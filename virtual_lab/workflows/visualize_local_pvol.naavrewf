@@ -1,0 +1,203 @@
+{
+  "chart": {
+    "offset": {
+      "x": -15.12,
+      "y": 566.37
+    },
+    "scale": 0.854,
+    "nodes": {
+      "0c44595c-02db-46a0-bd89-c1c17ad56f2b": {
+        "id": "0c44595c-02db-46a0-bd89-c1c17ad56f2b",
+        "position": {
+          "x": 2148.8719702548665,
+          "y": 142.42388758782198
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "local_ppi_paths": {
+            "properties": {
+              "color": "#8b87c5"
+            },
+            "id": "local_ppi_paths",
+            "type": "left",
+            "position": {
+              "x": 50.5,
+              "y": 74.5
+            }
+          }
+        },
+        "properties": {
+          "title": "S3-PPI-Uploader-bwijers1-gmail-com",
+          "vars": [
+            {
+              "name": "local_ppi_paths",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#8b87c5"
+            }
+          ],
+          "params": [
+            "param_jupyterhub_user"
+          ],
+          "secrets": [
+            "secret_minio_access_key",
+            "secret_minio_secret_key"
+          ],
+          "inputs": [
+            "local_ppi_paths"
+          ],
+          "outputs": [],
+          "og_node_id": "837d732"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      },
+      "aad17633-2ea7-49f4-bbb3-f536e59dbf54": {
+        "id": "aad17633-2ea7-49f4-bbb3-f536e59dbf54",
+        "position": {
+          "x": 1634.8204480066233,
+          "y": 124.85948477751754
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "local_pvol_paths": {
+            "properties": {
+              "color": "#862d3e"
+            },
+            "id": "local_pvol_paths",
+            "type": "left",
+            "position": {
+              "x": 50.5,
+              "y": 74.5
+            }
+          },
+          "local_ppi_paths": {
+            "properties": {
+              "color": "#8b87c5"
+            },
+            "id": "local_ppi_paths",
+            "type": "right",
+            "position": {
+              "x": 197.5,
+              "y": 74.5
+            }
+          }
+        },
+        "properties": {
+          "title": "PVOL-R-CODE-bwijers1-gmail-com",
+          "vars": [
+            {
+              "name": "local_pvol_paths",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#862d3e"
+            },
+            {
+              "name": "local_ppi_paths",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#8b87c5"
+            }
+          ],
+          "params": [
+            "param_param",
+            "param_elevation"
+          ],
+          "secrets": [],
+          "inputs": [
+            "local_pvol_paths"
+          ],
+          "outputs": [
+            "local_ppi_paths"
+          ],
+          "og_node_id": "026fb7e"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      },
+      "2d281ec4-1802-428e-b403-3106a4ebe127": {
+        "id": "2d281ec4-1802-428e-b403-3106a4ebe127",
+        "position": {
+          "x": 1214.4457407466703,
+          "y": 115.49180327868851
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "pvol_paths": {
+            "properties": {
+              "color": "#78931f"
+            },
+            "id": "pvol_paths",
+            "type": "right",
+            "position": {
+              "x": 209.5,
+              "y": 74.5
+            }
+          }
+        },
+        "properties": {
+          "title": "S3-PVOL-Downloader-bwijers1-gmail-com",
+          "vars": [
+            {
+              "name": "pvol_paths",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#78931f"
+            }
+          ],
+          "params": [
+            "param_start_date",
+            "param_end_date",
+            "param_radar"
+          ],
+          "secrets": [
+            "secret_minio_access_key",
+            "secret_minio_secret_key"
+          ],
+          "inputs": [],
+          "outputs": [
+            "pvol_paths"
+          ],
+          "og_node_id": "54e80de"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      }
+    },
+    "links": {
+      "c1072e26-33db-4ef6-8455-49d3a5abc62a": {
+        "id": "c1072e26-33db-4ef6-8455-49d3a5abc62a",
+        "from": {
+          "nodeId": "2d281ec4-1802-428e-b403-3106a4ebe127",
+          "portId": "pvol_paths"
+        },
+        "to": {
+          "nodeId": "aad17633-2ea7-49f4-bbb3-f536e59dbf54",
+          "portId": "local_pvol_paths"
+        }
+      },
+      "e552b055-f3bd-43c7-9bec-f78c139c3d23": {
+        "id": "e552b055-f3bd-43c7-9bec-f78c139c3d23",
+        "from": {
+          "nodeId": "aad17633-2ea7-49f4-bbb3-f536e59dbf54",
+          "portId": "local_ppi_paths"
+        },
+        "to": {
+          "nodeId": "0c44595c-02db-46a0-bd89-c1c17ad56f2b",
+          "portId": "local_ppi_paths"
+        }
+      }
+    },
+    "selected": {},
+    "hovered": {}
+  }
+}

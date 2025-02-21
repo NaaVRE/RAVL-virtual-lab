@@ -1,0 +1,200 @@
+{
+  "chart": {
+    "offset": {
+      "x": -232,
+      "y": 8
+    },
+    "scale": 1,
+    "nodes": {
+      "f5aca514-5410-4f1a-9d88-aa28cdf36947": {
+        "id": "f5aca514-5410-4f1a-9d88-aa28cdf36947",
+        "position": {
+          "x": 794.0166625976562,
+          "y": 287
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "vp_paths": {
+            "properties": {
+              "color": "#786b3a"
+            },
+            "id": "vp_paths",
+            "type": "right",
+            "position": {
+              "x": 216,
+              "y": 74.5
+            }
+          }
+        },
+        "properties": {
+          "title": "S3-VP-Downloader-bwijers1-gmail-com",
+          "vars": [
+            {
+              "name": "vp_paths",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#786b3a"
+            }
+          ],
+          "params": [
+            "param_start_date",
+            "param_end_date",
+            "param_radar"
+          ],
+          "secrets": [
+            "secret_minio_access_key",
+            "secret_minio_secret_key"
+          ],
+          "inputs": [],
+          "outputs": [
+            "vp_paths"
+          ],
+          "og_node_id": "f342466"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      },
+      "6cc7847d-c762-4c2b-bcb2-e5825483918a": {
+        "id": "6cc7847d-c762-4c2b-bcb2-e5825483918a",
+        "position": {
+          "x": 1969.0166625976562,
+          "y": 352
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "local_vpts_paths": {
+            "properties": {
+              "color": "#352dd2"
+            },
+            "id": "local_vpts_paths",
+            "type": "left",
+            "position": {
+              "x": 50.5,
+              "y": 74.5
+            }
+          }
+        },
+        "properties": {
+          "title": "S3-VPTS-Uploader-bwijers1-gmail-com",
+          "vars": [
+            {
+              "name": "local_vpts_paths",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#352dd2"
+            }
+          ],
+          "params": [
+            "param_jupyterhub_user"
+          ],
+          "secrets": [
+            "secret_minio_access_key",
+            "secret_minio_secret_key"
+          ],
+          "inputs": [
+            "local_vpts_paths"
+          ],
+          "outputs": [],
+          "og_node_id": "9e62cc6"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      },
+      "1357ee22-2943-44cf-a938-6e665e4780cf": {
+        "id": "1357ee22-2943-44cf-a938-6e665e4780cf",
+        "position": {
+          "x": 1485.0166625976562,
+          "y": 340
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "local_vp_paths": {
+            "properties": {
+              "color": "#53ac9f"
+            },
+            "id": "local_vp_paths",
+            "type": "left",
+            "position": {
+              "x": 50.5,
+              "y": 74.5
+            }
+          },
+          "local_vpts_paths": {
+            "properties": {
+              "color": "#352dd2"
+            },
+            "id": "local_vpts_paths",
+            "type": "right",
+            "position": {
+              "x": 197.5,
+              "y": 74.5
+            }
+          }
+        },
+        "properties": {
+          "title": "VP-R-Code-bwijers1-gmail-com",
+          "vars": [
+            {
+              "name": "local_vp_paths",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#53ac9f"
+            },
+            {
+              "name": "local_vpts_paths",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#352dd2"
+            }
+          ],
+          "params": [],
+          "secrets": [],
+          "inputs": [
+            "local_vp_paths"
+          ],
+          "outputs": [
+            "local_vpts_paths"
+          ],
+          "og_node_id": "79d18bc"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      }
+    },
+    "links": {
+      "fbd94368-952b-4ab0-9b6d-9d4dd99da6ad": {
+        "id": "fbd94368-952b-4ab0-9b6d-9d4dd99da6ad",
+        "from": {
+          "nodeId": "f5aca514-5410-4f1a-9d88-aa28cdf36947",
+          "portId": "vp_paths"
+        },
+        "to": {
+          "nodeId": "1357ee22-2943-44cf-a938-6e665e4780cf",
+          "portId": "local_vp_paths"
+        }
+      },
+      "824d765e-f3c1-4279-8507-a8ef996df327": {
+        "id": "824d765e-f3c1-4279-8507-a8ef996df327",
+        "from": {
+          "nodeId": "1357ee22-2943-44cf-a938-6e665e4780cf",
+          "portId": "local_vpts_paths"
+        },
+        "to": {
+          "nodeId": "6cc7847d-c762-4c2b-bcb2-e5825483918a",
+          "portId": "local_vpts_paths"
+        }
+      }
+    },
+    "selected": {},
+    "hovered": {}
+  }
+}
