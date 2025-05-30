@@ -1,0 +1,453 @@
+{
+  "chart": {
+    "offset": {
+      "x": 360.9,
+      "y": 126.35
+    },
+    "scale": 0.63,
+    "nodes": {
+      "4183d4ae-f80d-41e4-a4de-4caab2522e0a": {
+        "id": "4183d4ae-f80d-41e4-a4de-4caab2522e0a",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "init_complete": {
+            "properties": {
+              "color": "#2dd232"
+            },
+            "id": "init_complete",
+            "type": "right",
+            "position": {
+              "x": 204,
+              "y": 74
+            }
+          }
+        },
+        "properties": {
+          "title": "initializer-koen-greuell-lifewatch-eu",
+          "vars": [
+            {
+              "name": "init_complete",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#2dd232"
+            }
+          ],
+          "params": [],
+          "secrets": [
+            "secret_minio_access_key",
+            "secret_minio_secret_key"
+          ],
+          "inputs": [],
+          "outputs": [
+            "init_complete"
+          ],
+          "og_node_id": "edf95be"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      },
+      "2460026c-47b8-44cc-b374-b29b21e14f35": {
+        "id": "2460026c-47b8-44cc-b374-b29b21e14f35",
+        "position": {
+          "x": 410.0793650793652,
+          "y": 86.74603174603175
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "init_complete": {
+            "properties": {
+              "color": "#2dd232"
+            },
+            "id": "init_complete",
+            "type": "left",
+            "position": {
+              "x": 45,
+              "y": 74
+            }
+          },
+          "dataset_files": {
+            "properties": {
+              "color": "#53a9ac"
+            },
+            "id": "dataset_files",
+            "type": "right",
+            "position": {
+              "x": 206.5,
+              "y": 74
+            }
+          }
+        },
+        "properties": {
+          "title": "list-knmi-files-koen-greuell-lifewatch-eu",
+          "vars": [
+            {
+              "name": "init_complete",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#2dd232"
+            },
+            {
+              "name": "dataset_files",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#53a9ac"
+            }
+          ],
+          "params": [
+            "param_start_date",
+            "param_end_date",
+            "param_radar",
+            "param_interval"
+          ],
+          "secrets": [
+            "secret_key_knmi_api"
+          ],
+          "inputs": [
+            "init_complete"
+          ],
+          "outputs": [
+            "dataset_files"
+          ],
+          "og_node_id": "5ac2c7c"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      },
+      "fbc25c5c-6a65-4db0-9165-0396a47bc27e": {
+        "id": "fbc25c5c-6a65-4db0-9165-0396a47bc27e",
+        "position": {
+          "x": 887.857142857143,
+          "y": 220.07936507936506
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "dataset_files": {
+            "properties": {
+              "color": "#53a9ac"
+            },
+            "id": "dataset_files",
+            "type": "left",
+            "position": {
+              "x": 41.5,
+              "y": 74
+            }
+          },
+          "knmi_pvol_paths": {
+            "properties": {
+              "color": "#4082bf"
+            },
+            "id": "knmi_pvol_paths",
+            "type": "right",
+            "position": {
+              "x": 197.5,
+              "y": 74
+            }
+          }
+        },
+        "properties": {
+          "title": "Download-KNMI-koen-greuell-lifewatch-eu",
+          "vars": [
+            {
+              "name": "dataset_files",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#53a9ac"
+            },
+            {
+              "name": "knmi_pvol_paths",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#4082bf"
+            }
+          ],
+          "params": [
+            "param_radar"
+          ],
+          "secrets": [
+            "secret_key_knmi_api"
+          ],
+          "inputs": [
+            "dataset_files"
+          ],
+          "outputs": [
+            "knmi_pvol_paths"
+          ],
+          "og_node_id": "6b43bb1"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      },
+      "83f6a00e-2ea6-4823-923b-8f54fea0687d": {
+        "id": "83f6a00e-2ea6-4823-923b-8f54fea0687d",
+        "position": {
+          "x": 1402.1428571428573,
+          "y": 369.28571428571433
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "knmi_pvol_paths": {
+            "properties": {
+              "color": "#4082bf"
+            },
+            "id": "knmi_pvol_paths",
+            "type": "left",
+            "position": {
+              "x": 50.5,
+              "y": 74
+            }
+          },
+          "odim_pvol_paths": {
+            "properties": {
+              "color": "#2d863a"
+            },
+            "id": "odim_pvol_paths",
+            "type": "right",
+            "position": {
+              "x": 197.5,
+              "y": 74
+            }
+          }
+        },
+        "properties": {
+          "title": "KNMI-to-ODIM-converter-koen-greuell-lifewatch-eu",
+          "vars": [
+            {
+              "name": "knmi_pvol_paths",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#4082bf"
+            },
+            {
+              "name": "odim_pvol_paths",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#2d863a"
+            }
+          ],
+          "params": [
+            "param_clean_knmi_input",
+            "param_upload_results",
+            "param_jupyterhub_user"
+          ],
+          "secrets": [
+            "secret_minio_access_key",
+            "secret_minio_secret_key"
+          ],
+          "inputs": [
+            "knmi_pvol_paths"
+          ],
+          "outputs": [
+            "odim_pvol_paths"
+          ],
+          "og_node_id": "057e19f"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      },
+      "ea728678-79c9-47c1-be05-4ed3f06db314": {
+        "id": "ea728678-79c9-47c1-be05-4ed3f06db314",
+        "position": {
+          "x": 1825.9523809523812,
+          "y": 529.6031746031746
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "odim_pvol_paths": {
+            "properties": {
+              "color": "#2d863a"
+            },
+            "id": "odim_pvol_paths",
+            "type": "left",
+            "position": {
+              "x": 50.5,
+              "y": 74
+            }
+          },
+          "PVOL_VP_converter_complete": {
+            "properties": {
+              "color": "#931f82"
+            },
+            "id": "PVOL_VP_converter_complete",
+            "type": "right",
+            "position": {
+              "x": 197.5,
+              "y": 74
+            }
+          }
+        },
+        "properties": {
+          "title": "PVOL-VP-converter-koen-greuell-lifewatch-eu",
+          "vars": [
+            {
+              "name": "odim_pvol_paths",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#2d863a"
+            },
+            {
+              "name": "PVOL_VP_converter_complete",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#931f82"
+            }
+          ],
+          "params": [
+            "param_clean_pvol_output",
+            "param_upload_results",
+            "param_jupyterhub_user",
+            "param_clean_vp_output"
+          ],
+          "secrets": [
+            "secret_minio_access_key",
+            "secret_minio_secret_key"
+          ],
+          "inputs": [
+            "odim_pvol_paths"
+          ],
+          "outputs": [
+            "PVOL_VP_converter_complete"
+          ],
+          "og_node_id": "44d0d18"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      },
+      "e4af8a1d-8ba4-4bb2-b002-8c4c738119ea": {
+        "id": "e4af8a1d-8ba4-4bb2-b002-8c4c738119ea",
+        "position": {
+          "x": 2271.984126984127,
+          "y": 669.2857142857143
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "PVOL_VP_converter_complete": {
+            "properties": {
+              "color": "#931f82"
+            },
+            "id": "PVOL_VP_converter_complete",
+            "type": "left",
+            "position": {
+              "x": 50.5,
+              "y": 74
+            }
+          }
+        },
+        "properties": {
+          "title": "Retrieve-PVOL-DEPRECATED-koen-greuell-lifewatch-eu",
+          "vars": [
+            {
+              "name": "PVOL_VP_converter_complete",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#931f82"
+            }
+          ],
+          "params": [
+            "param_dtype",
+            "param_jupyterhub_user",
+            "param_country",
+            "param_radar",
+            "param_year",
+            "param_month",
+            "param_day"
+          ],
+          "secrets": [
+            "secret_minio_access_key",
+            "secret_minio_secret_key"
+          ],
+          "inputs": [
+            "PVOL_VP_converter_complete"
+          ],
+          "outputs": [],
+          "og_node_id": "0bf9a15"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
+      }
+    },
+    "links": {
+      "9235f0f4-ca72-4660-a16d-cc3e12967e35": {
+        "id": "9235f0f4-ca72-4660-a16d-cc3e12967e35",
+        "from": {
+          "nodeId": "4183d4ae-f80d-41e4-a4de-4caab2522e0a",
+          "portId": "init_complete"
+        },
+        "to": {
+          "nodeId": "2460026c-47b8-44cc-b374-b29b21e14f35",
+          "portId": "init_complete"
+        }
+      },
+      "ad6258ab-ab29-4e73-ae92-f84b6e1d5e78": {
+        "id": "ad6258ab-ab29-4e73-ae92-f84b6e1d5e78",
+        "from": {
+          "nodeId": "2460026c-47b8-44cc-b374-b29b21e14f35",
+          "portId": "dataset_files"
+        },
+        "to": {
+          "nodeId": "fbc25c5c-6a65-4db0-9165-0396a47bc27e",
+          "portId": "dataset_files"
+        }
+      },
+      "f9f92d03-48bf-4a1b-8808-718e93f57e01": {
+        "id": "f9f92d03-48bf-4a1b-8808-718e93f57e01",
+        "from": {
+          "nodeId": "fbc25c5c-6a65-4db0-9165-0396a47bc27e",
+          "portId": "knmi_pvol_paths"
+        },
+        "to": {
+          "nodeId": "83f6a00e-2ea6-4823-923b-8f54fea0687d",
+          "portId": "knmi_pvol_paths"
+        }
+      },
+      "e4267a8d-fe5b-4a7d-99bf-8de3e58d4306": {
+        "id": "e4267a8d-fe5b-4a7d-99bf-8de3e58d4306",
+        "from": {
+          "nodeId": "83f6a00e-2ea6-4823-923b-8f54fea0687d",
+          "portId": "odim_pvol_paths"
+        },
+        "to": {
+          "nodeId": "ea728678-79c9-47c1-be05-4ed3f06db314",
+          "portId": "odim_pvol_paths"
+        }
+      },
+      "7b0ce8b2-ea2c-4cbb-b0a9-033744f5c9a6": {
+        "id": "7b0ce8b2-ea2c-4cbb-b0a9-033744f5c9a6",
+        "from": {
+          "nodeId": "ea728678-79c9-47c1-be05-4ed3f06db314",
+          "portId": "PVOL_VP_converter_complete"
+        },
+        "to": {
+          "nodeId": "e4af8a1d-8ba4-4bb2-b002-8c4c738119ea",
+          "portId": "PVOL_VP_converter_complete"
+        }
+      }
+    },
+    "selected": {},
+    "hovered": {
+      "type": "node",
+      "id": "2460026c-47b8-44cc-b374-b29b21e14f35"
+    }
+  }
+}
