@@ -1,16 +1,16 @@
 {
   "chart": {
     "offset": {
-      "x": 278.83,
-      "y": 17.35
+      "x": 179.93,
+      "y": -24.87
     },
-    "scale": 1.345,
+    "scale": 1.111,
     "nodes": {
-      "4183d4ae-f80d-41e4-a4de-4caab2522e0a": {
-        "id": "4183d4ae-f80d-41e4-a4de-4caab2522e0a",
+      "097f30d0-14d4-4a49-ab2d-65884b55edbc": {
+        "id": "097f30d0-14d4-4a49-ab2d-65884b55edbc",
         "position": {
-          "x": 0,
-          "y": 0
+          "x": 86.37174721189595,
+          "y": 36.17100371747212
         },
         "orientation": 0,
         "type": "input-output",
@@ -53,11 +53,11 @@
           "height": 150
         }
       },
-      "2460026c-47b8-44cc-b374-b29b21e14f35": {
-        "id": "2460026c-47b8-44cc-b374-b29b21e14f35",
+      "3ee24eb7-94ed-4bbc-8894-cf20b9ec96d8": {
+        "id": "3ee24eb7-94ed-4bbc-8894-cf20b9ec96d8",
         "position": {
-          "x": 317.05610926541175,
-          "y": 65.81579918789225
+          "x": 358.49070631970267,
+          "y": 194.5353159851305
         },
         "orientation": 0,
         "type": "input-output",
@@ -123,11 +123,11 @@
           "height": 150
         }
       },
-      "fbc25c5c-6a65-4db0-9165-0396a47bc27e": {
-        "id": "fbc25c5c-6a65-4db0-9165-0396a47bc27e",
+      "21ac0474-3ea5-4228-9daf-835d1a4c8917": {
+        "id": "21ac0474-3ea5-4228-9daf-835d1a4c8917",
         "position": {
-          "x": 604.1362126245845,
-          "y": 150.3119232188999
+          "x": 634.3271375464681,
+          "y": 345.46468401486993
         },
         "orientation": 0,
         "type": "input-output",
@@ -190,11 +190,11 @@
           "height": 150
         }
       },
-      "83f6a00e-2ea6-4823-923b-8f54fea0687d": {
-        "id": "83f6a00e-2ea6-4823-923b-8f54fea0687d",
+      "4fa32b5c-c962-4210-a44d-e7c2e579a64d": {
+        "id": "4fa32b5c-c962-4210-a44d-e7c2e579a64d",
         "position": {
-          "x": 0,
-          "y": 385.56478405315613
+          "x": 899.7546468401488,
+          "y": 509.776951672862
         },
         "orientation": 0,
         "type": "input-output",
@@ -241,7 +241,7 @@
           "params": [
             "param_clean_knmi_input",
             "param_upload_results",
-            "param_jupyterhub_user"
+            "param_user_number"
           ],
           "secrets": [
             "secret_minio_access_key",
@@ -253,18 +253,18 @@
           "outputs": [
             "odim_pvol_paths"
           ],
-          "og_node_id": "057e19f"
+          "og_node_id": "898c015"
         },
         "size": {
           "width": 250,
           "height": 150
         }
       },
-      "ea728678-79c9-47c1-be05-4ed3f06db314": {
-        "id": "ea728678-79c9-47c1-be05-4ed3f06db314",
+      "3da19c9a-991a-4d30-b2ca-78d1934c5357": {
+        "id": "3da19c9a-991a-4d30-b2ca-78d1934c5357",
         "position": {
-          "x": 291.06866002214866,
-          "y": 473.7892211148025
+          "x": 1160.6194693818825,
+          "y": 656.3363659786053
         },
         "orientation": 0,
         "type": "input-output",
@@ -311,7 +311,7 @@
           "params": [
             "param_clean_pvol_output",
             "param_upload_results",
-            "param_jupyterhub_user",
+            "param_user_number",
             "param_clean_vp_output"
           ],
           "secrets": [
@@ -324,62 +324,7 @@
           "outputs": [
             "PVOL_VP_converter_complete"
           ],
-          "og_node_id": "44d0d18"
-        },
-        "size": {
-          "width": 250,
-          "height": 150
-        }
-      },
-      "e4af8a1d-8ba4-4bb2-b002-8c4c738119ea": {
-        "id": "e4af8a1d-8ba4-4bb2-b002-8c4c738119ea",
-        "position": {
-          "x": 576.6352897748251,
-          "y": 534.4019933554816
-        },
-        "orientation": 0,
-        "type": "input-output",
-        "ports": {
-          "PVOL_VP_converter_complete": {
-            "properties": {
-              "color": "#931f82"
-            },
-            "id": "PVOL_VP_converter_complete",
-            "type": "left",
-            "position": {
-              "x": 50.5,
-              "y": 74
-            }
-          }
-        },
-        "properties": {
-          "title": "Retrieve-PVOL-DEPRECATED-koen-greuell-lifewatch-eu",
-          "vars": [
-            {
-              "name": "PVOL_VP_converter_complete",
-              "direction": "input",
-              "type": "datatype",
-              "color": "#931f82"
-            }
-          ],
-          "params": [
-            "param_dtype",
-            "param_jupyterhub_user",
-            "param_country",
-            "param_radar",
-            "param_year",
-            "param_month",
-            "param_day"
-          ],
-          "secrets": [
-            "secret_minio_access_key",
-            "secret_minio_secret_key"
-          ],
-          "inputs": [
-            "PVOL_VP_converter_complete"
-          ],
-          "outputs": [],
-          "og_node_id": "0bf9a15"
+          "og_node_id": "d8499eb"
         },
         "size": {
           "width": 250,
@@ -388,59 +333,48 @@
       }
     },
     "links": {
-      "9235f0f4-ca72-4660-a16d-cc3e12967e35": {
-        "id": "9235f0f4-ca72-4660-a16d-cc3e12967e35",
+      "4a83d59d-81ff-4ae1-873f-1cd52b3f1253": {
+        "id": "4a83d59d-81ff-4ae1-873f-1cd52b3f1253",
         "from": {
-          "nodeId": "4183d4ae-f80d-41e4-a4de-4caab2522e0a",
+          "nodeId": "097f30d0-14d4-4a49-ab2d-65884b55edbc",
           "portId": "init_complete"
         },
         "to": {
-          "nodeId": "2460026c-47b8-44cc-b374-b29b21e14f35",
+          "nodeId": "3ee24eb7-94ed-4bbc-8894-cf20b9ec96d8",
           "portId": "init_complete"
         }
       },
-      "ad6258ab-ab29-4e73-ae92-f84b6e1d5e78": {
-        "id": "ad6258ab-ab29-4e73-ae92-f84b6e1d5e78",
+      "93f9686d-73a6-4a43-aa03-2e9b8e801eb8": {
+        "id": "93f9686d-73a6-4a43-aa03-2e9b8e801eb8",
         "from": {
-          "nodeId": "2460026c-47b8-44cc-b374-b29b21e14f35",
+          "nodeId": "3ee24eb7-94ed-4bbc-8894-cf20b9ec96d8",
           "portId": "dataset_files"
         },
         "to": {
-          "nodeId": "fbc25c5c-6a65-4db0-9165-0396a47bc27e",
+          "nodeId": "21ac0474-3ea5-4228-9daf-835d1a4c8917",
           "portId": "dataset_files"
         }
       },
-      "f9f92d03-48bf-4a1b-8808-718e93f57e01": {
-        "id": "f9f92d03-48bf-4a1b-8808-718e93f57e01",
+      "4c7a0f0f-fa5f-4bfe-a904-bd2f32ea236e": {
+        "id": "4c7a0f0f-fa5f-4bfe-a904-bd2f32ea236e",
         "from": {
-          "nodeId": "fbc25c5c-6a65-4db0-9165-0396a47bc27e",
+          "nodeId": "21ac0474-3ea5-4228-9daf-835d1a4c8917",
           "portId": "knmi_pvol_paths"
         },
         "to": {
-          "nodeId": "83f6a00e-2ea6-4823-923b-8f54fea0687d",
+          "nodeId": "4fa32b5c-c962-4210-a44d-e7c2e579a64d",
           "portId": "knmi_pvol_paths"
         }
       },
-      "e4267a8d-fe5b-4a7d-99bf-8de3e58d4306": {
-        "id": "e4267a8d-fe5b-4a7d-99bf-8de3e58d4306",
+      "2692b0f5-9416-4bbc-b820-b1fcfc6b2df9": {
+        "id": "2692b0f5-9416-4bbc-b820-b1fcfc6b2df9",
         "from": {
-          "nodeId": "83f6a00e-2ea6-4823-923b-8f54fea0687d",
+          "nodeId": "4fa32b5c-c962-4210-a44d-e7c2e579a64d",
           "portId": "odim_pvol_paths"
         },
         "to": {
-          "nodeId": "ea728678-79c9-47c1-be05-4ed3f06db314",
+          "nodeId": "3da19c9a-991a-4d30-b2ca-78d1934c5357",
           "portId": "odim_pvol_paths"
-        }
-      },
-      "7b0ce8b2-ea2c-4cbb-b0a9-033744f5c9a6": {
-        "id": "7b0ce8b2-ea2c-4cbb-b0a9-033744f5c9a6",
-        "from": {
-          "nodeId": "ea728678-79c9-47c1-be05-4ed3f06db314",
-          "portId": "PVOL_VP_converter_complete"
-        },
-        "to": {
-          "nodeId": "e4af8a1d-8ba4-4bb2-b002-8c4c738119ea",
-          "portId": "PVOL_VP_converter_complete"
         }
       }
     },
