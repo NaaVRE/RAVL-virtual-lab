@@ -1,10 +1,10 @@
 {
   "chart": {
     "offset": {
-      "x": 179.93,
-      "y": -24.87
+      "x": 240.18,
+      "y": -0.15
     },
-    "scale": 1.111,
+    "scale": 0.58,
     "nodes": {
       "097f30d0-14d4-4a49-ab2d-65884b55edbc": {
         "id": "097f30d0-14d4-4a49-ab2d-65884b55edbc",
@@ -190,11 +190,11 @@
           "height": 150
         }
       },
-      "4fa32b5c-c962-4210-a44d-e7c2e579a64d": {
-        "id": "4fa32b5c-c962-4210-a44d-e7c2e579a64d",
+      "78ea4a22-3238-45be-a90e-1adc24400f71": {
+        "id": "78ea4a22-3238-45be-a90e-1adc24400f71",
         "position": {
-          "x": 899.7546468401488,
-          "y": 509.776951672862
+          "x": 954.8620689655169,
+          "y": 420.9482758620691
         },
         "orientation": 0,
         "type": "input-output",
@@ -239,9 +239,9 @@
             }
           ],
           "params": [
+            "param_user_number",
             "param_clean_knmi_input",
-            "param_upload_results",
-            "param_user_number"
+            "param_upload_results"
           ],
           "secrets": [
             "secret_minio_access_key",
@@ -260,11 +260,11 @@
           "height": 150
         }
       },
-      "3da19c9a-991a-4d30-b2ca-78d1934c5357": {
-        "id": "3da19c9a-991a-4d30-b2ca-78d1934c5357",
+      "ca9dcd07-d005-443a-a906-51c29a5a5d26": {
+        "id": "ca9dcd07-d005-443a-a906-51c29a5a5d26",
         "position": {
-          "x": 1160.6194693818825,
-          "y": 656.3363659786053
+          "x": 1282.4482758620695,
+          "y": 501.98275862068965
         },
         "orientation": 0,
         "type": "input-output",
@@ -309,9 +309,9 @@
             }
           ],
           "params": [
+            "param_user_number",
             "param_clean_pvol_output",
             "param_upload_results",
-            "param_user_number",
             "param_clean_vp_output"
           ],
           "secrets": [
@@ -355,25 +355,25 @@
           "portId": "dataset_files"
         }
       },
-      "4c7a0f0f-fa5f-4bfe-a904-bd2f32ea236e": {
-        "id": "4c7a0f0f-fa5f-4bfe-a904-bd2f32ea236e",
+      "f2d5d14e-c2d8-4646-aa86-bf38fea6e24b": {
+        "id": "f2d5d14e-c2d8-4646-aa86-bf38fea6e24b",
         "from": {
           "nodeId": "21ac0474-3ea5-4228-9daf-835d1a4c8917",
           "portId": "knmi_pvol_paths"
         },
         "to": {
-          "nodeId": "4fa32b5c-c962-4210-a44d-e7c2e579a64d",
+          "nodeId": "78ea4a22-3238-45be-a90e-1adc24400f71",
           "portId": "knmi_pvol_paths"
         }
       },
-      "2692b0f5-9416-4bbc-b820-b1fcfc6b2df9": {
-        "id": "2692b0f5-9416-4bbc-b820-b1fcfc6b2df9",
+      "50b68727-2173-47be-8309-4f756ad7fa4b": {
+        "id": "50b68727-2173-47be-8309-4f756ad7fa4b",
         "from": {
-          "nodeId": "4fa32b5c-c962-4210-a44d-e7c2e579a64d",
+          "nodeId": "78ea4a22-3238-45be-a90e-1adc24400f71",
           "portId": "odim_pvol_paths"
         },
         "to": {
-          "nodeId": "3da19c9a-991a-4d30-b2ca-78d1934c5357",
+          "nodeId": "ca9dcd07-d005-443a-a906-51c29a5a5d26",
           "portId": "odim_pvol_paths"
         }
       }
