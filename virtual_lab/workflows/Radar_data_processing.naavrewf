@@ -53,76 +53,6 @@
           "height": 150
         }
       },
-      "3ee24eb7-94ed-4bbc-8894-cf20b9ec96d8": {
-        "id": "3ee24eb7-94ed-4bbc-8894-cf20b9ec96d8",
-        "position": {
-          "x": 358.49070631970267,
-          "y": 194.5353159851305
-        },
-        "orientation": 0,
-        "type": "input-output",
-        "ports": {
-          "init_complete": {
-            "properties": {
-              "color": "#2dd232"
-            },
-            "id": "init_complete",
-            "type": "left",
-            "position": {
-              "x": 45,
-              "y": 74
-            }
-          },
-          "dataset_files": {
-            "properties": {
-              "color": "#53a9ac"
-            },
-            "id": "dataset_files",
-            "type": "right",
-            "position": {
-              "x": 206.5,
-              "y": 74
-            }
-          }
-        },
-        "properties": {
-          "title": "list-knmi-files-koen-greuell-lifewatch-eu",
-          "vars": [
-            {
-              "name": "init_complete",
-              "direction": "input",
-              "type": "datatype",
-              "color": "#2dd232"
-            },
-            {
-              "name": "dataset_files",
-              "direction": "output",
-              "type": "datatype",
-              "color": "#53a9ac"
-            }
-          ],
-          "params": [
-            "param_start_date",
-            "param_end_date",
-            "param_radar",
-            "param_interval"
-          ],
-          "secrets": [
-            "secret_key_knmi_api"
-          ],
-          "inputs": [
-            "init_complete"
-          ],
-          "outputs": [
-            "dataset_files"
-          ],
-          "og_node_id": "5ac2c7c"
-        },
-        "size": {
-          "width": 250,
-          "height": 150
-        }
-      },
       "21ac0474-3ea5-4228-9daf-835d1a4c8917": {
         "id": "21ac0474-3ea5-4228-9daf-835d1a4c8917",
         "position": {
@@ -330,31 +260,79 @@
           "width": 250,
           "height": 150
         }
+      },
+      "69a169ae-d77c-4a15-8328-b0811a0d8f71": {
+        "id": "69a169ae-d77c-4a15-8328-b0811a0d8f71",
+        "position": {
+          "x": 368.65517241379325,
+          "y": 184.7413793103451
+        },
+        "orientation": 0,
+        "type": "input-output",
+        "ports": {
+          "init_complete": {
+            "properties": {
+              "color": "#2dd232"
+            },
+            "id": "init_complete",
+            "type": "left",
+            "position": {
+              "x": 45,
+              "y": 74
+            }
+          },
+          "dataset_files": {
+            "properties": {
+              "color": "#53a9ac"
+            },
+            "id": "dataset_files",
+            "type": "right",
+            "position": {
+              "x": 206.5,
+              "y": 74
+            }
+          }
+        },
+        "properties": {
+          "title": "list-knmi-files-koen-greuell-lifewatch-eu",
+          "vars": [
+            {
+              "name": "init_complete",
+              "direction": "input",
+              "type": "datatype",
+              "color": "#2dd232"
+            },
+            {
+              "name": "dataset_files",
+              "direction": "output",
+              "type": "datatype",
+              "color": "#53a9ac"
+            }
+          ],
+          "params": [
+            "param_start_date",
+            "param_end_date",
+            "param_radar",
+            "param_interval_in_minutes"
+          ],
+          "secrets": [
+            "secret_key_knmi_api"
+          ],
+          "inputs": [
+            "init_complete"
+          ],
+          "outputs": [
+            "dataset_files"
+          ],
+          "og_node_id": "5b2a085"
+        },
+        "size": {
+          "width": 250,
+          "height": 150
+        }
       }
     },
     "links": {
-      "4a83d59d-81ff-4ae1-873f-1cd52b3f1253": {
-        "id": "4a83d59d-81ff-4ae1-873f-1cd52b3f1253",
-        "from": {
-          "nodeId": "097f30d0-14d4-4a49-ab2d-65884b55edbc",
-          "portId": "init_complete"
-        },
-        "to": {
-          "nodeId": "3ee24eb7-94ed-4bbc-8894-cf20b9ec96d8",
-          "portId": "init_complete"
-        }
-      },
-      "93f9686d-73a6-4a43-aa03-2e9b8e801eb8": {
-        "id": "93f9686d-73a6-4a43-aa03-2e9b8e801eb8",
-        "from": {
-          "nodeId": "3ee24eb7-94ed-4bbc-8894-cf20b9ec96d8",
-          "portId": "dataset_files"
-        },
-        "to": {
-          "nodeId": "21ac0474-3ea5-4228-9daf-835d1a4c8917",
-          "portId": "dataset_files"
-        }
-      },
       "f2d5d14e-c2d8-4646-aa86-bf38fea6e24b": {
         "id": "f2d5d14e-c2d8-4646-aa86-bf38fea6e24b",
         "from": {
@@ -375,6 +353,28 @@
         "to": {
           "nodeId": "ca9dcd07-d005-443a-a906-51c29a5a5d26",
           "portId": "odim_pvol_paths"
+        }
+      },
+      "db6101bc-5b77-489a-ae4d-d05bb1732ebd": {
+        "id": "db6101bc-5b77-489a-ae4d-d05bb1732ebd",
+        "from": {
+          "nodeId": "097f30d0-14d4-4a49-ab2d-65884b55edbc",
+          "portId": "init_complete"
+        },
+        "to": {
+          "nodeId": "69a169ae-d77c-4a15-8328-b0811a0d8f71",
+          "portId": "init_complete"
+        }
+      },
+      "7d51c1b4-d10b-43fe-87f2-63848d270aeb": {
+        "id": "7d51c1b4-d10b-43fe-87f2-63848d270aeb",
+        "from": {
+          "nodeId": "69a169ae-d77c-4a15-8328-b0811a0d8f71",
+          "portId": "dataset_files"
+        },
+        "to": {
+          "nodeId": "21ac0474-3ea5-4228-9daf-835d1a4c8917",
+          "portId": "dataset_files"
         }
       }
     },
