@@ -1,0 +1,1051 @@
+{
+  "cells": {
+    "10086": {
+      "title": "Download-KNMI-koen-greuell-lifewatch-eu",
+      "task_name": "download-knmi-koen-greuell-lifewatch-eu",
+      "original_source": "conf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}\nconf_local_knmi = '/tmp/data/knmi'\ndataset_files \nn_files = len(dataset_files)      \nprint(f\"Starting download of {n_files} files.\")\n_, _, api_url, radar_code = conf_radars.get(param_radar.lower())\nknmi_pvol_paths = []\nidx = 1\nfor dataset_file in dataset_files:\n    filename = dataset_file[0]\n    fname_parts = filename.split('_')\n    fname_date_part = fname_parts[-1].split('.')[0]\n    year = fname_date_part[0:4]\n    month = fname_date_part[4:6]\n    day = fname_date_part[6:8]\n    p = Path(f\"{conf_local_knmi}/{radar_code}/{year}/{month}/{day}/{filename}\")\n    knmi_pvol_paths.append('{}'.format(str(p)))\n    \n    if not p.exists():\n        print(f\"Downloading file {idx}/{n_files}\")\n        endpoint = f\"{api_url}/{filename}/url\"\n        get_file_response = requests.get(endpoint, headers={\"Authorization\": secret_key_knmi_api})\n        download_url = get_file_response.json().get(\"temporaryDownloadUrl\")\n        dataset_file_response = requests.get(download_url)\n        p.parent.mkdir(parents=True,exist_ok=True)\n        p.write_bytes(dataset_file_response.content)\n    else:\n        print(f\"{p} already exists, skipping\")\n    idx += 1\nprint(knmi_pvol_paths)\nprint(\"Finished downloading files\")",
+      "types": {
+        "dataset_files": "list",
+        "knmi_pvol_paths": "list",
+        "param_radar": "str",
+        "secret_key_knmi_api": "str"
+      },
+      "inputs": [
+        "dataset_files"
+      ],
+      "outputs": [
+        "knmi_pvol_paths"
+      ],
+      "params": [
+        "param_radar"
+      ],
+      "param_values": {
+        "param_radar": "HRW"
+      },
+      "secrets": [
+        "secret_key_knmi_api"
+      ],
+      "confs": {
+        "conf_radars": "conf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}",
+        "conf_local_knmi": "conf_local_knmi = '/tmp/data/knmi'"
+      },
+      "all_inputs": [
+        "dataset_files"
+      ],
+      "dependencies": [
+        {
+          "name": "Path",
+          "asname": null,
+          "module": "pathlib"
+        },
+        {
+          "name": "requests",
+          "asname": null,
+          "module": ""
+        }
+      ],
+      "chart_obj": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1,
+        "nodes": {
+          "6b43bb1": {
+            "id": "6b43bb1",
+            "type": "input-output",
+            "position": {
+              "x": 35,
+              "y": 15
+            },
+            "properties": {
+              "title": "Download-KNMI-koen-greuell-lifewatch-eu",
+              "vars": [
+                {
+                  "name": "dataset_files",
+                  "direction": "input",
+                  "type": "datatype",
+                  "color": "#53a9ac"
+                },
+                {
+                  "name": "knmi_pvol_paths",
+                  "direction": "output",
+                  "type": "datatype",
+                  "color": "#4082bf"
+                }
+              ],
+              "params": [
+                "param_radar"
+              ],
+              "secrets": [
+                "secret_key_knmi_api"
+              ],
+              "inputs": [
+                "dataset_files"
+              ],
+              "outputs": [
+                "knmi_pvol_paths"
+              ],
+              "og_node_id": "6b43bb1"
+            },
+            "ports": {
+              "dataset_files": {
+                "properties": {
+                  "color": "#53a9ac"
+                },
+                "id": "dataset_files",
+                "type": "left"
+              },
+              "knmi_pvol_paths": {
+                "properties": {
+                  "color": "#4082bf"
+                },
+                "id": "knmi_pvol_paths",
+                "type": "right"
+              }
+            }
+          }
+        },
+        "links": {},
+        "selected": {},
+        "hovered": {}
+      },
+      "node_id": "6b43bb1",
+      "container_source": "",
+      "kernel": "ipython",
+      "notebook_dict": {
+        "metadata": {
+          "nbdime-conflicts": {
+            "local_diff": [
+              {
+                "diff": [
+                  {
+                    "diff": [
+                      {
+                        "key": 0,
+                        "op": "addrange",
+                        "valuelist": [
+                          "3.13.1"
+                        ]
+                      },
+                      {
+                        "key": 0,
+                        "length": 1,
+                        "op": "removerange"
+                      }
+                    ],
+                    "key": "version",
+                    "op": "patch"
+                  }
+                ],
+                "key": "language_info",
+                "op": "patch"
+              }
+            ],
+            "remote_diff": [
+              {
+                "key": "language_info",
+                "op": "remove"
+              }
+            ]
+          },
+          "kernelspec": {
+            "display_name": "python3",
+            "language": "python3",
+            "name": "python3"
+          },
+          "language_info": {
+            "codemirror_mode": {
+              "name": "ipython",
+              "version": 3
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3",
+            "version": "3.13.3"
+          }
+        },
+        "nbformat_minor": 5,
+        "nbformat": 4,
+        "cells": [
+          {
+            "cell_type": "code",
+            "source": "#Download-KNMI\n##libraries\nimport requests\nfrom pathlib import Path\nimport os\n# Changes per 16-11-2023\n# Test if we are working with a one element nested list\ndataset_files \nn_files = len(dataset_files)      \nprint(f\"Starting download of {n_files} files.\")\n_, _, api_url, radar_code = conf_radars.get(param_radar.lower())\nknmi_pvol_paths = []\nidx = 1\nfor dataset_file in dataset_files:\n    filename = dataset_file[0]\n    fname_parts = filename.split('_')\n    fname_date_part = fname_parts[-1].split('.')[0]\n    year = fname_date_part[0:4]\n    month = fname_date_part[4:6]\n    day = fname_date_part[6:8]\n    p = Path(f\"{conf_local_knmi}/{radar_code}/{year}/{month}/{day}/{filename}\")\n    knmi_pvol_paths.append('{}'.format(str(p)))\n    \n    if not p.exists():\n        print(f\"Downloading file {idx}/{n_files}\")\n        endpoint = f\"{api_url}/{filename}/url\"\n        get_file_response = requests.get(endpoint, headers={\"Authorization\": secret_key_knmi_api})\n        download_url = get_file_response.json().get(\"temporaryDownloadUrl\")\n        dataset_file_response = requests.get(download_url)\n        p.parent.mkdir(parents=True,exist_ok=True)\n        p.write_bytes(dataset_file_response.content)\n    else:\n        print(f\"{p} already exists, skipping\")\n    idx += 1\nprint(knmi_pvol_paths)\nprint(\"Finished downloading files\")",
+            "metadata": {},
+            "execution_count": null,
+            "outputs": [],
+            "id": "4abbdd4b"
+          }
+        ]
+      },
+      "base_image": {
+        "build": "ghcr.io/qcdis/naavre/naavre-cell-build-ravl:v0.22.12",
+        "runtime": "ghcr.io/qcdis/naavre/naavre-cell-runtime-ravl:v0.22.12"
+      },
+      "image_version": "66c2252"
+    },
+    "10101": {
+      "title": "initializer-koen-greuell-lifewatch-eu",
+      "task_name": "initializer-koen-greuell-lifewatch-eu",
+      "original_source": "conf_local_root = '/tmp/data'\nconf_local_knmi = '/tmp/data/knmi'\nconf_local_odim = '/tmp/data/odim'\nconf_local_vp = '/tmp/data/vp'\nconf_local_conf = '/tmp/data/conf'\nconf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\nconf_minio_public_bucket_name = 'naa-vre-public'\nconf_minio_public_conf_radar_db_object_name = 'vl-vol2bird/conf/OPERA_RADARS_DB.json'\n\nfor local_dir in [\n    conf_local_root,\n    conf_local_knmi,\n    conf_local_odim,\n    conf_local_vp,\n    conf_local_conf,\n]:\n    local_dir = pathlib.Path(local_dir)\n    if not local_dir.exists():\n        local_dir.mkdir(parents=True, exist_ok=True)\nif not pathlib.Path(conf_local_radar_db).exists():\n\n    minioClient = Minio(\n        endpoint=conf_minio_endpoint,\n        access_key=secret_minio_access_key,\n        secret_key=secret_minio_secret_key,\n        secure=True,\n    )\n    print(f\"{conf_local_radar_db} not found, downloading\")\n    minioClient.fget_object(\n        bucket_name=conf_minio_public_bucket_name,\n        object_name=conf_minio_public_conf_radar_db_object_name,\n        file_path=conf_local_radar_db,\n    )\n\ninit_complete = \"Yes\"  # Cant sent bool\nprint(\"Finished initialization\")",
+      "types": {
+        "init_complete": "str",
+        "secret_minio_access_key": "str",
+        "secret_minio_secret_key": "str"
+      },
+      "inputs": [],
+      "outputs": [
+        "init_complete"
+      ],
+      "params": [],
+      "param_values": {},
+      "secrets": [
+        "secret_minio_access_key",
+        "secret_minio_secret_key"
+      ],
+      "confs": {
+        "conf_local_root": "conf_local_root = '/tmp/data'",
+        "conf_local_knmi": "conf_local_knmi = '/tmp/data/knmi'",
+        "conf_local_odim": "conf_local_odim = '/tmp/data/odim'",
+        "conf_local_vp": "conf_local_vp = '/tmp/data/vp'",
+        "conf_local_conf": "conf_local_conf = '/tmp/data/conf'",
+        "conf_local_radar_db": "conf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'",
+        "conf_minio_endpoint": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'",
+        "conf_minio_public_bucket_name": "conf_minio_public_bucket_name = 'naa-vre-public'",
+        "conf_minio_public_conf_radar_db_object_name": "conf_minio_public_conf_radar_db_object_name = 'vl-vol2bird/conf/OPERA_RADARS_DB.json'"
+      },
+      "all_inputs": [],
+      "dependencies": [
+        {
+          "name": "Minio",
+          "asname": null,
+          "module": "minio"
+        },
+        {
+          "name": "pathlib",
+          "asname": null,
+          "module": ""
+        }
+      ],
+      "chart_obj": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1,
+        "nodes": {
+          "edf95be": {
+            "id": "edf95be",
+            "type": "input-output",
+            "position": {
+              "x": 35,
+              "y": 15
+            },
+            "properties": {
+              "title": "initializer-koen-greuell-lifewatch-eu",
+              "vars": [
+                {
+                  "name": "init_complete",
+                  "direction": "output",
+                  "type": "datatype",
+                  "color": "#2dd232"
+                }
+              ],
+              "params": [],
+              "secrets": [
+                "secret_minio_access_key",
+                "secret_minio_secret_key"
+              ],
+              "inputs": [],
+              "outputs": [
+                "init_complete"
+              ],
+              "og_node_id": "edf95be"
+            },
+            "ports": {
+              "init_complete": {
+                "properties": {
+                  "color": "#2dd232"
+                },
+                "id": "init_complete",
+                "type": "right"
+              }
+            }
+          }
+        },
+        "links": {},
+        "selected": {},
+        "hovered": {}
+      },
+      "node_id": "edf95be",
+      "container_source": "from minio import Minio\nimport pathlib\n\nimport argparse\nimport json\nimport os\narg_parser = argparse.ArgumentParser()\n\nsecret_minio_access_key = os.getenv('secret_minio_access_key')\nsecret_minio_secret_key = os.getenv('secret_minio_secret_key')\n\narg_parser.add_argument('--id', action='store',\n                        type=str, required=True, dest='id')\n\n\nargs = arg_parser.parse_args()\nprint(args)\n\nid = args.id\n\n\nconf_local_root = '/tmp/data'\n\nconf_local_knmi = '/tmp/data/knmi'\n\nconf_local_odim = '/tmp/data/odim'\n\nconf_local_vp = '/tmp/data/vp'\n\nconf_local_conf = '/tmp/data/conf'\n\nconf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'\n\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\n\nconf_minio_public_bucket_name = 'naa-vre-public'\n\nconf_minio_public_conf_radar_db_object_name = 'vl-vol2bird/conf/OPERA_RADARS_DB.json'\n\n\nconf_local_root = '/tmp/data'\nconf_local_knmi = '/tmp/data/knmi'\nconf_local_odim = '/tmp/data/odim'\nconf_local_vp = '/tmp/data/vp'\nconf_local_conf = '/tmp/data/conf'\nconf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\nconf_minio_public_bucket_name = 'naa-vre-public'\nconf_minio_public_conf_radar_db_object_name = 'vl-vol2bird/conf/OPERA_RADARS_DB.json'\n\nfor local_dir in [\n    conf_local_root,\n    conf_local_knmi,\n    conf_local_odim,\n    conf_local_vp,\n    conf_local_conf,\n]:\n    local_dir = pathlib.Path(local_dir)\n    if not local_dir.exists():\n        local_dir.mkdir(parents=True, exist_ok=True)\nif not pathlib.Path(conf_local_radar_db).exists():\n\n    minioClient = Minio(\n        endpoint=conf_minio_endpoint,\n        access_key=secret_minio_access_key,\n        secret_key=secret_minio_secret_key,\n        secure=True,\n    )\n    print(f\"{conf_local_radar_db} not found, downloading\")\n    minioClient.fget_object(\n        bucket_name=conf_minio_public_bucket_name,\n        object_name=conf_minio_public_conf_radar_db_object_name,\n        file_path=conf_local_radar_db,\n    )\n\ninit_complete = \"Yes\"  # Cant sent bool\nprint(\"Finished initialization\")\n\nfile_init_complete = open(\"/tmp/init_complete_\" + id + \".json\", \"w\")\nfile_init_complete.write(json.dumps(init_complete))\nfile_init_complete.close()\n",
+      "kernel": "ipython",
+      "notebook_dict": {
+        "metadata": {
+          "nbdime-conflicts": {
+            "local_diff": [
+              {
+                "diff": [
+                  {
+                    "diff": [
+                      {
+                        "key": 0,
+                        "op": "addrange",
+                        "valuelist": [
+                          "3.13.1"
+                        ]
+                      },
+                      {
+                        "key": 0,
+                        "length": 1,
+                        "op": "removerange"
+                      }
+                    ],
+                    "key": "version",
+                    "op": "patch"
+                  }
+                ],
+                "key": "language_info",
+                "op": "patch"
+              }
+            ],
+            "remote_diff": [
+              {
+                "key": "language_info",
+                "op": "remove"
+              }
+            ]
+          },
+          "kernelspec": {
+            "display_name": "python3",
+            "language": "python3",
+            "name": "python3"
+          },
+          "language_info": {
+            "codemirror_mode": {
+              "name": "ipython",
+              "version": 3
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3",
+            "version": "3.13.3"
+          }
+        },
+        "nbformat_minor": 5,
+        "nbformat": 4,
+        "cells": [
+          {
+            "cell_type": "code",
+            "source": "# initializer\nimport pathlib\n\n# Make directories on shared (local) storage\nfor local_dir in [\n    conf_local_root,\n    conf_local_knmi,\n    conf_local_odim,\n    conf_local_vp,\n    conf_local_conf,\n]:\n    local_dir = pathlib.Path(local_dir)\n    if not local_dir.exists():\n        local_dir.mkdir(parents=True, exist_ok=True)\n# Reference files\nif not pathlib.Path(conf_local_radar_db).exists():\n    from minio import Minio, S3Error\n\n    minioClient = Minio(\n        endpoint=conf_minio_endpoint,\n        access_key=secret_minio_access_key,\n        secret_key=secret_minio_secret_key,\n        secure=True,\n    )\n    print(f\"{conf_local_radar_db} not found, downloading\")\n    minioClient.fget_object(\n        bucket_name=conf_minio_public_bucket_name,\n        object_name=conf_minio_public_conf_radar_db_object_name,\n        file_path=conf_local_radar_db,\n    )\n\n# Now produce a variable which acts as a marker for the workflow manager\n# We can then drag a line from the configuration / initializer\n# and time the start of the rest of the workflow\n# If you decide to make different sets of configurations, you can store them\n# and decide per workflow which config to attach\ninit_complete = \"Yes\"  # Cant sent bool\nprint(\"Finished initialization\")",
+            "metadata": {},
+            "execution_count": 7,
+            "outputs": [
+              {
+                "name": "stdout",
+                "text": "/tmp/data/conf/OPERA_RADARS_DB.json not found, downloading\nFinished initialization\n",
+                "output_type": "stream"
+              }
+            ],
+            "id": "158be3e2"
+          }
+        ]
+      },
+      "base_image": {
+        "build": "ghcr.io/qcdis/naavre/naavre-cell-build-ravl:v0.22.12",
+        "runtime": "ghcr.io/qcdis/naavre/naavre-cell-runtime-ravl:v0.22.12"
+      },
+      "image_version": "5e7304a"
+    },
+    "10102": {
+      "title": "KNMI-to-ODIM-converter-koen-greuell-lifewatch-eu",
+      "task_name": "knmi-to-odim-converter-koen-greuell-lifewatch-eu",
+      "original_source": "conf_minio_public_root_prefix = 'vl-vol2bird'\nconf_minio_tutorial_prefix = 'ravl-tutorial'\nconf_pvol_output_prefix = 'pvol'\nconf_user_directory = 'user'\nconf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\nconf_local_odim = '/tmp/data/odim'\nconf_minio_public_bucket_name = 'naa-vre-public'\nconf_minio_user_bucket_name = 'naa-vre-user-data'\n\"\"\"\nnotes: \nNeed to add this such that it can upload the PVOL From this stage\nNeed to add option such that this can remove the PVOL files from this stage. \nWarning, with the removal of PVOL on this stage auto-bricks the VP / RBC gen\nWe can introduce a flag check where RBC and VP check if PVOL 'needed' to be removed\nIf that flag is met - abort, there 'shouldnt' be any INPUT files then. \n\"\"\"\n\n\n\ndef str2bool(v):\n    if isinstance(v, bool):\n        return v\n    if v.lower() in (\"yes\", \"true\", \"t\", \"y\", \"1\"):\n        return True\n    elif v.lower() in (\"no\", \"false\", \"f\", \"n\", \"0\"):\n        return False\n    else:\n        raise Exception\n\n\nclass FileTranslatorFileTypeError(LookupError):\n    \"\"\"raise this when there's a filetype mismatch derived from h5 file\"\"\"\n\n\ndef load_radar_db(radar_db_path):\n    \"\"\"Load and return the radar database\n\n    Output dict sample (wmo code is used as key):\n    {\n        11038: {'number': '1209', 'country': 'Austria', 'countryid': 'LOWM41', 'oldcountryid': 'OS41', 'wmocode': '11038', 'odimcode': 'atrau', 'location': 'Wien/Schwechat', 'status': '1', 'latitude': '48.074', 'longitude': '16.536', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1978', 'heightantenna': '224', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.625', 'single_rrr': 'Y', 'composite_rrr': 'Y', 'wrwp': 'Y'},\n        11052: {'number': '1210', 'country': 'Austria', 'countryid': 'LOWM43', 'oldcountryid': 'OS43', 'wmocode': '11052', 'odimcode': 'atfel', 'location': 'Salzburg/Feldkirchen', 'status': '1', 'latitude': '48.065', 'longitude': '13.062', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1992', 'heightantenna': '581', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.6', 'single_rrr': 'Y', 'composite_rrr': ' ', 'wrwp': ' '},\n        ...\n    }\n    \"\"\"\n    with open(radar_db_path, mode=\"r\") as f:\n        radar_db_json = json.load(f)\n    radar_db = {}\n    for radar_dict in radar_db_json:\n        try:\n            wmo_code = int(radar_dict.get(\"wmocode\"))\n            radar_db.update({wmo_code: radar_dict})\n        except Exception:  # Happens when there is for ex. no wmo code.\n            pass\n    return radar_db\n\n\ndef translate_wmo_odim(radar_db, wmo_code):\n    \"\"\" \"\"\"\n    if not isinstance(wmo_code, int):\n        raise ValueError(\"Expecting a wmo_code [int]\")\n    else:\n        pass\n    odim_code = (\n        radar_db.get(wmo_code).get(\"odimcode\").upper().strip()\n    )  # Apparently, people sometimes forget to remove whitespace..\n    return odim_code\n\n\ndef extract_wmo_code(in_path):\n    with h5py.File(in_path, mode=\"r\") as f:\n        what = f[\"what\"].attrs\n        source = what.get(\"source\")\n        source = source.decode(\"utf-8\")\n        source_list = source.split(sep=\",\")\n    wmo_code = [string for string in source_list if \"WMO\" in string]\n    if len(wmo_code) == 1:\n        wmo_code = wmo_code[0]\n        wmo_code = wmo_code.replace(\"WMO:\", \"\")\n    elif len(wmo_code) == 0:\n        rad_str = [string for string in source_list if \"RAD\" in string]\n\n        if len(rad_str) == 1:\n            rad_str = rad_str[0]\n        else:\n            print(\n                \"Something went wrong with determining the rad_str and it wasnt WMO either, exitting\"\n            )\n            sys.exit(1)\n        rad_str_split = rad_str.split(\":\")\n        rad_code = rad_str_split[1]\n\n        rad_codes = {\"NL52\": \"6356\", \"NL51\": \"6234\", \"NL50\": \"6260\"}\n\n        wmo_code = rad_codes.get(rad_code)\n    return int(wmo_code)\n\n\ndef translate_knmi_filename(in_path_h5):\n    wmo_code = extract_wmo_code(in_path_h5)\n    odim_code = translate_wmo_odim(radar_db, wmo_code)\n    with h5py.File(in_path_h5, mode=\"r\") as f:\n        what = f[\"what\"].attrs\n        date = what.get(\"date\")\n        date = date.decode(\"utf-8\")\n        time = what.get(\"time\")\n        time = time.decode(\"utf-8\")\n        hh = time[:2]\n        mm = time[2:4]\n        ss = time[4:]\n        time = time[:-2]  # Do not include seconds\n        filetype = what.get(\"object\")\n        filetype = filetype.decode(\"utf-8\")\n        if filetype != \"PVOL\":\n            raise FileTranslatorFileTypeError(\"File type was NOT pvol\")\n    name = [\n        odim_code,\n        filetype.lower(),\n        date + \"T\" + time,\n        str(wmo_code) + \".h5\",\n    ]\n    ibed_fname = \"_\".join(name)\n    return ibed_fname\n\n\ndef knmi_to_odim(in_fpath, out_fpath):\n    \"\"\"\n    Converter usage:\n    Usage: KNMI_vol_h5_to_ODIM_h5 ODIM_file.h5 KNMI_input_file.h5\n\n    Returns out_fpath and returncode\n    \"\"\"\n    converter = \"/opt/radar/vol2bird/bin/./KNMI_vol_h5_to_ODIM_h5\"\n    command = [converter, out_fpath, in_fpath]\n    proc = subprocess.run(command, stderr=subprocess.PIPE)\n    output = proc.stderr.decode(\"utf-8\")\n    returncode = int(proc.returncode)\n    return (out_fpath, returncode, output)\n\ndef get_pvol_storage_path(relative_path: str = \"\") -> str:\n    if param_public_minio_data:\n        return pathlib.Path(conf_minio_public_root_prefix).joinpath(conf_minio_tutorial_prefix).joinpath(conf_pvol_output_prefix).joinpath(relative_path)\n    else:\n        return pathlib.Path(conf_minio_tutorial_prefix).joinpath(conf_user_directory+param_user_number).joinpath(conf_pvol_output_prefix).joinpath(relative_path)\n\nprint(f\"{knmi_pvol_paths=}\")\nodim_pvol_paths = []\nradar_db = load_radar_db(conf_local_radar_db)\nfor knmi_path in knmi_pvol_paths:\n    out_path_pvol_odim = pathlib.Path(knmi_path.replace(\"knmi\", \"odim\"))\n    print(f\"{knmi_path=}\")\n    print(f\"{out_path_pvol_odim=}\")\n    if not out_path_pvol_odim.parent.exists():\n        out_path_pvol_odim.parent.mkdir(parents=True, exist_ok=False)\n    converter_results = knmi_to_odim(\n        in_fpath=str(knmi_path), out_fpath=str(out_path_pvol_odim)\n    )\n    print(f\"{converter_results=}\")\n    if param_clean_knmi_input:\n        pathlib.Path(knmi_path).unlink()\n        if not any(pathlib.Path(knmi_path).parent.iterdir()):\n            pathlib.Path(knmi_path).parent.rmdir()\n    ibed_pvol_name = translate_knmi_filename(in_path_h5=out_path_pvol_odim)\n    out_path_pvol_odim_tce = pathlib.Path(out_path_pvol_odim).parent.joinpath(\n        ibed_pvol_name\n    )\n    shutil.move(src=out_path_pvol_odim, dst=out_path_pvol_odim_tce)\n    odim_pvol_paths.append(out_path_pvol_odim_tce)\n\nprint(f\"{odim_pvol_paths=}\")\nif str2bool(param_upload_results):\n\n    minioClient = Minio(\n        endpoint=conf_minio_endpoint,\n        access_key=secret_minio_access_key,\n        secret_key=secret_minio_secret_key,\n        secure=True,\n    )\n    print(f\"Uploading results to {get_pvol_storage_path()}\")\n    for odim_pvol_path in odim_pvol_paths:\n        odim_pvol_path = pathlib.Path(odim_pvol_path)\n        local_pvol_storage = pathlib.Path(conf_local_odim)\n        relative_path = odim_pvol_path.relative_to(local_pvol_storage)\n        remote_odim_pvol_path = get_pvol_storage_path(relative_path)\n        exists = False\n        try:\n            _ = minioClient.stat_object(\n                bucket=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                prefix=remote_odim_pvol_path.as_posix(),\n            )\n            exists = True\n        except:\n            pass\n        if not exists:\n            print(f\"Uploading {odim_pvol_path} to {remote_odim_pvol_path}\")\n            with open(odim_pvol_path, mode=\"rb\") as file_data:\n                file_stat = os.stat(odim_pvol_path)\n                minioClient.put_object(\n                    bucket_name=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                    object_name=remote_odim_pvol_path.as_posix(),\n                    data=file_data,\n                    length=file_stat.st_size,\n                )\n        else:\n            print(f\"{remote_odim_pvol_path} exists, skipping \")\n    print(\"Finished uploading results\")\nodim_pvol_paths = [path.as_posix() for path in odim_pvol_paths]",
+      "types": {
+        "knmi_pvol_paths": "list",
+        "odim_pvol_paths": "list",
+        "param_public_minio_data": "int",
+        "param_user_number": "str",
+        "param_clean_knmi_input": "str",
+        "param_upload_results": "str",
+        "secret_minio_access_key": "str",
+        "secret_minio_secret_key": "str"
+      },
+      "inputs": [
+        "knmi_pvol_paths"
+      ],
+      "outputs": [
+        "odim_pvol_paths"
+      ],
+      "params": [
+        "param_public_minio_data",
+        "param_user_number",
+        "param_clean_knmi_input",
+        "param_upload_results"
+      ],
+      "param_values": {
+        "param_public_minio_data": 0,
+        "param_user_number": "001",
+        "param_clean_knmi_input": "True",
+        "param_upload_results": "True"
+      },
+      "secrets": [
+        "secret_minio_access_key",
+        "secret_minio_secret_key"
+      ],
+      "confs": {
+        "conf_minio_public_root_prefix": "conf_minio_public_root_prefix = 'vl-vol2bird'",
+        "conf_minio_tutorial_prefix": "conf_minio_tutorial_prefix = 'ravl-tutorial'",
+        "conf_pvol_output_prefix": "conf_pvol_output_prefix = 'pvol'",
+        "conf_user_directory": "conf_user_directory = 'user'",
+        "conf_local_radar_db": "conf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'",
+        "conf_minio_endpoint": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'",
+        "conf_local_odim": "conf_local_odim = '/tmp/data/odim'",
+        "conf_minio_public_bucket_name": "conf_minio_public_bucket_name = 'naa-vre-public'",
+        "conf_minio_user_bucket_name": "conf_minio_user_bucket_name = 'naa-vre-user-data'"
+      },
+      "all_inputs": [
+        "knmi_pvol_paths"
+      ],
+      "dependencies": [
+        {
+          "name": "Minio",
+          "asname": null,
+          "module": "minio"
+        },
+        {
+          "name": "h5py",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "json",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "os",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "pathlib",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "shutil",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "subprocess",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "sys",
+          "asname": null,
+          "module": ""
+        }
+      ],
+      "chart_obj": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1,
+        "nodes": {
+          "9505a7a": {
+            "id": "9505a7a",
+            "type": "input-output",
+            "position": {
+              "x": 35,
+              "y": 15
+            },
+            "properties": {
+              "title": "KNMI-to-ODIM-converter-koen-greuell-lifewatch-eu",
+              "vars": [
+                {
+                  "name": "knmi_pvol_paths",
+                  "direction": "input",
+                  "type": "datatype",
+                  "color": "#4082bf"
+                },
+                {
+                  "name": "odim_pvol_paths",
+                  "direction": "output",
+                  "type": "datatype",
+                  "color": "#2d863a"
+                }
+              ],
+              "params": [
+                "param_public_minio_data",
+                "param_user_number",
+                "param_clean_knmi_input",
+                "param_upload_results"
+              ],
+              "secrets": [
+                "secret_minio_access_key",
+                "secret_minio_secret_key"
+              ],
+              "inputs": [
+                "knmi_pvol_paths"
+              ],
+              "outputs": [
+                "odim_pvol_paths"
+              ],
+              "og_node_id": "9505a7a"
+            },
+            "ports": {
+              "knmi_pvol_paths": {
+                "properties": {
+                  "color": "#4082bf"
+                },
+                "id": "knmi_pvol_paths",
+                "type": "left"
+              },
+              "odim_pvol_paths": {
+                "properties": {
+                  "color": "#2d863a"
+                },
+                "id": "odim_pvol_paths",
+                "type": "right"
+              }
+            }
+          }
+        },
+        "links": {},
+        "selected": {},
+        "hovered": {}
+      },
+      "node_id": "9505a7a",
+      "container_source": "from minio import Minio\nimport h5py\nimport json\nimport os\nimport pathlib\nimport shutil\nimport subprocess\nimport sys\n\nimport argparse\nimport json\nimport os\narg_parser = argparse.ArgumentParser()\n\nsecret_minio_access_key = os.getenv('secret_minio_access_key')\nsecret_minio_secret_key = os.getenv('secret_minio_secret_key')\n\narg_parser.add_argument('--id', action='store',\n                        type=str, required=True, dest='id')\n\n\narg_parser.add_argument('--knmi_pvol_paths', action='store',\n                        type=str, required=True, dest='knmi_pvol_paths')\n\narg_parser.add_argument('--param_clean_knmi_input', action='store',\n                        type=str, required=True, dest='param_clean_knmi_input')\narg_parser.add_argument('--param_public_minio_data', action='store',\n                        type=int, required=True, dest='param_public_minio_data')\narg_parser.add_argument('--param_upload_results', action='store',\n                        type=str, required=True, dest='param_upload_results')\narg_parser.add_argument('--param_user_number', action='store',\n                        type=str, required=True, dest='param_user_number')\n\nargs = arg_parser.parse_args()\nprint(args)\n\nid = args.id\n\nknmi_pvol_paths = json.loads(args.knmi_pvol_paths)\n\nparam_clean_knmi_input = args.param_clean_knmi_input.replace('\"', '')\nparam_public_minio_data = args.param_public_minio_data\nparam_upload_results = args.param_upload_results.replace('\"', '')\nparam_user_number = args.param_user_number.replace('\"', '')\n\nconf_minio_public_root_prefix = 'vl-vol2bird'\n\nconf_minio_tutorial_prefix = 'ravl-tutorial'\n\nconf_pvol_output_prefix = 'pvol'\n\nconf_user_directory = 'user'\n\nconf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'\n\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\n\nconf_local_odim = '/tmp/data/odim'\n\nconf_minio_public_bucket_name = 'naa-vre-public'\n\nconf_minio_user_bucket_name = 'naa-vre-user-data'\n\n\nconf_minio_public_root_prefix = 'vl-vol2bird'\nconf_minio_tutorial_prefix = 'ravl-tutorial'\nconf_pvol_output_prefix = 'pvol'\nconf_user_directory = 'user'\nconf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\nconf_local_odim = '/tmp/data/odim'\nconf_minio_public_bucket_name = 'naa-vre-public'\nconf_minio_user_bucket_name = 'naa-vre-user-data'\n\"\"\"\nnotes: \nNeed to add this such that it can upload the PVOL From this stage\nNeed to add option such that this can remove the PVOL files from this stage. \nWarning, with the removal of PVOL on this stage auto-bricks the VP / RBC gen\nWe can introduce a flag check where RBC and VP check if PVOL 'needed' to be removed\nIf that flag is met - abort, there 'shouldnt' be any INPUT files then. \n\"\"\"\n\n\ndef str2bool(v):\n    if isinstance(v, bool):\n        return v\n    if v.lower() in (\"yes\", \"true\", \"t\", \"y\", \"1\"):\n        return True\n    elif v.lower() in (\"no\", \"false\", \"f\", \"n\", \"0\"):\n        return False\n    else:\n        raise Exception\n\n\nclass FileTranslatorFileTypeError(LookupError):\n    \"\"\"raise this when there's a filetype mismatch derived from h5 file\"\"\"\n\n\ndef load_radar_db(radar_db_path):\n    \"\"\"Load and return the radar database\n\n    Output dict sample (wmo code is used as key):\n    {\n        11038: {'number': '1209', 'country': 'Austria', 'countryid': 'LOWM41', 'oldcountryid': 'OS41', 'wmocode': '11038', 'odimcode': 'atrau', 'location': 'Wien/Schwechat', 'status': '1', 'latitude': '48.074', 'longitude': '16.536', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1978', 'heightantenna': '224', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.625', 'single_rrr': 'Y', 'composite_rrr': 'Y', 'wrwp': 'Y'},\n        11052: {'number': '1210', 'country': 'Austria', 'countryid': 'LOWM43', 'oldcountryid': 'OS43', 'wmocode': '11052', 'odimcode': 'atfel', 'location': 'Salzburg/Feldkirchen', 'status': '1', 'latitude': '48.065', 'longitude': '13.062', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1992', 'heightantenna': '581', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.6', 'single_rrr': 'Y', 'composite_rrr': ' ', 'wrwp': ' '},\n        ...\n    }\n    \"\"\"\n    with open(radar_db_path, mode=\"r\") as f:\n        radar_db_json = json.load(f)\n    radar_db = {}\n    for radar_dict in radar_db_json:\n        try:\n            wmo_code = int(radar_dict.get(\"wmocode\"))\n            radar_db.update({wmo_code: radar_dict})\n        except Exception:  # Happens when there is for ex. no wmo code.\n            pass\n    return radar_db\n\n\ndef translate_wmo_odim(radar_db, wmo_code):\n    \"\"\" \"\"\"\n    if not isinstance(wmo_code, int):\n        raise ValueError(\"Expecting a wmo_code [int]\")\n    else:\n        pass\n    odim_code = (\n        radar_db.get(wmo_code).get(\"odimcode\").upper().strip()\n    )  # Apparently, people sometimes forget to remove whitespace..\n    return odim_code\n\n\ndef extract_wmo_code(in_path):\n    with h5py.File(in_path, mode=\"r\") as f:\n        what = f[\"what\"].attrs\n        source = what.get(\"source\")\n        source = source.decode(\"utf-8\")\n        source_list = source.split(sep=\",\")\n    wmo_code = [string for string in source_list if \"WMO\" in string]\n    if len(wmo_code) == 1:\n        wmo_code = wmo_code[0]\n        wmo_code = wmo_code.replace(\"WMO:\", \"\")\n    elif len(wmo_code) == 0:\n        rad_str = [string for string in source_list if \"RAD\" in string]\n\n        if len(rad_str) == 1:\n            rad_str = rad_str[0]\n        else:\n            print(\n                \"Something went wrong with determining the rad_str and it wasnt WMO either, exitting\"\n            )\n            sys.exit(1)\n        rad_str_split = rad_str.split(\":\")\n        rad_code = rad_str_split[1]\n\n        rad_codes = {\"NL52\": \"6356\", \"NL51\": \"6234\", \"NL50\": \"6260\"}\n\n        wmo_code = rad_codes.get(rad_code)\n    return int(wmo_code)\n\n\ndef translate_knmi_filename(in_path_h5):\n    wmo_code = extract_wmo_code(in_path_h5)\n    odim_code = translate_wmo_odim(radar_db, wmo_code)\n    with h5py.File(in_path_h5, mode=\"r\") as f:\n        what = f[\"what\"].attrs\n        date = what.get(\"date\")\n        date = date.decode(\"utf-8\")\n        time = what.get(\"time\")\n        time = time.decode(\"utf-8\")\n        hh = time[:2]\n        mm = time[2:4]\n        ss = time[4:]\n        time = time[:-2]  # Do not include seconds\n        filetype = what.get(\"object\")\n        filetype = filetype.decode(\"utf-8\")\n        if filetype != \"PVOL\":\n            raise FileTranslatorFileTypeError(\"File type was NOT pvol\")\n    name = [\n        odim_code,\n        filetype.lower(),\n        date + \"T\" + time,\n        str(wmo_code) + \".h5\",\n    ]\n    ibed_fname = \"_\".join(name)\n    return ibed_fname\n\n\ndef knmi_to_odim(in_fpath, out_fpath):\n    \"\"\"\n    Converter usage:\n    Usage: KNMI_vol_h5_to_ODIM_h5 ODIM_file.h5 KNMI_input_file.h5\n\n    Returns out_fpath and returncode\n    \"\"\"\n    converter = \"/opt/radar/vol2bird/bin/./KNMI_vol_h5_to_ODIM_h5\"\n    command = [converter, out_fpath, in_fpath]\n    proc = subprocess.run(command, stderr=subprocess.PIPE)\n    output = proc.stderr.decode(\"utf-8\")\n    returncode = int(proc.returncode)\n    return (out_fpath, returncode, output)\n\n\ndef get_pvol_storage_path(relative_path: str = \"\") -> str:\n    if param_public_minio_data:\n        return pathlib.Path(conf_minio_public_root_prefix).joinpath(conf_minio_tutorial_prefix).joinpath(conf_pvol_output_prefix).joinpath(relative_path)\n    else:\n        return pathlib.Path(conf_minio_tutorial_prefix).joinpath(conf_user_directory+param_user_number).joinpath(conf_pvol_output_prefix).joinpath(relative_path)\n\n\nprint(f\"{knmi_pvol_paths=}\")\nodim_pvol_paths = []\nradar_db = load_radar_db(conf_local_radar_db)\nfor knmi_path in knmi_pvol_paths:\n    out_path_pvol_odim = pathlib.Path(knmi_path.replace(\"knmi\", \"odim\"))\n    print(f\"{knmi_path=}\")\n    print(f\"{out_path_pvol_odim=}\")\n    if not out_path_pvol_odim.parent.exists():\n        out_path_pvol_odim.parent.mkdir(parents=True, exist_ok=False)\n    converter_results = knmi_to_odim(\n        in_fpath=str(knmi_path), out_fpath=str(out_path_pvol_odim)\n    )\n    print(f\"{converter_results=}\")\n    if param_clean_knmi_input:\n        pathlib.Path(knmi_path).unlink()\n        if not any(pathlib.Path(knmi_path).parent.iterdir()):\n            pathlib.Path(knmi_path).parent.rmdir()\n    ibed_pvol_name = translate_knmi_filename(in_path_h5=out_path_pvol_odim)\n    out_path_pvol_odim_tce = pathlib.Path(out_path_pvol_odim).parent.joinpath(\n        ibed_pvol_name\n    )\n    shutil.move(src=out_path_pvol_odim, dst=out_path_pvol_odim_tce)\n    odim_pvol_paths.append(out_path_pvol_odim_tce)\n\nprint(f\"{odim_pvol_paths=}\")\nif str2bool(param_upload_results):\n\n    minioClient = Minio(\n        endpoint=conf_minio_endpoint,\n        access_key=secret_minio_access_key,\n        secret_key=secret_minio_secret_key,\n        secure=True,\n    )\n    print(f\"Uploading results to {get_pvol_storage_path()}\")\n    for odim_pvol_path in odim_pvol_paths:\n        odim_pvol_path = pathlib.Path(odim_pvol_path)\n        local_pvol_storage = pathlib.Path(conf_local_odim)\n        relative_path = odim_pvol_path.relative_to(local_pvol_storage)\n        remote_odim_pvol_path = get_pvol_storage_path(relative_path)\n        exists = False\n        try:\n            _ = minioClient.stat_object(\n                bucket=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                prefix=remote_odim_pvol_path.as_posix(),\n            )\n            exists = True\n        except:\n            pass\n        if not exists:\n            print(f\"Uploading {odim_pvol_path} to {remote_odim_pvol_path}\")\n            with open(odim_pvol_path, mode=\"rb\") as file_data:\n                file_stat = os.stat(odim_pvol_path)\n                minioClient.put_object(\n                    bucket_name=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                    object_name=remote_odim_pvol_path.as_posix(),\n                    data=file_data,\n                    length=file_stat.st_size,\n                )\n        else:\n            print(f\"{remote_odim_pvol_path} exists, skipping \")\n    print(\"Finished uploading results\")\nodim_pvol_paths = [path.as_posix() for path in odim_pvol_paths]\n\nfile_odim_pvol_paths = open(\"/tmp/odim_pvol_paths_\" + id + \".json\", \"w\")\nfile_odim_pvol_paths.write(json.dumps(odim_pvol_paths))\nfile_odim_pvol_paths.close()\n",
+      "kernel": "ipython",
+      "notebook_dict": {
+        "metadata": {
+          "nbdime-conflicts": {
+            "local_diff": [
+              {
+                "diff": [
+                  {
+                    "diff": [
+                      {
+                        "key": 0,
+                        "op": "addrange",
+                        "valuelist": [
+                          "3.13.1"
+                        ]
+                      },
+                      {
+                        "key": 0,
+                        "length": 1,
+                        "op": "removerange"
+                      }
+                    ],
+                    "key": "version",
+                    "op": "patch"
+                  }
+                ],
+                "key": "language_info",
+                "op": "patch"
+              }
+            ],
+            "remote_diff": [
+              {
+                "key": "language_info",
+                "op": "remove"
+              }
+            ]
+          },
+          "kernelspec": {
+            "display_name": "python3",
+            "language": "python3",
+            "name": "python3"
+          },
+          "language_info": {
+            "codemirror_mode": {
+              "name": "ipython",
+              "version": 3
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3",
+            "version": "3.13.3"
+          }
+        },
+        "nbformat_minor": 5,
+        "nbformat": 4,
+        "cells": [
+          {
+            "cell_type": "code",
+            "source": "# KNMI-to-ODIM-converter\n\"\"\"\nnotes: \nNeed to add this such that it can upload the PVOL From this stage\nNeed to add option such that this can remove the PVOL files from this stage. \nWarning, with the removal of PVOL on this stage auto-bricks the VP / RBC gen\nWe can introduce a flag check where RBC and VP check if PVOL 'needed' to be removed\nIf that flag is met - abort, there 'shouldnt' be any INPUT files then. \n\"\"\"\nimport subprocess\nimport pathlib\nimport h5py\nimport json\nimport sys\nimport shutil\n\n\n# from typing import List, Object\nimport math\n\ndef str2bool(v):\n    if isinstance(v, bool):\n        return v\n    if v.lower() in (\"yes\", \"true\", \"t\", \"y\", \"1\"):\n        return True\n    elif v.lower() in (\"no\", \"false\", \"f\", \"n\", \"0\"):\n        return False\n    else:\n        raise Exception\n\n\nclass FileTranslatorFileTypeError(LookupError):\n    \"\"\"raise this when there's a filetype mismatch derived from h5 file\"\"\"\n\n\ndef load_radar_db(radar_db_path):\n    \"\"\"Load and return the radar database\n\n    Output dict sample (wmo code is used as key):\n    {\n        11038: {'number': '1209', 'country': 'Austria', 'countryid': 'LOWM41', 'oldcountryid': 'OS41', 'wmocode': '11038', 'odimcode': 'atrau', 'location': 'Wien/Schwechat', 'status': '1', 'latitude': '48.074', 'longitude': '16.536', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1978', 'heightantenna': '224', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.625', 'single_rrr': 'Y', 'composite_rrr': 'Y', 'wrwp': 'Y'},\n        11052: {'number': '1210', 'country': 'Austria', 'countryid': 'LOWM43', 'oldcountryid': 'OS43', 'wmocode': '11052', 'odimcode': 'atfel', 'location': 'Salzburg/Feldkirchen', 'status': '1', 'latitude': '48.065', 'longitude': '13.062', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1992', 'heightantenna': '581', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.6', 'single_rrr': 'Y', 'composite_rrr': ' ', 'wrwp': ' '},\n        ...\n    }\n    \"\"\"\n    with open(radar_db_path, mode=\"r\") as f:\n        radar_db_json = json.load(f)\n    radar_db = {}\n    # Reorder list to a usable dict with sub dicts which we can search with wmo codes\n    for radar_dict in radar_db_json:\n        try:\n            wmo_code = int(radar_dict.get(\"wmocode\"))\n            radar_db.update({wmo_code: radar_dict})\n        except Exception:  # Happens when there is for ex. no wmo code.\n            pass\n    return radar_db\n\n\ndef translate_wmo_odim(radar_db, wmo_code):\n    \"\"\" \"\"\"\n    if not isinstance(wmo_code, int):\n        raise ValueError(\"Expecting a wmo_code [int]\")\n    else:\n        pass\n    odim_code = (\n        radar_db.get(wmo_code).get(\"odimcode\").upper().strip()\n    )  # Apparently, people sometimes forget to remove whitespace..\n    return odim_code\n\n\ndef extract_wmo_code(in_path):\n    with h5py.File(in_path, mode=\"r\") as f:\n        # DWD Specific\n        # Main attributes\n        what = f[\"what\"].attrs\n        # Source block\n        source = what.get(\"source\")\n        source = source.decode(\"utf-8\")\n        # Determine if we are dealing with a WMO code or with an ODIM code set\n        # Example from Germany where source block is set as WMO\n        # what/source: \"WMO:10103\"\n        # Example from The Netherlands where source block is set as a combination of ODIM and various codes\n        # what/source: RAD:NL52,NOD:nlhrw,PLC:Herwijnen\n        source_list = source.split(sep=\",\")\n    wmo_code = [string for string in source_list if \"WMO\" in string]\n    # Determine if we had exactly one WMO hit\n    if len(wmo_code) == 1:\n        wmo_code = wmo_code[0]\n        wmo_code = wmo_code.replace(\"WMO:\", \"\")\n    # No wmo code found, most likeley dealing with a dutch radar\n    elif len(wmo_code) == 0:\n        rad_str = [string for string in source_list if \"RAD\" in string]\n\n        if len(rad_str) == 1:\n            rad_str = rad_str[0]\n        else:\n            print(\n                \"Something went wrong with determining the rad_str and it wasnt WMO either, exitting\"\n            )\n            sys.exit(1)\n        # Split the rad_str\n        rad_str_split = rad_str.split(\":\")\n        # [0] = RAD, [1] = rad code\n        rad_code = rad_str_split[1]\n\n        rad_codes = {\"NL52\": \"6356\", \"NL51\": \"6234\", \"NL50\": \"6260\"}\n\n        wmo_code = rad_codes.get(rad_code)\n    return int(wmo_code)\n\n\ndef translate_knmi_filename(in_path_h5):\n    wmo_code = extract_wmo_code(in_path_h5)\n    odim_code = translate_wmo_odim(radar_db, wmo_code)\n    with h5py.File(in_path_h5, mode=\"r\") as f:\n        what = f[\"what\"].attrs\n        # Date block\n        date = what.get(\"date\")\n        date = date.decode(\"utf-8\")\n        # Time block\n        time = what.get(\"time\")\n        # time = f['dataset1/what'].attrs['endtime']\n        time = time.decode(\"utf-8\")\n        hh = time[:2]\n        mm = time[2:4]\n        ss = time[4:]\n        time = time[:-2]  # Do not include seconds\n        # File type\n        filetype = what.get(\"object\")\n        filetype = filetype.decode(\"utf-8\")\n        if filetype != \"PVOL\":\n            raise FileTranslatorFileTypeError(\"File type was NOT pvol\")\n    name = [\n        odim_code,\n        filetype.lower(),\n        date + \"T\" + time,\n        str(wmo_code) + \".h5\",\n    ]\n    ibed_fname = \"_\".join(name)\n    return ibed_fname\n\n\ndef knmi_to_odim(in_fpath, out_fpath):\n    \"\"\"\n    Converter usage:\n    Usage: KNMI_vol_h5_to_ODIM_h5 ODIM_file.h5 KNMI_input_file.h5\n\n    Returns out_fpath and returncode\n    \"\"\"\n    converter = \"/opt/radar/vol2bird/bin/./KNMI_vol_h5_to_ODIM_h5\"\n    command = [converter, out_fpath, in_fpath]\n    proc = subprocess.run(command, stderr=subprocess.PIPE)\n    output = proc.stderr.decode(\"utf-8\")\n    returncode = int(proc.returncode)\n    return (out_fpath, returncode, output)\n\ndef get_pvol_storage_path(relative_path: str = \"\") -> str:\n    if param_public_minio_data:\n        return pathlib.Path(conf_minio_public_root_prefix).joinpath(conf_minio_tutorial_prefix).joinpath(conf_pvol_output_prefix).joinpath(relative_path)\n    else:\n        return pathlib.Path(conf_minio_tutorial_prefix).joinpath(conf_user_directory+param_user_number).joinpath(conf_pvol_output_prefix).joinpath(relative_path)\n\nprint(f\"{knmi_pvol_paths=}\")\nodim_pvol_paths = []\nradar_db = load_radar_db(conf_local_radar_db)\nfor knmi_path in knmi_pvol_paths:\n    out_path_pvol_odim = pathlib.Path(knmi_path.replace(\"knmi\", \"odim\"))\n    print(f\"{knmi_path=}\")\n    print(f\"{out_path_pvol_odim=}\")\n    if not out_path_pvol_odim.parent.exists():\n        out_path_pvol_odim.parent.mkdir(parents=True, exist_ok=False)\n    converter_results = knmi_to_odim(\n        in_fpath=str(knmi_path), out_fpath=str(out_path_pvol_odim)\n    )\n    print(f\"{converter_results=}\")\n    if param_clean_knmi_input:\n        pathlib.Path(knmi_path).unlink()\n        if not any(pathlib.Path(knmi_path).parent.iterdir()):\n            pathlib.Path(knmi_path).parent.rmdir()\n    # Determine name for our convention\n    ibed_pvol_name = translate_knmi_filename(in_path_h5=out_path_pvol_odim)\n    out_path_pvol_odim_tce = pathlib.Path(out_path_pvol_odim).parent.joinpath(\n        ibed_pvol_name\n    )\n    shutil.move(src=out_path_pvol_odim, dst=out_path_pvol_odim_tce)\n    odim_pvol_paths.append(out_path_pvol_odim_tce)\n\nprint(f\"{odim_pvol_paths=}\")\nif str2bool(param_upload_results):\n    # Minio version\n    from minio import Minio\n\n    minioClient = Minio(\n        endpoint=conf_minio_endpoint,\n        access_key=secret_minio_access_key,\n        secret_key=secret_minio_secret_key,\n        secure=True,\n    )\n    print(f\"Uploading results to {get_pvol_storage_path()}\")\n    for odim_pvol_path in odim_pvol_paths:\n        odim_pvol_path = pathlib.Path(odim_pvol_path)\n        local_pvol_storage = pathlib.Path(conf_local_odim)\n        relative_path = odim_pvol_path.relative_to(local_pvol_storage)\n        remote_odim_pvol_path = get_pvol_storage_path(relative_path)\n        # check if this exists\n        exists = False\n        try:\n            _ = minioClient.stat_object(\n                bucket=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                prefix=remote_odim_pvol_path.as_posix(),\n            )\n            exists = True\n        except:\n            pass\n        if not exists:\n            print(f\"Uploading {odim_pvol_path} to {remote_odim_pvol_path}\")\n            with open(odim_pvol_path, mode=\"rb\") as file_data:\n                file_stat = os.stat(odim_pvol_path)\n                minioClient.put_object(\n                    bucket_name=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                    object_name=remote_odim_pvol_path.as_posix(),\n                    data=file_data,\n                    length=file_stat.st_size,\n                )\n        else:\n            print(f\"{remote_odim_pvol_path} exists, skipping \")\n    print(\"Finished uploading results\")\n# cast to string to not break json serializer\nodim_pvol_paths = [path.as_posix() for path in odim_pvol_paths]",
+            "metadata": {},
+            "execution_count": null,
+            "outputs": [],
+            "id": "7bf671ac"
+          }
+        ]
+      },
+      "base_image": {
+        "build": "ghcr.io/qcdis/naavre/naavre-cell-build-ravl:v0.22.12",
+        "runtime": "ghcr.io/qcdis/naavre/naavre-cell-runtime-ravl:v0.22.12"
+      },
+      "image_version": "0ec1ab4"
+    },
+    "10103": {
+      "title": "PVOL-VP-converter-koen-greuell-lifewatch-eu",
+      "task_name": "pvol-vp-converter-koen-greuell-lifewatch-eu",
+      "original_source": "conf_minio_public_root_prefix = 'vl-vol2bird'\nconf_minio_tutorial_prefix = 'ravl-tutorial'\nconf_vp_output_prefix = 'vp'\nconf_user_directory = 'user'\nconf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'\nconf_local_vp = '/tmp/data/vp'\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\nconf_minio_public_bucket_name = 'naa-vre-public'\nconf_minio_user_bucket_name = 'naa-vre-user-data'\n\n\ndef str2bool(v):\n    if isinstance(v, bool):\n        return v\n    if v.lower() in (\"yes\", \"true\", \"t\", \"y\", \"1\"):\n        return True\n    elif v.lower() in (\"no\", \"false\", \"f\", \"n\", \"0\"):\n        return False\n    else:\n        raise Exception\n\n\ndef load_radar_db(radar_db_path):\n    \"\"\"Load and return the radar database\n    Output dict sample (wmo code is used as key):\n    {\n        11038: {'number': '1209', 'country': 'Austria', 'countryid': 'LOWM41', 'oldcountryid': 'OS41', 'wmocode': '11038', 'odimcode': 'atrau', 'location': 'Wien/Schwechat', 'status': '1', 'latitude': '48.074', 'longitude': '16.536', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1978', 'heightantenna': '224', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.625', 'single_rrr': 'Y', 'composite_rrr': 'Y', 'wrwp': 'Y'},\n        11052: {'number': '1210', 'country': 'Austria', 'countryid': 'LOWM43', 'oldcountryid': 'OS43', 'wmocode': '11052', 'odimcode': 'atfel', 'location': 'Salzburg/Feldkirchen', 'status': '1', 'latitude': '48.065', 'longitude': '13.062', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1992', 'heightantenna': '581', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.6', 'single_rrr': 'Y', 'composite_rrr': ' ', 'wrwp': ' '},\n        ...\n    }\n    \"\"\"\n    with open(radar_db_path, mode=\"r\") as f:\n        radar_db_json = json.load(f)\n    radar_db = {}\n    for radar_dict in radar_db_json:\n        try:\n            wmo_code = int(radar_dict.get(\"wmocode\"))\n            radar_db.update({wmo_code: radar_dict})\n        except Exception:  # Happens when there is for ex. no wmo code.\n            pass\n    return radar_db\n\n\ndef translate_wmo_odim(radar_db, wmo_code):\n    \"\"\"\"\"\"\n    if not isinstance(wmo_code, int):\n        raise ValueError(\"Expecting a wmo_code [int]\")\n    else:\n        pass\n    odim_code = (\n        radar_db.get(wmo_code).get(\"odimcode\").upper().strip()\n    )  # Apparently, people sometimes forget to remove whitespace..\n    return odim_code\n\n\ndef extract_wmo_code(in_path):\n    with h5py.File(in_path, \"r\") as f:\n        what = f[\"what\"].attrs\n        source = what.get(\"source\")\n        source = source.decode(\"utf-8\")\n        source_list = source.split(sep=\",\")\n    wmo_code = [string for string in source_list if \"WMO\" in string]\n    if len(wmo_code) == 1:\n        wmo_code = wmo_code[0]\n        wmo_code = wmo_code.replace(\"WMO:\", \"\")\n    elif len(wmo_code) == 0:\n        rad_str = [string for string in source_list if \"RAD\" in string]\n        if len(rad_str) == 1:\n            rad_str = rad_str[0]\n        else:\n            print(\n                \"Something went wrong with determining the rad_str and it wasnt WMO either, exiting\"\n            )\n            sys.exit(1)\n        rad_str_split = rad_str.split(\":\")\n        rad_code = rad_str_split[1]\n        rad_codes = {\"NL52\": \"6356\", \"NL51\": \"6234\", \"NL50\": \"6260\"}\n        wmo_code = rad_codes.get(rad_code)\n    return int(wmo_code)\n\n\ndef vol2bird(\n    in_file,\n    out_dir,\n    radar_db,\n    add_version=True,\n    add_sector=False,\n    overwrite=False,\n):\n    date_regex = \"([0-9]{8})\"\n    if add_version == True:\n        version = \"v0-3-20\"\n        suffix = pathlib.Path(in_file).suffix\n        in_file_name = pathlib.Path(in_file).name\n        in_file_stem = pathlib.Path(in_file_name).stem\n        out_file_name = in_file_stem.replace(\"pvol\", \"vp\")\n        out_file_name = \"_\".join([out_file_name, version]) + suffix\n        wmo = extract_wmo_code(in_file)\n        odim = translate_wmo_odim(radar_db, wmo)\n        datetime = pd.to_datetime(re.search(date_regex, out_file_name)[0])\n        ibed_path = \"/\".join(\n            [\n                odim[:2],\n                odim[2:],\n                str(datetime.year),\n                str(datetime.month).zfill(2),\n                str(datetime.day).zfill(2),\n            ]\n        )\n        out_file = \"/\".join([out_dir, ibed_path, out_file_name])\n        out_file_dir = pathlib.Path(out_file).parent\n        if not out_file_dir.exists():\n            out_file_dir.mkdir(parents=True)\n\n    process = False\n    if not overwrite:\n        if not pathlib.Path(out_file).exists():\n            process = True\n            print(f\"Not processing, overwrite is set to {overwrite}\")\n    else:\n        process = True\n\n    if process:\n        command = [\"vol2bird\", in_file, out_file]\n        result = subprocess.run(\n            command, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT\n        )\n    return [in_file, out_file]\n\ndef get_vp_storage_path(relative_path: str = \"\") -> str:\n    if param_public_minio_data:\n        return pathlib.Path(conf_minio_public_root_prefix).joinpath(conf_minio_tutorial_prefix).joinpath(conf_vp_output_prefix).joinpath(relative_path)\n    else:\n        return pathlib.Path(conf_minio_tutorial_prefix).joinpath(conf_user_directory+param_user_number).joinpath(conf_vp_output_prefix).joinpath(relative_path)\n\nvertical_profile_paths = []\nradar_db = load_radar_db(conf_local_radar_db)\nodim_pvol_paths = [pathlib.Path(path) for path in odim_pvol_paths]\nfor odim_pvol_path in odim_pvol_paths:\n    pvol_path, vp_path = vol2bird(\n        odim_pvol_path, conf_local_vp, radar_db, overwrite=False\n    )\n    vertical_profile_paths.append(vp_path)\nprint(vertical_profile_paths)\n\nif str2bool(param_clean_pvol_output):\n    print(\"Removing PVOL output from local storage\")\n    for pvol_path in odim_pvol_paths:\n        pathlib.Path(pvol_path).unlink()\n        if not any(pathlib.Path(pvol_path).parent.iterdir()):\n            pathlib.Path(pvol_path).parent.rmdir()\n\nif str2bool(param_upload_results):\n\n    minioClient = Minio(\n        endpoint=conf_minio_endpoint,\n        access_key=secret_minio_access_key,\n        secret_key=secret_minio_secret_key,\n        secure=True,\n    )\n    print(f\"Uploading results to {get_vp_storage_path()}\")\n    for vp_path in vertical_profile_paths:\n        vp_path = pathlib.Path(vp_path)\n        local_vp_storage = pathlib.Path(conf_local_vp)\n        relative_path = vp_path.relative_to(local_vp_storage)\n        remote_vp_path = get_vp_storage_path(relative_path)\n        exists = False\n        try:\n            _ = minioClient.stat_object(\n                bucket=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                prefix=remote_vp_path.as_posix(),\n            )\n            exists = True\n        except:\n            pass\n        if not exists:\n            print(f\"Uploading {vp_path} to {remote_vp_path}\")\n            with open(vp_path, mode=\"rb\") as file_data:\n                file_stat = os.stat(vp_path)\n                minioClient.put_object(\n                    bucket_name=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                    object_name=remote_vp_path.as_posix(),\n                    data=file_data,\n                    length=file_stat.st_size,\n                )\n        else:\n            print(f\"{remote_vp_path} exists, skipping \")\n    print(\"Finished uploading results\")\nif str2bool(param_clean_vp_output):\n    print(\"Removing VP output from local storage\")\n    for vp_path in vertical_profile_paths:\n        pathlib.Path(vp_path).unlink()\n        if not any(pathlib.Path(vp_path).parent.iterdir()):\n            pathlib.Path(vp_path).parent.rmdir()\n            \nPVOL_VP_converter_complete = 1",
+      "types": {
+        "odim_pvol_paths": "list",
+        "PVOL_VP_converter_complete": "int",
+        "param_public_minio_data": "int",
+        "param_user_number": "str",
+        "param_clean_pvol_output": "str",
+        "param_upload_results": "str",
+        "param_clean_vp_output": "str",
+        "secret_minio_access_key": "str",
+        "secret_minio_secret_key": "str"
+      },
+      "inputs": [
+        "odim_pvol_paths"
+      ],
+      "outputs": [
+        "PVOL_VP_converter_complete"
+      ],
+      "params": [
+        "param_public_minio_data",
+        "param_user_number",
+        "param_clean_pvol_output",
+        "param_upload_results",
+        "param_clean_vp_output"
+      ],
+      "param_values": {
+        "param_public_minio_data": 0,
+        "param_user_number": "001",
+        "param_clean_pvol_output": "True",
+        "param_upload_results": "True",
+        "param_clean_vp_output": "True"
+      },
+      "secrets": [
+        "secret_minio_access_key",
+        "secret_minio_secret_key"
+      ],
+      "confs": {
+        "conf_minio_public_root_prefix": "conf_minio_public_root_prefix = 'vl-vol2bird'",
+        "conf_minio_tutorial_prefix": "conf_minio_tutorial_prefix = 'ravl-tutorial'",
+        "conf_vp_output_prefix": "conf_vp_output_prefix = 'vp'",
+        "conf_user_directory": "conf_user_directory = 'user'",
+        "conf_local_radar_db": "conf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'",
+        "conf_local_vp": "conf_local_vp = '/tmp/data/vp'",
+        "conf_minio_endpoint": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'",
+        "conf_minio_public_bucket_name": "conf_minio_public_bucket_name = 'naa-vre-public'",
+        "conf_minio_user_bucket_name": "conf_minio_user_bucket_name = 'naa-vre-user-data'"
+      },
+      "all_inputs": [
+        "odim_pvol_paths"
+      ],
+      "dependencies": [
+        {
+          "name": "Minio",
+          "asname": null,
+          "module": "minio"
+        },
+        {
+          "name": "h5py",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "json",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "os",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "pandas",
+          "asname": "pd",
+          "module": ""
+        },
+        {
+          "name": "pathlib",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "re",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "subprocess",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "sys",
+          "asname": null,
+          "module": ""
+        }
+      ],
+      "chart_obj": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1,
+        "nodes": {
+          "5bca8e0": {
+            "id": "5bca8e0",
+            "type": "input-output",
+            "position": {
+              "x": 35,
+              "y": 15
+            },
+            "properties": {
+              "title": "PVOL-VP-converter-koen-greuell-lifewatch-eu",
+              "vars": [
+                {
+                  "name": "odim_pvol_paths",
+                  "direction": "input",
+                  "type": "datatype",
+                  "color": "#2d863a"
+                },
+                {
+                  "name": "PVOL_VP_converter_complete",
+                  "direction": "output",
+                  "type": "datatype",
+                  "color": "#931f82"
+                }
+              ],
+              "params": [
+                "param_public_minio_data",
+                "param_user_number",
+                "param_clean_pvol_output",
+                "param_upload_results",
+                "param_clean_vp_output"
+              ],
+              "secrets": [
+                "secret_minio_access_key",
+                "secret_minio_secret_key"
+              ],
+              "inputs": [
+                "odim_pvol_paths"
+              ],
+              "outputs": [
+                "PVOL_VP_converter_complete"
+              ],
+              "og_node_id": "5bca8e0"
+            },
+            "ports": {
+              "odim_pvol_paths": {
+                "properties": {
+                  "color": "#2d863a"
+                },
+                "id": "odim_pvol_paths",
+                "type": "left"
+              },
+              "PVOL_VP_converter_complete": {
+                "properties": {
+                  "color": "#931f82"
+                },
+                "id": "PVOL_VP_converter_complete",
+                "type": "right"
+              }
+            }
+          }
+        },
+        "links": {},
+        "selected": {},
+        "hovered": {}
+      },
+      "node_id": "5bca8e0",
+      "container_source": "from minio import Minio\nimport h5py\nimport json\nimport os\nimport pandas as pd\nimport pathlib\nimport re\nimport subprocess\nimport sys\n\nimport argparse\nimport json\nimport os\narg_parser = argparse.ArgumentParser()\n\nsecret_minio_access_key = os.getenv('secret_minio_access_key')\nsecret_minio_secret_key = os.getenv('secret_minio_secret_key')\n\narg_parser.add_argument('--id', action='store',\n                        type=str, required=True, dest='id')\n\n\narg_parser.add_argument('--odim_pvol_paths', action='store',\n                        type=str, required=True, dest='odim_pvol_paths')\n\narg_parser.add_argument('--param_clean_pvol_output', action='store',\n                        type=str, required=True, dest='param_clean_pvol_output')\narg_parser.add_argument('--param_clean_vp_output', action='store',\n                        type=str, required=True, dest='param_clean_vp_output')\narg_parser.add_argument('--param_public_minio_data', action='store',\n                        type=int, required=True, dest='param_public_minio_data')\narg_parser.add_argument('--param_upload_results', action='store',\n                        type=str, required=True, dest='param_upload_results')\narg_parser.add_argument('--param_user_number', action='store',\n                        type=str, required=True, dest='param_user_number')\n\nargs = arg_parser.parse_args()\nprint(args)\n\nid = args.id\n\nodim_pvol_paths = json.loads(args.odim_pvol_paths)\n\nparam_clean_pvol_output = args.param_clean_pvol_output.replace('\"', '')\nparam_clean_vp_output = args.param_clean_vp_output.replace('\"', '')\nparam_public_minio_data = args.param_public_minio_data\nparam_upload_results = args.param_upload_results.replace('\"', '')\nparam_user_number = args.param_user_number.replace('\"', '')\n\nconf_minio_public_root_prefix = 'vl-vol2bird'\n\nconf_minio_tutorial_prefix = 'ravl-tutorial'\n\nconf_vp_output_prefix = 'vp'\n\nconf_user_directory = 'user'\n\nconf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'\n\nconf_local_vp = '/tmp/data/vp'\n\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\n\nconf_minio_public_bucket_name = 'naa-vre-public'\n\nconf_minio_user_bucket_name = 'naa-vre-user-data'\n\n\nconf_minio_public_root_prefix = 'vl-vol2bird'\nconf_minio_tutorial_prefix = 'ravl-tutorial'\nconf_vp_output_prefix = 'vp'\nconf_user_directory = 'user'\nconf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'\nconf_local_vp = '/tmp/data/vp'\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\nconf_minio_public_bucket_name = 'naa-vre-public'\nconf_minio_user_bucket_name = 'naa-vre-user-data'\n\n\ndef str2bool(v):\n    if isinstance(v, bool):\n        return v\n    if v.lower() in (\"yes\", \"true\", \"t\", \"y\", \"1\"):\n        return True\n    elif v.lower() in (\"no\", \"false\", \"f\", \"n\", \"0\"):\n        return False\n    else:\n        raise Exception\n\n\ndef load_radar_db(radar_db_path):\n    \"\"\"Load and return the radar database\n    Output dict sample (wmo code is used as key):\n    {\n        11038: {'number': '1209', 'country': 'Austria', 'countryid': 'LOWM41', 'oldcountryid': 'OS41', 'wmocode': '11038', 'odimcode': 'atrau', 'location': 'Wien/Schwechat', 'status': '1', 'latitude': '48.074', 'longitude': '16.536', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1978', 'heightantenna': '224', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.625', 'single_rrr': 'Y', 'composite_rrr': 'Y', 'wrwp': 'Y'},\n        11052: {'number': '1210', 'country': 'Austria', 'countryid': 'LOWM43', 'oldcountryid': 'OS43', 'wmocode': '11052', 'odimcode': 'atfel', 'location': 'Salzburg/Feldkirchen', 'status': '1', 'latitude': '48.065', 'longitude': '13.062', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1992', 'heightantenna': '581', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.6', 'single_rrr': 'Y', 'composite_rrr': ' ', 'wrwp': ' '},\n        ...\n    }\n    \"\"\"\n    with open(radar_db_path, mode=\"r\") as f:\n        radar_db_json = json.load(f)\n    radar_db = {}\n    for radar_dict in radar_db_json:\n        try:\n            wmo_code = int(radar_dict.get(\"wmocode\"))\n            radar_db.update({wmo_code: radar_dict})\n        except Exception:  # Happens when there is for ex. no wmo code.\n            pass\n    return radar_db\n\n\ndef translate_wmo_odim(radar_db, wmo_code):\n    \"\"\"\"\"\"\n    if not isinstance(wmo_code, int):\n        raise ValueError(\"Expecting a wmo_code [int]\")\n    else:\n        pass\n    odim_code = (\n        radar_db.get(wmo_code).get(\"odimcode\").upper().strip()\n    )  # Apparently, people sometimes forget to remove whitespace..\n    return odim_code\n\n\ndef extract_wmo_code(in_path):\n    with h5py.File(in_path, \"r\") as f:\n        what = f[\"what\"].attrs\n        source = what.get(\"source\")\n        source = source.decode(\"utf-8\")\n        source_list = source.split(sep=\",\")\n    wmo_code = [string for string in source_list if \"WMO\" in string]\n    if len(wmo_code) == 1:\n        wmo_code = wmo_code[0]\n        wmo_code = wmo_code.replace(\"WMO:\", \"\")\n    elif len(wmo_code) == 0:\n        rad_str = [string for string in source_list if \"RAD\" in string]\n        if len(rad_str) == 1:\n            rad_str = rad_str[0]\n        else:\n            print(\n                \"Something went wrong with determining the rad_str and it wasnt WMO either, exiting\"\n            )\n            sys.exit(1)\n        rad_str_split = rad_str.split(\":\")\n        rad_code = rad_str_split[1]\n        rad_codes = {\"NL52\": \"6356\", \"NL51\": \"6234\", \"NL50\": \"6260\"}\n        wmo_code = rad_codes.get(rad_code)\n    return int(wmo_code)\n\n\ndef vol2bird(\n    in_file,\n    out_dir,\n    radar_db,\n    add_version=True,\n    add_sector=False,\n    overwrite=False,\n):\n    date_regex = \"([0-9]{8})\"\n    if add_version == True:\n        version = \"v0-3-20\"\n        suffix = pathlib.Path(in_file).suffix\n        in_file_name = pathlib.Path(in_file).name\n        in_file_stem = pathlib.Path(in_file_name).stem\n        out_file_name = in_file_stem.replace(\"pvol\", \"vp\")\n        out_file_name = \"_\".join([out_file_name, version]) + suffix\n        wmo = extract_wmo_code(in_file)\n        odim = translate_wmo_odim(radar_db, wmo)\n        datetime = pd.to_datetime(re.search(date_regex, out_file_name)[0])\n        ibed_path = \"/\".join(\n            [\n                odim[:2],\n                odim[2:],\n                str(datetime.year),\n                str(datetime.month).zfill(2),\n                str(datetime.day).zfill(2),\n            ]\n        )\n        out_file = \"/\".join([out_dir, ibed_path, out_file_name])\n        out_file_dir = pathlib.Path(out_file).parent\n        if not out_file_dir.exists():\n            out_file_dir.mkdir(parents=True)\n\n    process = False\n    if not overwrite:\n        if not pathlib.Path(out_file).exists():\n            process = True\n            print(f\"Not processing, overwrite is set to {overwrite}\")\n    else:\n        process = True\n\n    if process:\n        command = [\"vol2bird\", in_file, out_file]\n        result = subprocess.run(\n            command, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT\n        )\n    return [in_file, out_file]\n\n\ndef get_vp_storage_path(relative_path: str = \"\") -> str:\n    if param_public_minio_data:\n        return pathlib.Path(conf_minio_public_root_prefix).joinpath(conf_minio_tutorial_prefix).joinpath(conf_vp_output_prefix).joinpath(relative_path)\n    else:\n        return pathlib.Path(conf_minio_tutorial_prefix).joinpath(conf_user_directory+param_user_number).joinpath(conf_vp_output_prefix).joinpath(relative_path)\n\n\nvertical_profile_paths = []\nradar_db = load_radar_db(conf_local_radar_db)\nodim_pvol_paths = [pathlib.Path(path) for path in odim_pvol_paths]\nfor odim_pvol_path in odim_pvol_paths:\n    pvol_path, vp_path = vol2bird(\n        odim_pvol_path, conf_local_vp, radar_db, overwrite=False\n    )\n    vertical_profile_paths.append(vp_path)\nprint(vertical_profile_paths)\n\nif str2bool(param_clean_pvol_output):\n    print(\"Removing PVOL output from local storage\")\n    for pvol_path in odim_pvol_paths:\n        pathlib.Path(pvol_path).unlink()\n        if not any(pathlib.Path(pvol_path).parent.iterdir()):\n            pathlib.Path(pvol_path).parent.rmdir()\n\nif str2bool(param_upload_results):\n\n    minioClient = Minio(\n        endpoint=conf_minio_endpoint,\n        access_key=secret_minio_access_key,\n        secret_key=secret_minio_secret_key,\n        secure=True,\n    )\n    print(f\"Uploading results to {get_vp_storage_path()}\")\n    for vp_path in vertical_profile_paths:\n        vp_path = pathlib.Path(vp_path)\n        local_vp_storage = pathlib.Path(conf_local_vp)\n        relative_path = vp_path.relative_to(local_vp_storage)\n        remote_vp_path = get_vp_storage_path(relative_path)\n        exists = False\n        try:\n            _ = minioClient.stat_object(\n                bucket=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                prefix=remote_vp_path.as_posix(),\n            )\n            exists = True\n        except:\n            pass\n        if not exists:\n            print(f\"Uploading {vp_path} to {remote_vp_path}\")\n            with open(vp_path, mode=\"rb\") as file_data:\n                file_stat = os.stat(vp_path)\n                minioClient.put_object(\n                    bucket_name=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                    object_name=remote_vp_path.as_posix(),\n                    data=file_data,\n                    length=file_stat.st_size,\n                )\n        else:\n            print(f\"{remote_vp_path} exists, skipping \")\n    print(\"Finished uploading results\")\nif str2bool(param_clean_vp_output):\n    print(\"Removing VP output from local storage\")\n    for vp_path in vertical_profile_paths:\n        pathlib.Path(vp_path).unlink()\n        if not any(pathlib.Path(vp_path).parent.iterdir()):\n            pathlib.Path(vp_path).parent.rmdir()\n\nPVOL_VP_converter_complete = 1\n\nfile_PVOL_VP_converter_complete = open(\n    \"/tmp/PVOL_VP_converter_complete_\" + id + \".json\", \"w\")\nfile_PVOL_VP_converter_complete.write(json.dumps(PVOL_VP_converter_complete))\nfile_PVOL_VP_converter_complete.close()\n",
+      "kernel": "ipython",
+      "notebook_dict": {
+        "metadata": {
+          "nbdime-conflicts": {
+            "local_diff": [
+              {
+                "diff": [
+                  {
+                    "diff": [
+                      {
+                        "key": 0,
+                        "op": "addrange",
+                        "valuelist": [
+                          "3.13.1"
+                        ]
+                      },
+                      {
+                        "key": 0,
+                        "length": 1,
+                        "op": "removerange"
+                      }
+                    ],
+                    "key": "version",
+                    "op": "patch"
+                  }
+                ],
+                "key": "language_info",
+                "op": "patch"
+              }
+            ],
+            "remote_diff": [
+              {
+                "key": "language_info",
+                "op": "remove"
+              }
+            ]
+          },
+          "kernelspec": {
+            "display_name": "python3",
+            "language": "python3",
+            "name": "python3"
+          },
+          "language_info": {
+            "codemirror_mode": {
+              "name": "ipython",
+              "version": 3
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3",
+            "version": "3.13.3"
+          }
+        },
+        "nbformat_minor": 5,
+        "nbformat": 4,
+        "cells": [
+          {
+            "cell_type": "code",
+            "source": "# PVOL-VP-converter\nimport pandas as pd\nimport re\nimport pathlib\n\n\ndef str2bool(v):\n    if isinstance(v, bool):\n        return v\n    if v.lower() in (\"yes\", \"true\", \"t\", \"y\", \"1\"):\n        return True\n    elif v.lower() in (\"no\", \"false\", \"f\", \"n\", \"0\"):\n        return False\n    else:\n        raise Exception\n\n\ndef load_radar_db(radar_db_path):\n    \"\"\"Load and return the radar database\n    Output dict sample (wmo code is used as key):\n    {\n        11038: {'number': '1209', 'country': 'Austria', 'countryid': 'LOWM41', 'oldcountryid': 'OS41', 'wmocode': '11038', 'odimcode': 'atrau', 'location': 'Wien/Schwechat', 'status': '1', 'latitude': '48.074', 'longitude': '16.536', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1978', 'heightantenna': '224', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.625', 'single_rrr': 'Y', 'composite_rrr': 'Y', 'wrwp': 'Y'},\n        11052: {'number': '1210', 'country': 'Austria', 'countryid': 'LOWM43', 'oldcountryid': 'OS43', 'wmocode': '11052', 'odimcode': 'atfel', 'location': 'Salzburg/Feldkirchen', 'status': '1', 'latitude': '48.065', 'longitude': '13.062', 'heightofstation': ' ', 'band': 'C', 'doppler': 'Y', 'polarization': 'D', 'maxrange': '224', 'startyear': '1992', 'heightantenna': '581', 'diametrantenna': ' ', 'beam': ' ', 'gain': ' ', 'frequency': '5.6', 'single_rrr': 'Y', 'composite_rrr': ' ', 'wrwp': ' '},\n        ...\n    }\n    \"\"\"\n    with open(radar_db_path, mode=\"r\") as f:\n        radar_db_json = json.load(f)\n    radar_db = {}\n    # Reorder list to a usable dict with sub dicts which we can search with wmo codes\n    for radar_dict in radar_db_json:\n        try:\n            wmo_code = int(radar_dict.get(\"wmocode\"))\n            radar_db.update({wmo_code: radar_dict})\n        except Exception:  # Happens when there is for ex. no wmo code.\n            pass\n    return radar_db\n\n\ndef translate_wmo_odim(radar_db, wmo_code):\n    \"\"\"\"\"\"\n    # class FileTranslatorFileTypeError(LookupError):\n    #    '''raise this when there's a filetype mismatch derived from h5 file'''\n    if not isinstance(wmo_code, int):\n        raise ValueError(\"Expecting a wmo_code [int]\")\n    else:\n        pass\n    odim_code = (\n        radar_db.get(wmo_code).get(\"odimcode\").upper().strip()\n    )  # Apparently, people sometimes forget to remove whitespace..\n    return odim_code\n\n\ndef extract_wmo_code(in_path):\n    with h5py.File(in_path, \"r\") as f:\n        # DWD Specific\n        # Main attributes\n        what = f[\"what\"].attrs\n        # Source block\n        source = what.get(\"source\")\n        source = source.decode(\"utf-8\")\n        # Determine if we are dealing with a WMO code or with an ODIM code set\n        # Example from Germany where source block is set as WMO\n        # what/source: \"WMO:10103\"\n        # Example from The Netherlands where source block is set as a combination of ODIM and various codes\n        # what/source: RAD:NL52,NOD:nlhrw,PLC:Herwijnen\n        source_list = source.split(sep=\",\")\n    wmo_code = [string for string in source_list if \"WMO\" in string]\n    # Determine if we had exactly one WMO hit\n    if len(wmo_code) == 1:\n        wmo_code = wmo_code[0]\n        wmo_code = wmo_code.replace(\"WMO:\", \"\")\n    # No wmo code found, most likeley dealing with a dutch radar\n    elif len(wmo_code) == 0:\n        rad_str = [string for string in source_list if \"RAD\" in string]\n        if len(rad_str) == 1:\n            rad_str = rad_str[0]\n        else:\n            print(\n                \"Something went wrong with determining the rad_str and it wasnt WMO either, exiting\"\n            )\n            sys.exit(1)\n        # Split the rad_str\n        rad_str_split = rad_str.split(\":\")\n        # [0] = RAD, [1] = rad code\n        rad_code = rad_str_split[1]\n        rad_codes = {\"NL52\": \"6356\", \"NL51\": \"6234\", \"NL50\": \"6260\"}\n        wmo_code = rad_codes.get(rad_code)\n    return int(wmo_code)\n\n\ndef vol2bird(\n    in_file,\n    out_dir,\n    radar_db,\n    add_version=True,\n    add_sector=False,\n    overwrite=False,\n):\n    # Construct output file\n    date_regex = \"([0-9]{8})\"\n    if add_version == True:\n        version = \"v0-3-20\"\n        suffix = pathlib.Path(in_file).suffix\n        in_file_name = pathlib.Path(in_file).name\n        in_file_stem = pathlib.Path(in_file_name).stem\n        #\n        out_file_name = in_file_stem.replace(\"pvol\", \"vp\")\n        out_file_name = \"_\".join([out_file_name, version]) + suffix\n        # odim = odim_code(out_file_name)\n        wmo = extract_wmo_code(in_file)\n        odim = translate_wmo_odim(radar_db, wmo)\n        datetime = pd.to_datetime(re.search(date_regex, out_file_name)[0])\n        ibed_path = \"/\".join(\n            [\n                odim[:2],\n                odim[2:],\n                str(datetime.year),\n                str(datetime.month).zfill(2),\n                str(datetime.day).zfill(2),\n            ]\n        )\n        # check if we need to make this dir\n        out_file = \"/\".join([out_dir, ibed_path, out_file_name])\n        out_file_dir = pathlib.Path(out_file).parent\n        if not out_file_dir.exists():\n            out_file_dir.mkdir(parents=True)\n\n    process = False\n    if not overwrite:\n        if not pathlib.Path(out_file).exists():\n            process = True\n            print(f\"Not processing, overwrite is set to {overwrite}\")\n    else:\n        process = True\n\n    if process:\n        command = [\"vol2bird\", in_file, out_file]\n        result = subprocess.run(\n            command, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT\n        )\n    return [in_file, out_file]\n\ndef get_vp_storage_path(relative_path: str = \"\") -> str:\n    if param_public_minio_data:\n        return pathlib.Path(conf_minio_public_root_prefix).joinpath(conf_minio_tutorial_prefix).joinpath(conf_vp_output_prefix).joinpath(relative_path)\n    else:\n        return pathlib.Path(conf_minio_tutorial_prefix).joinpath(conf_user_directory+param_user_number).joinpath(conf_vp_output_prefix).joinpath(relative_path)\n\nvertical_profile_paths = []\nradar_db = load_radar_db(conf_local_radar_db)\n# cast back to pathlib after deserializing\nodim_pvol_paths = [pathlib.Path(path) for path in odim_pvol_paths]\nfor odim_pvol_path in odim_pvol_paths:\n    pvol_path, vp_path = vol2bird(\n        odim_pvol_path, conf_local_vp, radar_db, overwrite=False\n    )\n    vertical_profile_paths.append(vp_path)\nprint(vertical_profile_paths)\n\nif str2bool(param_clean_pvol_output):\n    print(\"Removing PVOL output from local storage\")\n    for pvol_path in odim_pvol_paths:\n        pathlib.Path(pvol_path).unlink()\n        if not any(pathlib.Path(pvol_path).parent.iterdir()):\n            pathlib.Path(pvol_path).parent.rmdir()\n\nif str2bool(param_upload_results):\n    # Minio version\n    from minio import Minio\n\n    minioClient = Minio(\n        endpoint=conf_minio_endpoint,\n        access_key=secret_minio_access_key,\n        secret_key=secret_minio_secret_key,\n        secure=True,\n    )\n    print(f\"Uploading results to {get_vp_storage_path()}\")\n    for vp_path in vertical_profile_paths:\n        vp_path = pathlib.Path(vp_path)\n        local_vp_storage = pathlib.Path(conf_local_vp)\n        relative_path = vp_path.relative_to(local_vp_storage)\n        remote_vp_path = get_vp_storage_path(relative_path)\n        # check if this exists\n        exists = False\n        try:\n            _ = minioClient.stat_object(\n                bucket=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                prefix=remote_vp_path.as_posix(),\n            )\n            exists = True\n        except:\n            pass\n        if not exists:\n            print(f\"Uploading {vp_path} to {remote_vp_path}\")\n            with open(vp_path, mode=\"rb\") as file_data:\n                file_stat = os.stat(vp_path)\n                minioClient.put_object(\n                    bucket_name=conf_minio_public_bucket_name if param_public_minio_data else conf_minio_user_bucket_name,\n                    object_name=remote_vp_path.as_posix(),\n                    data=file_data,\n                    length=file_stat.st_size,\n                )\n        else:\n            print(f\"{remote_vp_path} exists, skipping \")\n    print(\"Finished uploading results\")\nif str2bool(param_clean_vp_output):\n    print(\"Removing VP output from local storage\")\n    for vp_path in vertical_profile_paths:\n        pathlib.Path(vp_path).unlink()\n        if not any(pathlib.Path(vp_path).parent.iterdir()):\n            pathlib.Path(vp_path).parent.rmdir()\n            \nPVOL_VP_converter_complete = 1",
+            "metadata": {},
+            "execution_count": null,
+            "outputs": [],
+            "id": "334de446"
+          }
+        ]
+      },
+      "base_image": {
+        "build": "ghcr.io/qcdis/naavre/naavre-cell-build-ravl:v0.22.12",
+        "runtime": "ghcr.io/qcdis/naavre/naavre-cell-runtime-ravl:v0.22.12"
+      },
+      "image_version": "2071265"
+    },
+    "10105": {
+      "title": "list-knmi-files-koen-greuell-lifewatch-eu",
+      "task_name": "list-knmi-files-koen-greuell-lifewatch-eu",
+      "original_source": "conf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}\n\"\"\"\nconsume dummy var from config to signal workflow start\nThere is something dodgy going on with how\nstrings are being passed around.\nThe string \"Yes\" is being sent as '\"Yes\"'\nSo, to prevent extra quotes being introduced\nwe eval init_complete first before\nwe test if it contains \"Yes\"\n\"\"\"\n\ndef validate_api_errors():\n    if api_response.status_code >= 400:\n        raise ValueError(f\"API {api_response.url} returned an error status code: {api_response.status_code}. {api_response.json()=}\")\n        \ndef validate_number_of_KNMI_files():\n    if len(dataset_files) > param_maximum_KNMI_files:\n        raise ValueError(f\"{len(dataset_files)} KNMI files were found to download, but {param_maximum_KNMI_files=}.\"\n                         f\"\\n The data was retrieved with the following parameters:\"\n                         f\"\\n {param_start_date=} \\n {param_end_date=} \\n {param_interval_in_minutes=}\"\n                         f\"\\n Increase {param_maximum_KNMI_files=}, decrease the time range, or increase the interval.\")\n        \ninit_complete = init_complete.replace(\"'\", \"\")\ninit_complete = init_complete.replace('\"', \"\")\nif init_complete == \"Yes\":\n    print(\"Workflow configuration succesfull\")\nelse:\n    print(\"Workflow configuration was not complete, exitting\")\n\n    sys.exit(1)\n\n\nstart_ts = param_start_date\nend_ts = param_end_date\ndatasetName, datasetVersion, api_url, _ = conf_radars.get(param_radar.lower())\nparams = {\n    \"datasetName\": datasetName,\n    \"datasetVersion\": datasetVersion,\n    \"maxKeys\": 10,\n    \"sorting\": \"asc\",\n    \"orderBy\": \"created\",\n    \"begin\": start_ts,\n    \"end\": end_ts,\n}\ndataset_files = []\nwhile True:\n    api_response = requests.get(\n        url=api_url,\n        headers={\"Authorization\": secret_key_knmi_api},\n        params=params,\n    )\n    validate_api_errors()\n    \n    api_reponse_json = api_response.json()    \n    dset_files = api_reponse_json.get(\"files\")\n        \n    dset_files = [list(dset_file.values()) for dset_file in dset_files]\n    dataset_files += dset_files\n    nextPageToken = api_reponse_json.get(\"nextPageToken\")\n    if not nextPageToken:\n        break\n    else:\n        params.update({\"nextPageToken\": nextPageToken})\n\nfiltered_list = []\ninterval_list = list(range(0, 60, param_interval_in_minutes))\nfor dataset_file in dataset_files:\n    minute = int(dataset_file[0].split(\"_\")[-1].split(\".\")[0][-2:])\n    if minute in interval_list:\n        filtered_list.append(dataset_file)\n\ndataset_files = filtered_list\n\nvalidate_number_of_KNMI_files()\n\nprint(f\"Found {len(dataset_files)} files\")\nprint(dataset_files)",
+      "types": {
+        "init_complete": "str",
+        "dataset_files": "list",
+        "param_maximum_KNMI_files": "int",
+        "param_start_date": "str",
+        "param_end_date": "str",
+        "param_interval_in_minutes": "int",
+        "param_radar": "str",
+        "secret_key_knmi_api": "str"
+      },
+      "inputs": [
+        "init_complete"
+      ],
+      "outputs": [
+        "dataset_files"
+      ],
+      "params": [
+        "param_maximum_KNMI_files",
+        "param_start_date",
+        "param_end_date",
+        "param_interval_in_minutes",
+        "param_radar"
+      ],
+      "param_values": {
+        "param_maximum_KNMI_files": 4,
+        "param_start_date": "2019-12-31T23:00+00:00",
+        "param_end_date": "2020-01-01T01:00+00:00",
+        "param_interval_in_minutes": 60,
+        "param_radar": "HRW"
+      },
+      "secrets": [
+        "secret_key_knmi_api"
+      ],
+      "confs": {
+        "conf_radars": "conf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}"
+      },
+      "all_inputs": [
+        "init_complete"
+      ],
+      "dependencies": [
+        {
+          "name": "requests",
+          "asname": null,
+          "module": ""
+        },
+        {
+          "name": "sys",
+          "asname": null,
+          "module": ""
+        }
+      ],
+      "chart_obj": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1,
+        "nodes": {
+          "c10591a": {
+            "id": "c10591a",
+            "type": "input-output",
+            "position": {
+              "x": 35,
+              "y": 15
+            },
+            "properties": {
+              "title": "list-knmi-files-koen-greuell-lifewatch-eu",
+              "vars": [
+                {
+                  "name": "init_complete",
+                  "direction": "input",
+                  "type": "datatype",
+                  "color": "#2dd232"
+                },
+                {
+                  "name": "dataset_files",
+                  "direction": "output",
+                  "type": "datatype",
+                  "color": "#53a9ac"
+                }
+              ],
+              "params": [
+                "param_maximum_KNMI_files",
+                "param_start_date",
+                "param_end_date",
+                "param_interval_in_minutes",
+                "param_radar"
+              ],
+              "secrets": [
+                "secret_key_knmi_api"
+              ],
+              "inputs": [
+                "init_complete"
+              ],
+              "outputs": [
+                "dataset_files"
+              ],
+              "og_node_id": "c10591a"
+            },
+            "ports": {
+              "init_complete": {
+                "properties": {
+                  "color": "#2dd232"
+                },
+                "id": "init_complete",
+                "type": "left"
+              },
+              "dataset_files": {
+                "properties": {
+                  "color": "#53a9ac"
+                },
+                "id": "dataset_files",
+                "type": "right"
+              }
+            }
+          }
+        },
+        "links": {},
+        "selected": {},
+        "hovered": {}
+      },
+      "node_id": "c10591a",
+      "container_source": "import requests\nimport sys\n\nimport argparse\nimport json\nimport os\narg_parser = argparse.ArgumentParser()\n\nsecret_key_knmi_api = os.getenv('secret_key_knmi_api')\n\narg_parser.add_argument('--id', action='store',\n                        type=str, required=True, dest='id')\n\n\narg_parser.add_argument('--init_complete', action='store',\n                        type=str, required=True, dest='init_complete')\n\narg_parser.add_argument('--param_end_date', action='store',\n                        type=str, required=True, dest='param_end_date')\narg_parser.add_argument('--param_interval_in_minutes', action='store',\n                        type=int, required=True, dest='param_interval_in_minutes')\narg_parser.add_argument('--param_maximum_KNMI_files', action='store',\n                        type=int, required=True, dest='param_maximum_KNMI_files')\narg_parser.add_argument('--param_radar', action='store',\n                        type=str, required=True, dest='param_radar')\narg_parser.add_argument('--param_start_date', action='store',\n                        type=str, required=True, dest='param_start_date')\n\nargs = arg_parser.parse_args()\nprint(args)\n\nid = args.id\n\ninit_complete = args.init_complete.replace('\"', '')\n\nparam_end_date = args.param_end_date.replace('\"', '')\nparam_interval_in_minutes = args.param_interval_in_minutes\nparam_maximum_KNMI_files = args.param_maximum_KNMI_files\nparam_radar = args.param_radar.replace('\"', '')\nparam_start_date = args.param_start_date.replace('\"', '')\n\nconf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files',\n                                                                                                                                                                                             'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}\n\n\nconf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files',\n                                                                                                                                                                                             'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}\n\"\"\"\nconsume dummy var from config to signal workflow start\nThere is something dodgy going on with how\nstrings are being passed around.\nThe string \"Yes\" is being sent as '\"Yes\"'\nSo, to prevent extra quotes being introduced\nwe eval init_complete first before\nwe test if it contains \"Yes\"\n\"\"\"\n\n\ndef validate_api_errors():\n    if api_response.status_code >= 400:\n        raise ValueError(\n            f\"API {api_response.url} returned an error status code: {api_response.status_code}. {api_response.json()=}\")\n\n\ndef validate_number_of_KNMI_files():\n    if len(dataset_files) > param_maximum_KNMI_files:\n        raise ValueError(f\"{len(dataset_files)} KNMI files were found to download, but {param_maximum_KNMI_files=}.\"\n                         f\"\\n The data was retrieved with the following parameters:\"\n                         f\"\\n {param_start_date=} \\n {param_end_date=} \\n {param_interval_in_minutes=}\"\n                         f\"\\n Increase {param_maximum_KNMI_files=}, decrease the time range, or increase the interval.\")\n\n\ninit_complete = init_complete.replace(\"'\", \"\")\ninit_complete = init_complete.replace('\"', \"\")\nif init_complete == \"Yes\":\n    print(\"Workflow configuration succesfull\")\nelse:\n    print(\"Workflow configuration was not complete, exitting\")\n\n    sys.exit(1)\n\n\nstart_ts = param_start_date\nend_ts = param_end_date\ndatasetName, datasetVersion, api_url, _ = conf_radars.get(param_radar.lower())\nparams = {\n    \"datasetName\": datasetName,\n    \"datasetVersion\": datasetVersion,\n    \"maxKeys\": 10,\n    \"sorting\": \"asc\",\n    \"orderBy\": \"created\",\n    \"begin\": start_ts,\n    \"end\": end_ts,\n}\ndataset_files = []\nwhile True:\n    api_response = requests.get(\n        url=api_url,\n        headers={\"Authorization\": secret_key_knmi_api},\n        params=params,\n    )\n    validate_api_errors()\n\n    api_reponse_json = api_response.json()\n    dset_files = api_reponse_json.get(\"files\")\n\n    dset_files = [list(dset_file.values()) for dset_file in dset_files]\n    dataset_files += dset_files\n    nextPageToken = api_reponse_json.get(\"nextPageToken\")\n    if not nextPageToken:\n        break\n    else:\n        params.update({\"nextPageToken\": nextPageToken})\n\nfiltered_list = []\ninterval_list = list(range(0, 60, param_interval_in_minutes))\nfor dataset_file in dataset_files:\n    minute = int(dataset_file[0].split(\"_\")[-1].split(\".\")[0][-2:])\n    if minute in interval_list:\n        filtered_list.append(dataset_file)\n\ndataset_files = filtered_list\n\nvalidate_number_of_KNMI_files()\n\nprint(f\"Found {len(dataset_files)} files\")\nprint(dataset_files)\n\nfile_dataset_files = open(\"/tmp/dataset_files_\" + id + \".json\", \"w\")\nfile_dataset_files.write(json.dumps(dataset_files))\nfile_dataset_files.close()\n",
+      "kernel": "ipython",
+      "notebook_dict": {
+        "metadata": {
+          "nbdime-conflicts": {
+            "local_diff": [
+              {
+                "diff": [
+                  {
+                    "diff": [
+                      {
+                        "key": 0,
+                        "op": "addrange",
+                        "valuelist": [
+                          "3.13.1"
+                        ]
+                      },
+                      {
+                        "key": 0,
+                        "length": 1,
+                        "op": "removerange"
+                      }
+                    ],
+                    "key": "version",
+                    "op": "patch"
+                  }
+                ],
+                "key": "language_info",
+                "op": "patch"
+              }
+            ],
+            "remote_diff": [
+              {
+                "key": "language_info",
+                "op": "remove"
+              }
+            ]
+          },
+          "kernelspec": {
+            "display_name": "python3",
+            "language": "python3",
+            "name": "python3"
+          },
+          "language_info": {
+            "codemirror_mode": {
+              "name": "ipython",
+              "version": 3
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3",
+            "version": "3.13.3"
+          }
+        },
+        "nbformat_minor": 5,
+        "nbformat": 4,
+        "cells": [
+          {
+            "cell_type": "code",
+            "source": "# list-knmi-files\n\"\"\"\nconsume dummy var from config to signal workflow start\nThere is something dodgy going on with how\nstrings are being passed around.\nThe string \"Yes\" is being sent as '\"Yes\"'\nSo, to prevent extra quotes being introduced\nwe eval init_complete first before\nwe test if it contains \"Yes\"\n\"\"\"\n# Libraries\nimport requests\n\ndef validate_api_errors():\n    if api_response.status_code >= 400:\n        raise ValueError(f\"API {api_response.url} returned an error status code: {api_response.status_code}. {api_response.json()=}\")\n        \ndef validate_number_of_KNMI_files():\n    if len(dataset_files) > param_maximum_KNMI_files:\n        raise ValueError(f\"{len(dataset_files)} KNMI files were found to download, but {param_maximum_KNMI_files=}.\"\n                         f\"\\n The data was retrieved with the following parameters:\"\n                         f\"\\n {param_start_date=} \\n {param_end_date=} \\n {param_interval_in_minutes=}\"\n                         f\"\\n Increase {param_maximum_KNMI_files=}, decrease the time range, or increase the interval.\")\n        \n# Strip any extra quotes\ninit_complete = init_complete.replace(\"'\", \"\")\ninit_complete = init_complete.replace('\"', \"\")\nif init_complete == \"Yes\":\n    print(\"Workflow configuration succesfull\")\nelse:\n    print(\"Workflow configuration was not complete, exitting\")\n    import sys\n\n    sys.exit(1)\n\n# Notes:\n# Timestamps in iso8601\n# 2020-01-01T00:00+00:00\n\n# configure\nstart_ts = param_start_date\nend_ts = param_end_date\ndatasetName, datasetVersion, api_url, _ = conf_radars.get(param_radar.lower())\nparams = {\n    \"datasetName\": datasetName,\n    \"datasetVersion\": datasetVersion,\n    \"maxKeys\": 10,\n    \"sorting\": \"asc\",\n    \"orderBy\": \"created\",\n    \"begin\": start_ts,\n    \"end\": end_ts,\n}\n# Request a response from the KNMI severs\n# Try the next page tokens\ndataset_files = []\nwhile True:\n    api_response = requests.get(\n        url=api_url,\n        headers={\"Authorization\": secret_key_knmi_api},\n        params=params,\n    )\n    validate_api_errors()\n    \n    api_reponse_json = api_response.json()    \n    dset_files = api_reponse_json.get(\"files\")\n        \n    dset_files = [list(dset_file.values()) for dset_file in dset_files]\n    dataset_files += dset_files\n    nextPageToken = api_reponse_json.get(\"nextPageToken\")\n    if not nextPageToken:\n        break\n    else:\n        params.update({\"nextPageToken\": nextPageToken})\n\n# KNMI outputs per 5 minutes, per 15 is less of a heavy hit on downloads and processing\n# Quick and dirty way to only keep the 15 minute measurements.\n# Check API if we can filter for this on their end. If not fine\nfiltered_list = []\ninterval_list = list(range(0, 60, param_interval_in_minutes))\nfor dataset_file in dataset_files:\n    minute = int(dataset_file[0].split(\"_\")[-1].split(\".\")[0][-2:])\n    if minute in interval_list:\n        filtered_list.append(dataset_file)\n\ndataset_files = filtered_list\n\nvalidate_number_of_KNMI_files()\n\nprint(f\"Found {len(dataset_files)} files\")\nprint(dataset_files)",
+            "metadata": {},
+            "execution_count": null,
+            "outputs": [],
+            "id": "22b9e71d"
+          }
+        ]
+      },
+      "base_image": {
+        "build": "ghcr.io/qcdis/naavre/naavre-cell-build-ravl:v0.22.12",
+        "runtime": "ghcr.io/qcdis/naavre/naavre-cell-runtime-ravl:v0.22.12"
+      },
+      "image_version": "79b01be"
+    }
+  }
+}
