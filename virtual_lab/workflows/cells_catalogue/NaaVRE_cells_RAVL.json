@@ -1046,6 +1046,540 @@
         "runtime": "ghcr.io/qcdis/naavre/naavre-cell-runtime-ravl:v0.22.12"
       },
       "image_version": "79b01be"
+    },
+    "10117": {
+      "title": "S3-PPI-Uploader-bwijers1-gmail-com",
+      "task_name": "s3-ppi-uploader-bwijers1-gmail-com",
+      "original_source": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\nconf_minio_tutorial_prefix = 'ravl-tutorial'\nconf_user_directory = 'user'\nconf_minio_user_bucket_name = 'naa-vre-user-data'\n\n\nminioClient = Minio(\n    endpoint=conf_minio_endpoint,\n    access_key=secret_minio_access_key,\n    secret_key=secret_minio_secret_key,\n    secure=True,\n)\n\nfor path in local_ppi_paths:\n    print(path)\n    obj_key = pathlib.Path(*pathlib.Path(path).parts[3:])\n    obj_name = f\"{conf_minio_tutorial_prefix}/{conf_user_directory + param_user_number}/{obj_key}\"\n    print(obj_name)\n    minioClient.fput_object(\n        bucket_name=conf_minio_user_bucket_name,\n        object_name=obj_name,\n        file_path=path,\n    )",
+      "types": {
+        "local_ppi_paths": "list",
+        "param_user_number": "str",
+        "secret_minio_access_key": "str",
+        "secret_minio_secret_key": "str"
+      },
+      "inputs": [
+        "local_ppi_paths"
+      ],
+      "outputs": [],
+      "params": [
+        "param_user_number"
+      ],
+      "param_values": {
+        "param_user_number": "001"
+      },
+      "secrets": [
+        "secret_minio_access_key",
+        "secret_minio_secret_key"
+      ],
+      "confs": {
+        "conf_minio_endpoint": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'",
+        "conf_minio_tutorial_prefix": "conf_minio_tutorial_prefix = 'ravl-tutorial'",
+        "conf_user_directory": "conf_user_directory = 'user'",
+        "conf_minio_user_bucket_name": "conf_minio_user_bucket_name = 'naa-vre-user-data'"
+      },
+      "all_inputs": [
+        "local_ppi_paths"
+      ],
+      "dependencies": [
+        {
+          "name": "Minio",
+          "asname": null,
+          "module": "minio"
+        },
+        {
+          "name": "pathlib",
+          "asname": null,
+          "module": ""
+        }
+      ],
+      "chart_obj": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1,
+        "nodes": {
+          "73809e0": {
+            "id": "73809e0",
+            "type": "input-output",
+            "position": {
+              "x": 35,
+              "y": 15
+            },
+            "properties": {
+              "title": "S3-PPI-Uploader-bwijers1-gmail-com",
+              "vars": [
+                {
+                  "name": "local_ppi_paths",
+                  "direction": "input",
+                  "type": "datatype",
+                  "color": "#8b87c5"
+                }
+              ],
+              "params": [
+                "param_user_number"
+              ],
+              "secrets": [
+                "secret_minio_access_key",
+                "secret_minio_secret_key"
+              ],
+              "inputs": [
+                "local_ppi_paths"
+              ],
+              "outputs": [],
+              "og_node_id": "73809e0"
+            },
+            "ports": {
+              "local_ppi_paths": {
+                "properties": {
+                  "color": "#8b87c5"
+                },
+                "id": "local_ppi_paths",
+                "type": "left"
+              }
+            }
+          }
+        },
+        "links": {},
+        "selected": {},
+        "hovered": {}
+      },
+      "node_id": "73809e0",
+      "container_source": "",
+      "kernel": "ipython",
+      "notebook_dict": {
+        "metadata": {
+          "nbdime-conflicts": {
+            "local_diff": [
+              {
+                "diff": [
+                  {
+                    "diff": [
+                      {
+                        "key": 0,
+                        "op": "addrange",
+                        "valuelist": [
+                          "3.13.1"
+                        ]
+                      },
+                      {
+                        "key": 0,
+                        "length": 1,
+                        "op": "removerange"
+                      }
+                    ],
+                    "key": "version",
+                    "op": "patch"
+                  }
+                ],
+                "key": "language_info",
+                "op": "patch"
+              }
+            ],
+            "remote_diff": [
+              {
+                "key": "language_info",
+                "op": "remove"
+              }
+            ]
+          },
+          "kernelspec": {
+            "display_name": "python3",
+            "language": "python3",
+            "name": "python3"
+          },
+          "language_info": {
+            "codemirror_mode": {
+              "name": "ipython",
+              "version": 3
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3",
+            "version": "3.13.3"
+          }
+        },
+        "nbformat_minor": 5,
+        "nbformat": 4,
+        "cells": [
+          {
+            "cell_type": "code",
+            "source": "# S3 PPI Uploader\n\n# Libraries\nfrom minio import Minio\n\nminioClient = Minio(\n    endpoint=conf_minio_endpoint,\n    access_key=secret_minio_access_key,\n    secret_key=secret_minio_secret_key,\n    secure=True,\n)\n\nfor path in local_ppi_paths:\n    print(path)\n    # strip the leading \"/tmp/data\"\n    obj_key = pathlib.Path(*pathlib.Path(path).parts[3:])\n    obj_name = f\"{conf_minio_tutorial_prefix}/{conf_user_directory + param_user_number}/{obj_key}\"\n    print(obj_name)\n    minioClient.fput_object(\n        bucket_name=conf_minio_user_bucket_name,\n        object_name=obj_name,\n        file_path=path,\n    )",
+            "metadata": {},
+            "execution_count": null,
+            "outputs": [],
+            "id": "2737af58-3c86-4d3a-be4d-cf56c8811f67"
+          }
+        ]
+      },
+      "base_image": {
+        "build": "ghcr.io/qcdis/naavre/naavre-cell-build-ravl:v0.22.14",
+        "runtime": "ghcr.io/qcdis/naavre/naavre-cell-runtime-ravl:v0.22.14"
+      },
+      "image_version": "ebd6f95"
+    },
+    "10128": {
+      "title": "R-PPI-bwijers1-gmail-com",
+      "task_name": "r-ppi-bwijers1-gmail-com",
+      "original_source": "conf_local_odim=\"/tmp/data/odim\"\nconf_local_ppi=\"/tmp/data/ppi\"\n\nlibrary('bioRad')\nlibrary(\"stringr\")\nlibrary(\"ggplot2\")\ntitle_from_pvol <- function(pvol) {\n  date_prefix <- strftime(my_pvol$datetime, format = \"%Y/%m/%d T %H:%M UTC\", tz = \"UTC\")\n  corad <- pvol$radar\n  co <- substring(corad, 1, 2)\n  rad <- substring(corad, 3, 5)\n  corad_prefix <- paste0(c(co, rad), collapse = \"/\")\n  corad_prefix <- toupper(corad_prefix)\n  title_str <- paste0(c(co, rad, date_prefix), collapse = \" \")\n  title_str <- toupper(title_str)\n  return(title_str)\n}\nbasemap <- rosm::osm.types()[1]\nlocal_ppi_paths <- list()\nfor (pvol_path in local_pvol_paths) {\n  my_pvol <- read_pvolfile(pvol_path, param = c(\"DBZH\", \"VRADH\"))\n  my_scan <- get_scan(\n    x = my_pvol,\n    elev = param_elevation,\n    all = FALSE\n  )\n  my_param <- get_param(my_scan, param = param_param)\n  ppi <- project_as_ppi(my_param)\n  elev <- my_scan$attributes$where$elangle %>% str_replace(\"\\\\.\", \"-\")\n  imname <- basename(pvol_path) %>%\n    str_replace(\".h5\", \".png\") %>%\n    str_replace(\"pvol\", paste(\"ppi\", param_param, elev, sep = \"_\"))\n  print(imname)\n  impath_dir <- pvol_path %>%\n    str_replace(conf_local_odim, conf_local_ppi) %>%\n    str_replace(basename(pvol_path), \"\")\n  impath_dir <- paste(impath_dir, param_param, elev, sep = \"/\")\n  dir.create(file.path(impath_dir), recursive = TRUE, showWarnings = FALSE)\n  impath <- paste(impath_dir, imname, sep = \"/\")\n  title_str <- title_from_pvol(my_pvol)  \n  subtitle_str <- paste(\"param:\",param_param, \"- elevation angle:\",param_elevation)\n  png(impath, width = 1024, height = 1024, units = \"px\")\n  plt <- map(ppi, map = basemap, alpha = 0.6) +\n    ggtitle(title_str, subtitle = subtitle_str) +\n    theme(plot.title = element_text(size = 40, face = \"bold\", hjust = 0.5), plot.subtitle = element_text(hjust = 0.5))\n  print(plt)\n  dev.off()\n  local_ppi_paths <- append(local_ppi_paths, impath)\n}",
+      "types": {
+        "local_pvol_paths": "list",
+        "local_ppi_paths": "list",
+        "param_param": "str",
+        "param_elevation": "float"
+      },
+      "inputs": [
+        "local_pvol_paths"
+      ],
+      "outputs": [
+        "local_ppi_paths"
+      ],
+      "params": [
+        "param_param",
+        "param_elevation"
+      ],
+      "param_values": {
+        "param_param": null,
+        "param_elevation": null
+      },
+      "secrets": [],
+      "confs": {
+        "conf_local_odim": "conf_local_odim=\"/tmp/data/odim\"",
+        "conf_local_ppi": "conf_local_ppi=\"/tmp/data/ppi\""
+      },
+      "all_inputs": [
+        "local_pvol_paths"
+      ],
+      "dependencies": [
+        {
+          "name": "bioRad",
+          "asname": "",
+          "module": ""
+        },
+        {
+          "name": "ggplot2",
+          "asname": "",
+          "module": ""
+        },
+        {
+          "name": "rosm",
+          "asname": "",
+          "module": ""
+        },
+        {
+          "name": "stringr",
+          "asname": "",
+          "module": ""
+        },
+        {
+          "name": "tools",
+          "asname": "",
+          "module": ""
+        }
+      ],
+      "chart_obj": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1,
+        "nodes": {
+          "7296e5f": {
+            "id": "7296e5f",
+            "type": "input-output",
+            "position": {
+              "x": 35,
+              "y": 15
+            },
+            "properties": {
+              "title": "R-PPI-bwijers1-gmail-com",
+              "vars": [
+                {
+                  "name": "local_pvol_paths",
+                  "direction": "input",
+                  "type": "datatype",
+                  "color": "#862d3e"
+                },
+                {
+                  "name": "local_ppi_paths",
+                  "direction": "output",
+                  "type": "datatype",
+                  "color": "#8b87c5"
+                }
+              ],
+              "params": [
+                "param_param",
+                "param_elevation"
+              ],
+              "secrets": [],
+              "inputs": [
+                "local_pvol_paths"
+              ],
+              "outputs": [
+                "local_ppi_paths"
+              ],
+              "og_node_id": "7296e5f"
+            },
+            "ports": {
+              "local_pvol_paths": {
+                "properties": {
+                  "color": "#862d3e"
+                },
+                "id": "local_pvol_paths",
+                "type": "left"
+              },
+              "local_ppi_paths": {
+                "properties": {
+                  "color": "#8b87c5"
+                },
+                "id": "local_ppi_paths",
+                "type": "right"
+              }
+            }
+          }
+        },
+        "links": {},
+        "selected": {},
+        "hovered": {}
+      },
+      "node_id": "7296e5f",
+      "container_source": "",
+      "kernel": "IRkernel",
+      "notebook_dict": {
+        "metadata": {
+          "kernelspec": {
+            "display_name": "R",
+            "language": "R",
+            "name": "R"
+          },
+          "language_info": {
+            "codemirror_mode": "r",
+            "file_extension": ".r",
+            "mimetype": "text/x-r-source",
+            "name": "R",
+            "pygments_lexer": "r",
+            "version": "4.4.3"
+          }
+        },
+        "nbformat_minor": 4,
+        "nbformat": 4,
+        "cells": [
+          {
+            "cell_type": "code",
+            "source": "# R-PPI\n# ---\n# NaaVRE:\n#  cell:\n#   inputs:\n#    - local_pvol_paths : List\n#   outputs:\n#    - local_ppi_paths : List\n#   params:\n#    - param_param : String\n#    - param_elevation : Float\n# ...\n\n# libraries\nlibrary('bioRad')\nlibrary(\"stringr\")\nlibrary(\"ggplot2\")\ntitle_from_pvol <- function(pvol) {\n  date_prefix <- strftime(my_pvol$datetime, format = \"%Y/%m/%d T %H:%M UTC\", tz = \"UTC\")\n  corad <- pvol$radar\n  co <- substring(corad, 1, 2)\n  rad <- substring(corad, 3, 5)\n  corad_prefix <- paste0(c(co, rad), collapse = \"/\")\n  corad_prefix <- toupper(corad_prefix)\n  title_str <- paste0(c(co, rad, date_prefix), collapse = \" \")\n  title_str <- toupper(title_str)\n  return(title_str)\n}\n# Retrieve the basemap\nbasemap <- rosm::osm.types()[1]\n# initialize a output list for files\nlocal_ppi_paths <- list()\nfor (pvol_path in local_pvol_paths) {\n  my_pvol <- read_pvolfile(pvol_path, param = c(\"DBZH\", \"VRADH\"))\n  my_scan <- get_scan(\n    x = my_pvol,\n    elev = param_elevation,\n    all = FALSE\n  )\n  my_param <- get_param(my_scan, param = param_param)\n  ppi <- project_as_ppi(my_param)\n  # If elevation has a '.' in it, like 2.5, substitute the '.' for a '-'.\n  # Otherwise certain operating systems confuse it for a suffix.\n  elev <- my_scan$attributes$where$elangle %>% str_replace(\"\\\\.\", \"-\")\n  # Create an image name\n  imname <- basename(pvol_path) %>%\n    str_replace(\".h5\", \".png\") %>%\n    str_replace(\"pvol\", paste(\"ppi\", param_param, elev, sep = \"_\"))\n  print(imname)\n  # Create an image directory\n  impath_dir <- pvol_path %>%\n    str_replace(conf_local_odim, conf_local_ppi) %>%\n    str_replace(basename(pvol_path), \"\")\n  impath_dir <- paste(impath_dir, param_param, elev, sep = \"/\")\n  # Create the directory\n  dir.create(file.path(impath_dir), recursive = TRUE, showWarnings = FALSE)\n  # Create a image path\n  impath <- paste(impath_dir, imname, sep = \"/\")\n  title_str <- title_from_pvol(my_pvol)  \n  subtitle_str <- paste(\"param:\",param_param, \"- elevation angle:\",param_elevation)\n  png(impath, width = 1024, height = 1024, units = \"px\")\n  plt <- map(ppi, map = basemap, alpha = 0.6) +\n    ggtitle(title_str, subtitle = subtitle_str) +\n    theme(plot.title = element_text(size = 40, face = \"bold\", hjust = 0.5), plot.subtitle = element_text(hjust = 0.5))\n  print(plt)\n  dev.off()\n  local_ppi_paths <- append(local_ppi_paths, impath)\n}",
+            "metadata": {
+              "vscode": {
+                "languageId": "r"
+              }
+            },
+            "execution_count": null,
+            "outputs": []
+          }
+        ]
+      },
+      "base_image": {
+        "build": "ghcr.io/qcdis/naavre/naavre-cell-build-ravl:v0.22.14",
+        "runtime": "ghcr.io/qcdis/naavre/naavre-cell-runtime-ravl:v0.22.14"
+      },
+      "image_version": "e996bd9"
+    },
+    "10129": {
+      "title": "S3-PVOL-Downloader-bwijers1-gmail-com",
+      "task_name": "s3-pvol-downloader-bwijers1-gmail-com",
+      "original_source": "conf_minio_public_root_prefix = 'vl-vol2bird'\nconf_minio_tutorial_prefix = 'ravl-tutorial'\nconf_pvol_output_prefix = 'pvol'\nconf_user_directory = 'user'\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\nconf_minio_public_bucket_name = 'naa-vre-public'\nconf_minio_user_bucket_name = 'naa-vre-user-data'\nconf_local_odim = '/tmp/data/odim'\n\nminioClient = \"\"\n\n\n\ndef get_pvol_storage_path(relative_path: str = \"\") -> str:\n    if param_public_minio_data:\n        return (\n            pathlib.Path(conf_minio_public_root_prefix)\n            .joinpath(conf_minio_tutorial_prefix)\n            .joinpath(conf_pvol_output_prefix)\n            .joinpath(relative_path)\n        )\n    else:\n        return (\n            pathlib.Path(conf_minio_tutorial_prefix)\n            .joinpath(conf_user_directory + param_user_number)\n            .joinpath(conf_pvol_output_prefix)\n            .joinpath(relative_path)\n        )\n\n\npsd = pd.to_datetime(param_start_date)\nped = pd.to_datetime(param_end_date)\nminioClient = Minio(\n    endpoint=conf_minio_endpoint,\n    access_key=secret_minio_access_key,\n    secret_key=secret_minio_secret_key,\n    secure=True,\n)\n\ndownload_objs = []\n\n\npsd_prefix = f\"{get_pvol_storage_path()}/NL/{param_radar}/{psd.year}/{psd.month:02}/{psd.day:02}\"\nprint(f\"Parsing first prefix: {psd_prefix}\")\npsd_start_after_prefix = f\"{psd_prefix}/NL{param_radar}_pvol_{psd.year}{psd.month:02}{psd.day:02}T{psd.hour:02}{psd.minute:02}\"\nprint(f\"Building an start after prefix: {psd_start_after_prefix}\")\npsd_prefix_objs = minioClient.list_objects(\n    bucket_name=(\n        conf_minio_public_bucket_name\n        if param_public_minio_data\n        else conf_minio_user_bucket_name\n    ),\n    prefix=psd_prefix,\n    start_after=psd_start_after_prefix,\n    recursive=True,\n)\npsd_prefix_objs = list(psd_prefix_objs)\nprint(f\"{psd_prefix_objs=}\")\ndownload_objs += psd_prefix_objs\n\nprint(f\"Determining middle prefixes...\")\ndrange = pd.date_range(start=psd, end=ped, freq=\"5 min\")\ndate_prefix_list = [\n    f\"{dstamp.year}/{dstamp.month:02}/{dstamp.day:02}\" for dstamp in drange\n]\nunique_date_prefix_list = list(set(date_prefix_list))\nunique_date_prefix_list.sort()\nmiddle_prefixes = unique_date_prefix_list[1:-1]\nmiddle_prefixes = [\n    f\"{get_pvol_storage_path()}/NL/{param_radar}/{middle_prefix}\"\n    for middle_prefix in middle_prefixes\n]\nprint(f\"Parsing {len(middle_prefixes)} middle prefixes.\")\nfor middle_prefix in middle_prefixes:\n    print(f\"Downloading {middle_prefix}\")\n    middle_prefix_objs = minioClient.list_objects(\n        bucket_name=(\n            conf_minio_public_bucket_name\n            if param_public_minio_data\n            else conf_minio_user_bucket_name\n        ),\n        prefix=middle_prefix,\n        recursive=True,\n    )\n    download_objs += list(middle_prefix_objs)\n\n\nped_prefix = f\"{get_pvol_storage_path()}/NL/{param_radar}/{ped.year}/{ped.month:02}/{ped.day:02}\"\n\nped_until_prefix = f\"{ped_prefix}/NL{param_radar}_pvol_{ped.year}{ped.month:02}{ped.day:02}T{ped.hour:02}{ped.minute:02}\"\nprint(f\"Parsing last prefix:{ped_prefix}\")\nped_until_datetimestr = (\n    f\"{ped.year}{ped.month:02}{ped.day:02}T{ped.hour:02}{ped.minute:02}\"\n)\nped_until_timestamp = pd.to_datetime(ped_until_datetimestr)\nprint(f\"Building an end timestamp for object filtering: {ped_until_timestamp}\")\nped_prefix_objs = minioClient.list_objects(\n    bucket_name=(\n        conf_minio_public_bucket_name\n        if param_public_minio_data\n        else conf_minio_user_bucket_name\n    ),\n    prefix=ped_prefix,\n    recursive=True,\n)\nprint(f\"Filtering last prefix objects on timestamps\")\nped_prefix_objs = list(ped_prefix_objs)\nprint(f\"{ped_prefix_objs=}\")\n_ped_prefix_objs = []\nfor obj in ped_prefix_objs:\n    fpath = pathlib.Path(obj._object_name)\n    fname = fpath.name\n    corad, dtype, datetimestr, radcode_suffix = fname.split(\"_\")\n    timestamp = pd.to_datetime(datetimestr)\n    if timestamp <= ped_until_timestamp:\n        _ped_prefix_objs.append(obj)\n        download_objs.append(obj)\n\nped_prefix_objs = _ped_prefix_objs\n\nif psd_prefix == ped_prefix:\n    print(\"Single prefix filtering\")\n    psd_object_names = [\n        psd_prefix_obj._object_name for psd_prefix_obj in psd_prefix_objs\n    ]\n    print(f\"{psd_object_names=}\")\n    ped_object_names = [\n        ped_prefix_obj._object_name for ped_prefix_obj in ped_prefix_objs\n    ]\n    print(f\"{ped_object_names=}\")\n    intersect_object_names = [\n        obj_name\n        for obj_name in psd_object_names\n        if obj_name in ped_object_names\n    ]\n    print(f\"{intersect_object_names=}\")\n    download_objs = []\n    for psd_prefix_obj in psd_prefix_objs:\n        if psd_prefix_obj._object_name in intersect_object_names:\n            download_objs.append(psd_prefix_obj)\n\n\nlocal_pvol_paths = []\nfor obj in download_objs:\n    obj_path = pathlib.Path(obj._object_name)\n    if param_public_minio_data:\n        lab, workshop, dtype, country, radar, year, month, day, filename = (\n            obj_path.parts\n        )\n    else:\n        workshop, uname, dtype, country, radar, year, month, day, filename = (\n            obj_path.parts\n        )\n    local_pvol_path = (\n        f\"{conf_local_odim}/{country}/{radar}/{year}/{month}/{day}/{filename}\"\n    )\n    print(local_pvol_path)\n    minioClient.fget_object(\n        bucket_name=obj._bucket_name,\n        object_name=obj._object_name,\n        file_path=local_pvol_path,\n    )\n    local_pvol_paths.append(local_pvol_path)",
+      "types": {
+        "local_pvol_paths": "list",
+        "param_public_minio_data": "int",
+        "param_user_number": "str",
+        "param_start_date": "str",
+        "param_end_date": "str",
+        "param_radar": "str",
+        "secret_minio_access_key": "str",
+        "secret_minio_secret_key": "str"
+      },
+      "inputs": [],
+      "outputs": [
+        "local_pvol_paths"
+      ],
+      "params": [
+        "param_public_minio_data",
+        "param_user_number",
+        "param_start_date",
+        "param_end_date",
+        "param_radar"
+      ],
+      "param_values": {
+        "param_public_minio_data": 0,
+        "param_user_number": "001",
+        "param_start_date": "2019-12-31T23:00+00:00",
+        "param_end_date": "2020-01-01T01:00+00:00",
+        "param_radar": "HRW"
+      },
+      "secrets": [
+        "secret_minio_access_key",
+        "secret_minio_secret_key"
+      ],
+      "confs": {
+        "conf_minio_public_root_prefix": "conf_minio_public_root_prefix = 'vl-vol2bird'",
+        "conf_minio_tutorial_prefix": "conf_minio_tutorial_prefix = 'ravl-tutorial'",
+        "conf_pvol_output_prefix": "conf_pvol_output_prefix = 'pvol'",
+        "conf_user_directory": "conf_user_directory = 'user'",
+        "conf_minio_endpoint": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'",
+        "conf_minio_public_bucket_name": "conf_minio_public_bucket_name = 'naa-vre-public'",
+        "conf_minio_user_bucket_name": "conf_minio_user_bucket_name = 'naa-vre-user-data'",
+        "conf_local_odim": "conf_local_odim = '/tmp/data/odim'"
+      },
+      "all_inputs": [],
+      "dependencies": [
+        {
+          "name": "Minio",
+          "asname": null,
+          "module": "minio"
+        },
+        {
+          "name": "pandas",
+          "asname": "pd",
+          "module": ""
+        },
+        {
+          "name": "pathlib",
+          "asname": null,
+          "module": ""
+        }
+      ],
+      "chart_obj": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1,
+        "nodes": {
+          "00240e8": {
+            "id": "00240e8",
+            "type": "input-output",
+            "position": {
+              "x": 35,
+              "y": 15
+            },
+            "properties": {
+              "title": "S3-PVOL-Downloader-bwijers1-gmail-com",
+              "vars": [
+                {
+                  "name": "local_pvol_paths",
+                  "direction": "output",
+                  "type": "datatype",
+                  "color": "#862d3e"
+                }
+              ],
+              "params": [
+                "param_public_minio_data",
+                "param_user_number",
+                "param_start_date",
+                "param_end_date",
+                "param_radar"
+              ],
+              "secrets": [
+                "secret_minio_access_key",
+                "secret_minio_secret_key"
+              ],
+              "inputs": [],
+              "outputs": [
+                "local_pvol_paths"
+              ],
+              "og_node_id": "00240e8"
+            },
+            "ports": {
+              "local_pvol_paths": {
+                "properties": {
+                  "color": "#862d3e"
+                },
+                "id": "local_pvol_paths",
+                "type": "right"
+              }
+            }
+          }
+        },
+        "links": {},
+        "selected": {},
+        "hovered": {}
+      },
+      "node_id": "00240e8",
+      "container_source": "from minio import Minio\nimport pandas as pd\nimport pathlib\n\nimport argparse\nimport json\nimport os\narg_parser = argparse.ArgumentParser()\n\nsecret_minio_access_key = os.getenv('secret_minio_access_key')\nsecret_minio_secret_key = os.getenv('secret_minio_secret_key')\n\narg_parser.add_argument('--id', action='store',\n                        type=str, required=True, dest='id')\n\n\narg_parser.add_argument('--param_end_date', action='store',\n                        type=str, required=True, dest='param_end_date')\narg_parser.add_argument('--param_public_minio_data', action='store',\n                        type=int, required=True, dest='param_public_minio_data')\narg_parser.add_argument('--param_radar', action='store',\n                        type=str, required=True, dest='param_radar')\narg_parser.add_argument('--param_start_date', action='store',\n                        type=str, required=True, dest='param_start_date')\narg_parser.add_argument('--param_user_number', action='store',\n                        type=str, required=True, dest='param_user_number')\n\nargs = arg_parser.parse_args()\nprint(args)\n\nid = args.id\n\n\nparam_end_date = args.param_end_date.replace('\"', '')\nparam_public_minio_data = args.param_public_minio_data\nparam_radar = args.param_radar.replace('\"', '')\nparam_start_date = args.param_start_date.replace('\"', '')\nparam_user_number = args.param_user_number.replace('\"', '')\n\nconf_minio_public_root_prefix = 'vl-vol2bird'\n\nconf_minio_tutorial_prefix = 'ravl-tutorial'\n\nconf_pvol_output_prefix = 'pvol'\n\nconf_user_directory = 'user'\n\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\n\nconf_minio_public_bucket_name = 'naa-vre-public'\n\nconf_minio_user_bucket_name = 'naa-vre-user-data'\n\nconf_local_odim = '/tmp/data/odim'\n\n\nconf_minio_public_root_prefix = 'vl-vol2bird'\nconf_minio_tutorial_prefix = 'ravl-tutorial'\nconf_pvol_output_prefix = 'pvol'\nconf_user_directory = 'user'\nconf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'\nconf_minio_public_bucket_name = 'naa-vre-public'\nconf_minio_user_bucket_name = 'naa-vre-user-data'\nconf_local_odim = '/tmp/data/odim'\n\nminioClient = \"\"\n\n\ndef get_pvol_storage_path(relative_path: str = \"\") -> str:\n    if param_public_minio_data:\n        return (\n            pathlib.Path(conf_minio_public_root_prefix)\n            .joinpath(conf_minio_tutorial_prefix)\n            .joinpath(conf_pvol_output_prefix)\n            .joinpath(relative_path)\n        )\n    else:\n        return (\n            pathlib.Path(conf_minio_tutorial_prefix)\n            .joinpath(conf_user_directory + param_user_number)\n            .joinpath(conf_pvol_output_prefix)\n            .joinpath(relative_path)\n        )\n\n\npsd = pd.to_datetime(param_start_date)\nped = pd.to_datetime(param_end_date)\nminioClient = Minio(\n    endpoint=conf_minio_endpoint,\n    access_key=secret_minio_access_key,\n    secret_key=secret_minio_secret_key,\n    secure=True,\n)\n\ndownload_objs = []\n\n\npsd_prefix = f\"{get_pvol_storage_path()}/NL/{param_radar}/{psd.year}/{psd.month:02}/{psd.day:02}\"\nprint(f\"Parsing first prefix: {psd_prefix}\")\npsd_start_after_prefix = f\"{psd_prefix}/NL{param_radar}_pvol_{psd.year}{psd.month:02}{psd.day:02}T{psd.hour:02}{psd.minute:02}\"\nprint(f\"Building an start after prefix: {psd_start_after_prefix}\")\npsd_prefix_objs = minioClient.list_objects(\n    bucket_name=(\n        conf_minio_public_bucket_name\n        if param_public_minio_data\n        else conf_minio_user_bucket_name\n    ),\n    prefix=psd_prefix,\n    start_after=psd_start_after_prefix,\n    recursive=True,\n)\npsd_prefix_objs = list(psd_prefix_objs)\nprint(f\"{psd_prefix_objs=}\")\ndownload_objs += psd_prefix_objs\n\nprint(f\"Determining middle prefixes...\")\ndrange = pd.date_range(start=psd, end=ped, freq=\"5 min\")\ndate_prefix_list = [\n    f\"{dstamp.year}/{dstamp.month:02}/{dstamp.day:02}\" for dstamp in drange\n]\nunique_date_prefix_list = list(set(date_prefix_list))\nunique_date_prefix_list.sort()\nmiddle_prefixes = unique_date_prefix_list[1:-1]\nmiddle_prefixes = [\n    f\"{get_pvol_storage_path()}/NL/{param_radar}/{middle_prefix}\"\n    for middle_prefix in middle_prefixes\n]\nprint(f\"Parsing {len(middle_prefixes)} middle prefixes.\")\nfor middle_prefix in middle_prefixes:\n    print(f\"Downloading {middle_prefix}\")\n    middle_prefix_objs = minioClient.list_objects(\n        bucket_name=(\n            conf_minio_public_bucket_name\n            if param_public_minio_data\n            else conf_minio_user_bucket_name\n        ),\n        prefix=middle_prefix,\n        recursive=True,\n    )\n    download_objs += list(middle_prefix_objs)\n\n\nped_prefix = f\"{get_pvol_storage_path()}/NL/{param_radar}/{ped.year}/{ped.month:02}/{ped.day:02}\"\n\nped_until_prefix = f\"{ped_prefix}/NL{param_radar}_pvol_{ped.year}{ped.month:02}{ped.day:02}T{ped.hour:02}{ped.minute:02}\"\nprint(f\"Parsing last prefix:{ped_prefix}\")\nped_until_datetimestr = (\n    f\"{ped.year}{ped.month:02}{ped.day:02}T{ped.hour:02}{ped.minute:02}\"\n)\nped_until_timestamp = pd.to_datetime(ped_until_datetimestr)\nprint(f\"Building an end timestamp for object filtering: {ped_until_timestamp}\")\nped_prefix_objs = minioClient.list_objects(\n    bucket_name=(\n        conf_minio_public_bucket_name\n        if param_public_minio_data\n        else conf_minio_user_bucket_name\n    ),\n    prefix=ped_prefix,\n    recursive=True,\n)\nprint(f\"Filtering last prefix objects on timestamps\")\nped_prefix_objs = list(ped_prefix_objs)\nprint(f\"{ped_prefix_objs=}\")\n_ped_prefix_objs = []\nfor obj in ped_prefix_objs:\n    fpath = pathlib.Path(obj._object_name)\n    fname = fpath.name\n    corad, dtype, datetimestr, radcode_suffix = fname.split(\"_\")\n    timestamp = pd.to_datetime(datetimestr)\n    if timestamp <= ped_until_timestamp:\n        _ped_prefix_objs.append(obj)\n        download_objs.append(obj)\n\nped_prefix_objs = _ped_prefix_objs\n\nif psd_prefix == ped_prefix:\n    print(\"Single prefix filtering\")\n    psd_object_names = [\n        psd_prefix_obj._object_name for psd_prefix_obj in psd_prefix_objs\n    ]\n    print(f\"{psd_object_names=}\")\n    ped_object_names = [\n        ped_prefix_obj._object_name for ped_prefix_obj in ped_prefix_objs\n    ]\n    print(f\"{ped_object_names=}\")\n    intersect_object_names = [\n        obj_name\n        for obj_name in psd_object_names\n        if obj_name in ped_object_names\n    ]\n    print(f\"{intersect_object_names=}\")\n    download_objs = []\n    for psd_prefix_obj in psd_prefix_objs:\n        if psd_prefix_obj._object_name in intersect_object_names:\n            download_objs.append(psd_prefix_obj)\n\n\nlocal_pvol_paths = []\nfor obj in download_objs:\n    obj_path = pathlib.Path(obj._object_name)\n    if param_public_minio_data:\n        lab, workshop, dtype, country, radar, year, month, day, filename = (\n            obj_path.parts\n        )\n    else:\n        workshop, uname, dtype, country, radar, year, month, day, filename = (\n            obj_path.parts\n        )\n    local_pvol_path = (\n        f\"{conf_local_odim}/{country}/{radar}/{year}/{month}/{day}/{filename}\"\n    )\n    print(local_pvol_path)\n    minioClient.fget_object(\n        bucket_name=obj._bucket_name,\n        object_name=obj._object_name,\n        file_path=local_pvol_path,\n    )\n    local_pvol_paths.append(local_pvol_path)\n\nfile_local_pvol_paths = open(\"/tmp/local_pvol_paths_\" + id + \".json\", \"w\")\nfile_local_pvol_paths.write(json.dumps(local_pvol_paths))\nfile_local_pvol_paths.close()\n",
+      "kernel": "ipython",
+      "notebook_dict": {
+        "metadata": {
+          "nbdime-conflicts": {
+            "local_diff": [
+              {
+                "diff": [
+                  {
+                    "diff": [
+                      {
+                        "key": 0,
+                        "op": "addrange",
+                        "valuelist": [
+                          "3.13.1"
+                        ]
+                      },
+                      {
+                        "key": 0,
+                        "length": 1,
+                        "op": "removerange"
+                      }
+                    ],
+                    "key": "version",
+                    "op": "patch"
+                  }
+                ],
+                "key": "language_info",
+                "op": "patch"
+              }
+            ],
+            "remote_diff": [
+              {
+                "key": "language_info",
+                "op": "remove"
+              }
+            ]
+          },
+          "kernelspec": {
+            "display_name": "python3",
+            "language": "python3",
+            "name": "python3"
+          },
+          "language_info": {
+            "codemirror_mode": {
+              "name": "ipython",
+              "version": 3
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3",
+            "version": "3.13.5"
+          }
+        },
+        "nbformat_minor": 5,
+        "nbformat": 4,
+        "cells": [
+          {
+            "cell_type": "code",
+            "source": "# S3 PVOL Downloader\n# ---\n# NaaVRE:\n#  cell:\n#   outputs:\n#    - local_pvol_paths: List\n# ...\n\n# Code analyzer fix block. Assign empty strings to variables that should not be picked up by the analyzer.\nminioClient = \"\"\n\n# libraries\nfrom minio import Minio\nimport pandas as pd\nimport pathlib\n\n\n# functions\ndef get_pvol_storage_path(relative_path: str = \"\") -> str:\n    if param_public_minio_data:\n        return (\n            pathlib.Path(conf_minio_public_root_prefix)\n            .joinpath(conf_minio_tutorial_prefix)\n            .joinpath(conf_pvol_output_prefix)\n            .joinpath(relative_path)\n        )\n    else:\n        return (\n            pathlib.Path(conf_minio_tutorial_prefix)\n            .joinpath(conf_user_directory + param_user_number)\n            .joinpath(conf_pvol_output_prefix)\n            .joinpath(relative_path)\n        )\n\n\n# main\npsd = pd.to_datetime(param_start_date)\nped = pd.to_datetime(param_end_date)\nminioClient = Minio(\n    endpoint=conf_minio_endpoint,\n    access_key=secret_minio_access_key,\n    secret_key=secret_minio_secret_key,\n    secure=True,\n)\n\ndownload_objs = []\n\n\n# grab psd and ped, rework them to include a start_after prefix\npsd_prefix = f\"{get_pvol_storage_path()}/NL/{param_radar}/{psd.year}/{psd.month:02}/{psd.day:02}\"\nprint(f\"Parsing first prefix: {psd_prefix}\")\npsd_start_after_prefix = f\"{psd_prefix}/NL{param_radar}_pvol_{psd.year}{psd.month:02}{psd.day:02}T{psd.hour:02}{psd.minute:02}\"\nprint(f\"Building an start after prefix: {psd_start_after_prefix}\")\npsd_prefix_objs = minioClient.list_objects(\n    bucket_name=(\n        conf_minio_public_bucket_name\n        if param_public_minio_data\n        else conf_minio_user_bucket_name\n    ),\n    prefix=psd_prefix,\n    start_after=psd_start_after_prefix,\n    recursive=True,\n)\npsd_prefix_objs = list(psd_prefix_objs)\nprint(f\"{psd_prefix_objs=}\")\ndownload_objs += psd_prefix_objs\n\n# Now we need a middle prefix download. The prefixes that are between psd and ped.\nprint(f\"Determining middle prefixes...\")\ndrange = pd.date_range(start=psd, end=ped, freq=\"5 min\")\ndate_prefix_list = [\n    f\"{dstamp.year}/{dstamp.month:02}/{dstamp.day:02}\" for dstamp in drange\n]\nunique_date_prefix_list = list(set(date_prefix_list))\n# sort the dates\nunique_date_prefix_list.sort()\n# remove first prefix, we evaluate that differently\nmiddle_prefixes = unique_date_prefix_list[1:-1]\n# Now add the correct country, radar to the date prefixes\nmiddle_prefixes = [\n    f\"{get_pvol_storage_path()}/NL/{param_radar}/{middle_prefix}\"\n    for middle_prefix in middle_prefixes\n]\nprint(f\"Parsing {len(middle_prefixes)} middle prefixes.\")\nfor middle_prefix in middle_prefixes:\n    print(f\"Downloading {middle_prefix}\")\n    middle_prefix_objs = minioClient.list_objects(\n        bucket_name=(\n            conf_minio_public_bucket_name\n            if param_public_minio_data\n            else conf_minio_user_bucket_name\n        ),\n        prefix=middle_prefix,\n        recursive=True,\n    )\n    download_objs += list(middle_prefix_objs)\n\n\n# For PED we need a 'until'.\n# So, we need to determine which part of the list of the final prefix we require.\n# in essence, we need a ped_until_prefix.\nped_prefix = f\"{get_pvol_storage_path()}/NL/{param_radar}/{ped.year}/{ped.month:02}/{ped.day:02}\"\n\nped_until_prefix = f\"{ped_prefix}/NL{param_radar}_pvol_{ped.year}{ped.month:02}{ped.day:02}T{ped.hour:02}{ped.minute:02}\"\nprint(f\"Parsing last prefix:{ped_prefix}\")\nped_until_datetimestr = (\n    f\"{ped.year}{ped.month:02}{ped.day:02}T{ped.hour:02}{ped.minute:02}\"\n)\nped_until_timestamp = pd.to_datetime(ped_until_datetimestr)\nprint(f\"Building an end timestamp for object filtering: {ped_until_timestamp}\")\nped_prefix_objs = minioClient.list_objects(\n    bucket_name=(\n        conf_minio_public_bucket_name\n        if param_public_minio_data\n        else conf_minio_user_bucket_name\n    ),\n    prefix=ped_prefix,\n    recursive=True,\n)\nprint(f\"Filtering last prefix objects on timestamps\")\nped_prefix_objs = list(ped_prefix_objs)\nprint(f\"{ped_prefix_objs=}\")\n_ped_prefix_objs = []\nfor obj in ped_prefix_objs:\n    fpath = pathlib.Path(obj._object_name)\n    fname = fpath.name\n    corad, dtype, datetimestr, radcode_suffix = fname.split(\"_\")\n    timestamp = pd.to_datetime(datetimestr)\n    if timestamp <= ped_until_timestamp:\n        _ped_prefix_objs.append(obj)\n        download_objs.append(obj)\n\nped_prefix_objs = _ped_prefix_objs\n\n# Ensure that download objects are not duplicated in case of single prefix searches\nif psd_prefix == ped_prefix:\n    # same prefix\n    print(\"Single prefix filtering\")\n    psd_object_names = [\n        psd_prefix_obj._object_name for psd_prefix_obj in psd_prefix_objs\n    ]\n    print(f\"{psd_object_names=}\")\n    ped_object_names = [\n        ped_prefix_obj._object_name for ped_prefix_obj in ped_prefix_objs\n    ]\n    print(f\"{ped_object_names=}\")\n    intersect_object_names = [\n        obj_name\n        for obj_name in psd_object_names\n        if obj_name in ped_object_names\n    ]\n    print(f\"{intersect_object_names=}\")\n    # Reset download_objs list\n    download_objs = []\n    for psd_prefix_obj in psd_prefix_objs:\n        if psd_prefix_obj._object_name in intersect_object_names:\n            download_objs.append(psd_prefix_obj)\n\n\nlocal_pvol_paths = []\nfor obj in download_objs:\n    obj_path = pathlib.Path(obj._object_name)\n    if param_public_minio_data:\n        lab, workshop, dtype, country, radar, year, month, day, filename = (\n            obj_path.parts\n        )\n    else:\n        workshop, uname, dtype, country, radar, year, month, day, filename = (\n            obj_path.parts\n        )\n    local_pvol_path = (\n        f\"{conf_local_odim}/{country}/{radar}/{year}/{month}/{day}/{filename}\"\n    )\n    print(local_pvol_path)\n    minioClient.fget_object(\n        bucket_name=obj._bucket_name,\n        object_name=obj._object_name,\n        file_path=local_pvol_path,\n    )\n    local_pvol_paths.append(local_pvol_path)",
+            "metadata": {},
+            "execution_count": null,
+            "outputs": [],
+            "id": "71d17296"
+          }
+        ]
+      },
+      "base_image": {
+        "build": "ghcr.io/qcdis/naavre/naavre-cell-build-ravl:v0.22.16",
+        "runtime": "ghcr.io/qcdis/naavre/naavre-cell-runtime-ravl:v0.22.16"
+      },
+      "image_version": "7c298ff"
     }
   }
 }
