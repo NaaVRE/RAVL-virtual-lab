@@ -1,195 +1,335 @@
 {
   "chart": {
     "offset": {
-      "x": -232,
-      "y": 8
+      "x": 0,
+      "y": 0
     },
     "scale": 1,
     "nodes": {
-      "f5aca514-5410-4f1a-9d88-aa28cdf36947": {
-        "id": "f5aca514-5410-4f1a-9d88-aa28cdf36947",
+      "14c4b431-95f1-491e-9289-ce18220f4dda": {
+        "id": "14c4b431-95f1-491e-9289-ce18220f4dda",
         "position": {
-          "x": 794.0166625976562,
-          "y": 287
+          "x": 1156,
+          "y": 445
         },
         "orientation": 0,
-        "type": "input-output",
-        "ports": {
-          "vp_paths": {
-            "properties": {
-              "color": "#786b3a"
-            },
-            "id": "vp_paths",
-            "type": "right",
-            "position": {
-              "x": 216,
-              "y": 74.5
-            }
-          }
-        },
-        "properties": {
-          "title": "S3-VP-Downloader-bwijers1-gmail-com",
-          "vars": [
-            {
-              "name": "vp_paths",
-              "direction": "output",
-              "type": "datatype",
-              "color": "#786b3a"
-            }
-          ],
-          "params": [
-            "param_start_date",
-            "param_end_date",
-            "param_radar"
-          ],
-          "secrets": [
-            "secret_minio_access_key",
-            "secret_minio_secret_key"
-          ],
-          "inputs": [],
-          "outputs": [
-            "vp_paths"
-          ],
-          "og_node_id": "f342466"
-        },
-        "size": {
-          "width": 250,
-          "height": 150
-        }
-      },
-      "6cc7847d-c762-4c2b-bcb2-e5825483918a": {
-        "id": "6cc7847d-c762-4c2b-bcb2-e5825483918a",
-        "position": {
-          "x": 1969.0166625976562,
-          "y": 352
-        },
-        "orientation": 0,
-        "type": "input-output",
+        "type": "workflow-cell",
         "ports": {
           "local_vpts_paths": {
-            "properties": {
-              "color": "#352dd2"
-            },
             "id": "local_vpts_paths",
             "type": "left",
+            "properties": {
+              "color": "#d2a779",
+              "parentNodeType": "workflow-cell"
+            },
             "position": {
-              "x": 50.5,
-              "y": 74.5
+              "x": 53,
+              "y": 75
             }
           }
         },
         "properties": {
-          "title": "S3-VPTS-Uploader-bwijers1-gmail-com",
-          "vars": [
-            {
-              "name": "local_vpts_paths",
-              "direction": "input",
-              "type": "datatype",
-              "color": "#352dd2"
-            }
-          ],
-          "params": [
-            "param_jupyterhub_user"
-          ],
-          "secrets": [
-            "secret_minio_access_key",
-            "secret_minio_secret_key"
-          ],
-          "inputs": [
-            "local_vpts_paths"
-          ],
-          "outputs": [],
-          "og_node_id": "9e62cc6"
+          "cell": {
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/36fabf54-c672-49a9-9d3b-098d58d4e5de/",
+            "owner": "gabriel.pelouze@lifewatch.eu",
+            "virtual_lab": "ravl",
+            "base_container_image": {
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.17",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.17"
+            },
+            "dependencies": [
+              {
+                "name": "Minio",
+                "module": "minio",
+                "asname": null
+              },
+              {
+                "name": "pathlib",
+                "module": "",
+                "asname": null
+              }
+            ],
+            "inputs": [
+              {
+                "name": "local_vpts_paths",
+                "type": "list"
+              }
+            ],
+            "outputs": [],
+            "confs": [
+              {
+                "name": "conf_minio_endpoint",
+                "assignation": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'"
+              },
+              {
+                "name": "conf_minio_tutorial_prefix",
+                "assignation": "conf_minio_tutorial_prefix = 'ravl-tutorial'"
+              },
+              {
+                "name": "conf_minio_user_bucket_name",
+                "assignation": "conf_minio_user_bucket_name = 'naa-vre-user-data'"
+              }
+            ],
+            "params": [],
+            "secrets": [
+              {
+                "name": "secret_minio_access_key",
+                "type": "str"
+              },
+              {
+                "name": "secret_minio_secret_key",
+                "type": "str"
+              }
+            ],
+            "title": "s3-vpts-uploader-gabriel-pelouze-lifewatch-eu",
+            "description": "s3-vpts-uploader-gabriel-pelouze-lifewatch-eu",
+            "created": "2025-08-08T08:14:29.298249Z",
+            "modified": "2025-08-08T08:14:29.602976Z",
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/s3-vpts-uploader-gabriel-pelouze-lifewatch-eu:db4e02b",
+            "kernel": "ipython",
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/724fafb467b9a965a8679afb4aac21f0379bc452/s3-vpts-uploader-gabriel-pelouze-lifewatch-eu"
+          }
         },
         "size": {
-          "width": 250,
-          "height": 150
+          "width": 252,
+          "height": 152
         }
       },
-      "1357ee22-2943-44cf-a938-6e665e4780cf": {
-        "id": "1357ee22-2943-44cf-a938-6e665e4780cf",
+      "03b0a0b2-a262-4fa0-a67c-d13024dd0e7a": {
+        "id": "03b0a0b2-a262-4fa0-a67c-d13024dd0e7a",
         "position": {
-          "x": 1485.0166625976562,
-          "y": 340
+          "x": 829,
+          "y": 443
         },
         "orientation": 0,
-        "type": "input-output",
+        "type": "workflow-cell",
         "ports": {
           "local_vp_paths": {
-            "properties": {
-              "color": "#53ac9f"
-            },
             "id": "local_vp_paths",
             "type": "left",
+            "properties": {
+              "color": "#9279d2",
+              "parentNodeType": "workflow-cell"
+            },
             "position": {
-              "x": 50.5,
-              "y": 74.5
+              "x": 48,
+              "y": 75
             }
           },
           "local_vpts_paths": {
-            "properties": {
-              "color": "#352dd2"
-            },
             "id": "local_vpts_paths",
             "type": "right",
+            "properties": {
+              "color": "#d2a779",
+              "parentNodeType": "workflow-cell"
+            },
             "position": {
-              "x": 197.5,
-              "y": 74.5
+              "x": 197,
+              "y": 75
             }
           }
         },
         "properties": {
-          "title": "VP-R-Code-bwijers1-gmail-com",
-          "vars": [
-            {
-              "name": "local_vp_paths",
-              "direction": "input",
-              "type": "datatype",
-              "color": "#53ac9f"
+          "cell": {
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/048eabe5-b7d0-4801-aec0-cfaf430364de/",
+            "owner": "gabriel.pelouze@lifewatch.eu",
+            "virtual_lab": "ravl",
+            "base_container_image": {
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.17",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.17"
             },
-            {
-              "name": "local_vpts_paths",
-              "direction": "output",
-              "type": "datatype",
-              "color": "#352dd2"
-            }
-          ],
-          "params": [],
-          "secrets": [],
-          "inputs": [
-            "local_vp_paths"
-          ],
-          "outputs": [
-            "local_vpts_paths"
-          ],
-          "og_node_id": "79d18bc"
+            "dependencies": [
+              {
+                "name": "bioRad",
+                "module": "",
+                "asname": ""
+              },
+              {
+                "name": "ggplot2",
+                "module": "",
+                "asname": ""
+              },
+              {
+                "name": "tools",
+                "module": "",
+                "asname": ""
+              },
+              {
+                "name": "rosm",
+                "module": "",
+                "asname": ""
+              },
+              {
+                "name": "stringr",
+                "module": "",
+                "asname": ""
+              }
+            ],
+            "inputs": [
+              {
+                "name": "local_vp_paths",
+                "type": "list"
+              }
+            ],
+            "outputs": [
+              {
+                "name": "local_vpts_paths",
+                "type": "list"
+              }
+            ],
+            "confs": [
+              {
+                "name": "conf_local_visualization_output",
+                "assignation": "conf_local_visualization_output=\"/tmp/data/visualizatons/output\""
+              }
+            ],
+            "params": [],
+            "secrets": [],
+            "title": "vp-r-code-gabriel-pelouze-lifewatch-eu",
+            "description": "vp-r-code-gabriel-pelouze-lifewatch-eu",
+            "created": "2025-08-08T09:50:04.829001Z",
+            "modified": "2025-08-08T09:50:05.185486Z",
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/vp-r-code-gabriel-pelouze-lifewatch-eu:81b5a00",
+            "kernel": "IRkernel",
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/afc9c7fa33387691ff1b05c5476ff9a58a81e546/vp-r-code-gabriel-pelouze-lifewatch-eu"
+          }
         },
         "size": {
-          "width": 250,
-          "height": 150
+          "width": 252,
+          "height": 152
+        }
+      },
+      "499bb5e5-5ebf-44e9-a810-45fcde34f7de": {
+        "id": "499bb5e5-5ebf-44e9-a810-45fcde34f7de",
+        "position": {
+          "x": 502,
+          "y": 443
+        },
+        "orientation": 0,
+        "type": "workflow-cell",
+        "ports": {
+          "vp_paths": {
+            "id": "vp_paths",
+            "type": "right",
+            "properties": {
+              "color": "#2d8647",
+              "parentNodeType": "workflow-cell"
+            },
+            "position": {
+              "x": 219,
+              "y": 75
+            }
+          }
+        },
+        "properties": {
+          "cell": {
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/dcfd8197-83ba-4d24-89a3-ed760dd98d77/",
+            "owner": "gabriel.pelouze@lifewatch.eu",
+            "virtual_lab": "ravl",
+            "base_container_image": {
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.17",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.17"
+            },
+            "dependencies": [
+              {
+                "name": "Minio",
+                "module": "minio",
+                "asname": null
+              },
+              {
+                "name": "pandas",
+                "module": "",
+                "asname": "pd"
+              },
+              {
+                "name": "pathlib",
+                "module": "",
+                "asname": null
+              }
+            ],
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "vp_paths",
+                "type": "list"
+              }
+            ],
+            "confs": [
+              {
+                "name": "conf_minio_endpoint",
+                "assignation": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'"
+              },
+              {
+                "name": "conf_minio_user_bucket_name",
+                "assignation": "conf_minio_user_bucket_name = 'naa-vre-user-data'"
+              },
+              {
+                "name": "conf_local_vp",
+                "assignation": "conf_local_vp = '/tmp/data/vp'"
+              }
+            ],
+            "params": [
+              {
+                "name": "param_end_date",
+                "type": "str",
+                "default_value": "2020-01-01T01:00+00:00"
+              },
+              {
+                "name": "param_radar",
+                "type": "str",
+                "default_value": "HRW"
+              },
+              {
+                "name": "param_start_date",
+                "type": "str",
+                "default_value": "2019-12-31T23:00+00:00"
+              }
+            ],
+            "secrets": [
+              {
+                "name": "secret_minio_access_key",
+                "type": "str"
+              },
+              {
+                "name": "secret_minio_secret_key",
+                "type": "str"
+              }
+            ],
+            "title": "s3-vp-downloader-gabriel-pelouze-lifewatch-eu",
+            "description": "s3-vp-downloader-gabriel-pelouze-lifewatch-eu",
+            "created": "2025-08-08T08:15:04.775036Z",
+            "modified": "2025-08-08T08:15:05.659243Z",
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/s3-vp-downloader-gabriel-pelouze-lifewatch-eu:bf04599",
+            "kernel": "ipython",
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/a33c1fdcf11d954ba48a1ce30e8bde108c018f7d/s3-vp-downloader-gabriel-pelouze-lifewatch-eu"
+          }
+        },
+        "size": {
+          "width": 252,
+          "height": 152
         }
       }
     },
     "links": {
-      "fbd94368-952b-4ab0-9b6d-9d4dd99da6ad": {
-        "id": "fbd94368-952b-4ab0-9b6d-9d4dd99da6ad",
+      "2622b3a3-4f9b-4cb1-b38f-12e2b474b356": {
+        "id": "2622b3a3-4f9b-4cb1-b38f-12e2b474b356",
         "from": {
-          "nodeId": "f5aca514-5410-4f1a-9d88-aa28cdf36947",
+          "nodeId": "499bb5e5-5ebf-44e9-a810-45fcde34f7de",
           "portId": "vp_paths"
         },
         "to": {
-          "nodeId": "1357ee22-2943-44cf-a938-6e665e4780cf",
+          "nodeId": "03b0a0b2-a262-4fa0-a67c-d13024dd0e7a",
           "portId": "local_vp_paths"
         }
       },
-      "824d765e-f3c1-4279-8507-a8ef996df327": {
-        "id": "824d765e-f3c1-4279-8507-a8ef996df327",
+      "f43702a4-40dd-49e8-9271-bd4b4f1c4f2e": {
+        "id": "f43702a4-40dd-49e8-9271-bd4b4f1c4f2e",
         "from": {
-          "nodeId": "1357ee22-2943-44cf-a938-6e665e4780cf",
+          "nodeId": "03b0a0b2-a262-4fa0-a67c-d13024dd0e7a",
           "portId": "local_vpts_paths"
         },
         "to": {
-          "nodeId": "6cc7847d-c762-4c2b-bcb2-e5825483918a",
+          "nodeId": "14c4b431-95f1-491e-9289-ce18220f4dda",
           "portId": "local_vpts_paths"
         }
       }
