@@ -1,16 +1,16 @@
 {
   "chart": {
     "offset": {
-      "x": 0,
-      "y": 0
+      "x": 126.54,
+      "y": -21.16
     },
-    "scale": 1,
+    "scale": 0.54,
     "nodes": {
-      "53d0071e-5723-47dc-bd76-4302e182906a": {
-        "id": "53d0071e-5723-47dc-bd76-4302e182906a",
+      "0c52cc90-776a-4178-8436-a12f7695ed4a": {
+        "id": "0c52cc90-776a-4178-8436-a12f7695ed4a",
         "position": {
-          "x": 352.6499938964844,
-          "y": 325
+          "x": 348,
+          "y": 161
         },
         "orientation": 0,
         "type": "workflow-cell",
@@ -23,19 +23,21 @@
               "parentNodeType": "workflow-cell"
             },
             "position": {
-              "x": 206.5,
-              "y": 75
+              "x": 252,
+              "y": 30
             }
           }
         },
         "properties": {
           "cell": {
-            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/69060603-7b3e-4d28-acf9-f3e1c671c856/",
-            "owner": "gabriel.pelouze@lifewatch.eu",
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/336b6fd9-68d7-411a-bcec-c68948e6ce87/",
+            "owner": "koen.greuell@lifewatch.eu",
             "virtual_lab": "ravl",
+            "shared_with_scopes": [],
+            "shared_with_users": [],
             "base_container_image": {
-              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.16",
-              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.16"
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.37",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.37"
             },
             "dependencies": [
               {
@@ -105,25 +107,27 @@
                 "type": "str"
               }
             ],
-            "title": "initializer-gabriel-pelouze-lifewatch-eu",
-            "description": "initializer-gabriel-pelouze-lifewatch-eu",
-            "created": "2025-08-07T07:47:41.352679Z",
-            "modified": "2025-08-07T07:47:41.889645Z",
-            "container_image": "ghcr.io/naavre/cells-vl-ravl/initializer-gabriel-pelouze-lifewatch-eu:149f5d9",
+            "title": "initializer-koen-greuell-lifewatch-eu",
+            "description": "initializer-koen-greuell-lifewatch-eu",
+            "created": "2025-11-13T16:50:48.456246Z",
+            "modified": "2025-11-13T16:50:48.820826Z",
+            "version": 2,
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/initializer-koen-greuell-lifewatch-eu:149f5d9",
             "kernel": "ipython",
-            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/05db0f0ef2e0cc414e8d56925a768b7536751b01/initializer-gabriel-pelouze-lifewatch-eu"
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/a706a8d5eb17f3ec86c4df2b077a6a2f40260fa2/initializer-koen-greuell-lifewatch-eu",
+            "next_version": null
           }
         },
         "size": {
           "width": 252,
-          "height": 152
+          "height": 61
         }
       },
-      "c28a3517-bf0f-4ad4-bf1b-30450e3564c1": {
-        "id": "c28a3517-bf0f-4ad4-bf1b-30450e3564c1",
+      "e523eb0f-81cd-440a-9498-1bf0a51b6dbe": {
+        "id": "e523eb0f-81cd-440a-9498-1bf0a51b6dbe",
         "position": {
-          "x": 652.6499938964844,
-          "y": 325
+          "x": 655.4074074074074,
+          "y": 161.44444444444446
         },
         "orientation": 0,
         "type": "workflow-cell",
@@ -136,8 +140,8 @@
               "parentNodeType": "workflow-cell"
             },
             "position": {
-              "x": 43.5,
-              "y": 75
+              "x": -2,
+              "y": 30
             }
           },
           "dataset_files": {
@@ -148,19 +152,21 @@
               "parentNodeType": "workflow-cell"
             },
             "position": {
-              "x": 208.5,
-              "y": 75
+              "x": 252,
+              "y": 30
             }
           }
         },
         "properties": {
           "cell": {
-            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/199255ae-542c-4b9a-ba24-8ac9235831d9/",
-            "owner": "gabriel.pelouze@lifewatch.eu",
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/f159e4e1-af75-4f62-8a98-e6c412331c7b/",
+            "owner": "koen.greuell@lifewatch.eu",
             "virtual_lab": "ravl",
+            "shared_with_scopes": [],
+            "shared_with_users": [],
             "base_container_image": {
-              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.16",
-              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.16"
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.37",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.37"
             },
             "dependencies": [
               {
@@ -225,206 +231,135 @@
                 "type": "str"
               }
             ],
-            "title": "list-knmi-files-gabriel-pelouze-lifewatch-eu",
-            "description": "list-knmi-files-gabriel-pelouze-lifewatch-eu",
-            "created": "2025-08-07T07:46:29.599758Z",
-            "modified": "2025-08-07T07:46:29.995888Z",
-            "container_image": "ghcr.io/naavre/cells-vl-ravl/list-knmi-files-gabriel-pelouze-lifewatch-eu:d450685",
+            "title": "list-knmi-files-koen-greuell-lifewatch-eu",
+            "description": "list-knmi-files-koen-greuell-lifewatch-eu",
+            "created": "2025-11-13T16:51:45.960914Z",
+            "modified": "2025-11-13T16:51:46.314926Z",
+            "version": 2,
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/list-knmi-files-koen-greuell-lifewatch-eu:d450685",
             "kernel": "ipython",
-            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/15800ac5ae35a71f22722d2087d98bbbedbb846c/list-knmi-files-gabriel-pelouze-lifewatch-eu"
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/20c20646234419813f351cd9e2d51bebbf9324b8/list-knmi-files-koen-greuell-lifewatch-eu",
+            "next_version": null
           }
         },
         "size": {
           "width": 252,
-          "height": 152
+          "height": 61
         }
       },
-      "3e0b4c3f-b7ec-482e-849f-9b2e2f1708b6": {
-        "id": "3e0b4c3f-b7ec-482e-849f-9b2e2f1708b6",
+      "30bfd6df-6141-4a97-b20e-72db05c7bd34": {
+        "id": "30bfd6df-6141-4a97-b20e-72db05c7bd34",
         "position": {
-          "x": 1250.6499938964844,
-          "y": 325
+          "x": 963.2222222222222,
+          "y": 162.2962962962963
         },
         "orientation": 0,
         "type": "workflow-cell",
         "ports": {
+          "dataset_files": {
+            "id": "dataset_files",
+            "type": "left",
+            "properties": {
+              "color": "#783a4d",
+              "parentNodeType": "workflow-cell"
+            },
+            "position": {
+              "x": -2,
+              "y": 30
+            }
+          },
           "knmi_pvol_paths": {
             "id": "knmi_pvol_paths",
-            "type": "left",
+            "type": "right",
             "properties": {
               "color": "#c2d22d",
               "parentNodeType": "workflow-cell"
             },
             "position": {
-              "x": 53,
-              "y": 75
-            }
-          },
-          "odim_pvol_paths": {
-            "id": "odim_pvol_paths",
-            "type": "right",
-            "properties": {
-              "color": "#2d3c86",
-              "parentNodeType": "workflow-cell"
-            },
-            "position": {
-              "x": 197,
-              "y": 75
+              "x": 252,
+              "y": 30
             }
           }
         },
         "properties": {
           "cell": {
-            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/0b477dba-1b1c-4653-a60c-1eeb9ddfa842/",
-            "owner": "gabriel.pelouze@lifewatch.eu",
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/ffe9e25a-f06a-422a-ae03-03215eea7ba1/",
+            "owner": "koen.greuell@lifewatch.eu",
             "virtual_lab": "ravl",
+            "shared_with_scopes": [],
+            "shared_with_users": [],
             "base_container_image": {
-              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.16",
-              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.16"
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.37",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.37"
             },
             "dependencies": [
               {
-                "name": "Minio",
-                "module": "minio",
-                "asname": null
-              },
-              {
-                "name": "subprocess",
+                "name": "requests",
                 "module": "",
                 "asname": null
               },
               {
-                "name": "pathlib",
-                "module": "",
-                "asname": null
-              },
-              {
-                "name": "shutil",
-                "module": "",
-                "asname": null
-              },
-              {
-                "name": "json",
-                "module": "",
-                "asname": null
-              },
-              {
-                "name": "h5py",
-                "module": "",
-                "asname": null
-              },
-              {
-                "name": "sys",
-                "module": "",
-                "asname": null
-              },
-              {
-                "name": "os",
-                "module": "",
+                "name": "Path",
+                "module": "pathlib",
                 "asname": null
               }
             ],
             "inputs": [
               {
-                "name": "knmi_pvol_paths",
+                "name": "dataset_files",
                 "type": "list"
               }
             ],
             "outputs": [
               {
-                "name": "odim_pvol_paths",
+                "name": "knmi_pvol_paths",
                 "type": "list"
               }
             ],
             "confs": [
               {
-                "name": "conf_minio_public_root_prefix",
-                "assignation": "conf_minio_public_root_prefix = 'vl-vol2bird'"
+                "name": "conf_radars",
+                "assignation": "conf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}"
               },
               {
-                "name": "conf_minio_tutorial_prefix",
-                "assignation": "conf_minio_tutorial_prefix = 'ravl-tutorial'"
-              },
-              {
-                "name": "conf_pvol_output_prefix",
-                "assignation": "conf_pvol_output_prefix = 'pvol'"
-              },
-              {
-                "name": "conf_user_directory",
-                "assignation": "conf_user_directory = 'user'"
-              },
-              {
-                "name": "conf_local_radar_db",
-                "assignation": "conf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'"
-              },
-              {
-                "name": "conf_minio_endpoint",
-                "assignation": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'"
-              },
-              {
-                "name": "conf_local_odim",
-                "assignation": "conf_local_odim = '/tmp/data/odim'"
-              },
-              {
-                "name": "conf_minio_public_bucket_name",
-                "assignation": "conf_minio_public_bucket_name = 'naa-vre-public'"
-              },
-              {
-                "name": "conf_minio_user_bucket_name",
-                "assignation": "conf_minio_user_bucket_name = 'naa-vre-user-data'"
+                "name": "conf_local_knmi",
+                "assignation": "conf_local_knmi = '/tmp/data/knmi'"
               }
             ],
             "params": [
               {
-                "name": "param_clean_knmi_input",
+                "name": "param_radar",
                 "type": "str",
-                "default_value": "True"
-              },
-              {
-                "name": "param_public_minio_data",
-                "type": "int",
-                "default_value": "0"
-              },
-              {
-                "name": "param_upload_results",
-                "type": "str",
-                "default_value": "True"
-              },
-              {
-                "name": "param_user_number",
-                "type": "str",
-                "default_value": "001"
+                "default_value": "HRW"
               }
             ],
             "secrets": [
               {
-                "name": "secret_minio_access_key",
-                "type": "str"
-              },
-              {
-                "name": "secret_minio_secret_key",
+                "name": "secret_key_knmi_api",
                 "type": "str"
               }
             ],
-            "title": "knmi-to-odim-converter-gabriel-pelouze-lifewatch-eu",
-            "description": "knmi-to-odim-converter-gabriel-pelouze-lifewatch-eu",
-            "created": "2025-08-07T07:46:12.170824Z",
-            "modified": "2025-08-07T07:46:12.697850Z",
-            "container_image": "ghcr.io/naavre/cells-vl-ravl/knmi-to-odim-converter-gabriel-pelouze-lifewatch-eu:718e7d0",
+            "title": "download-knmi-koen-greuell-lifewatch-eu",
+            "description": "download-knmi-koen-greuell-lifewatch-eu",
+            "created": "2025-11-13T16:51:15.500428Z",
+            "modified": "2025-11-13T16:51:15.816587Z",
+            "version": 2,
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/download-knmi-koen-greuell-lifewatch-eu:2e84558",
             "kernel": "ipython",
-            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/382a7c70d8ccac106c31c6c3031b7bc510ab9dfc/knmi-to-odim-converter-gabriel-pelouze-lifewatch-eu"
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/f8f769fb31f07a4b9497fd3892a4a5b34c445b2f/download-knmi-koen-greuell-lifewatch-eu",
+            "next_version": null
           }
         },
         "size": {
           "width": 252,
-          "height": 152
+          "height": 61
         }
       },
-      "0d020856-3752-4ede-98b5-9edad74d99ff": {
-        "id": "0d020856-3752-4ede-98b5-9edad74d99ff",
+      "a7c4b12e-66fc-41f1-a612-271f54056ff3": {
+        "id": "a7c4b12e-66fc-41f1-a612-271f54056ff3",
         "position": {
-          "x": 1575.6499938964844,
-          "y": 327
+          "x": 1580.2036584924804,
+          "y": 159.55555555555563
         },
         "orientation": 0,
         "type": "workflow-cell",
@@ -437,8 +372,8 @@
               "parentNodeType": "workflow-cell"
             },
             "position": {
-              "x": 53,
-              "y": 75
+              "x": -2,
+              "y": 30
             }
           },
           "PVOL_VP_converter_complete": {
@@ -449,19 +384,21 @@
               "parentNodeType": "workflow-cell"
             },
             "position": {
-              "x": 197,
-              "y": 75
+              "x": 252,
+              "y": 30
             }
           }
         },
         "properties": {
           "cell": {
-            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/1f7018a4-2ebd-4699-a150-18e4db5fa4a5/",
-            "owner": "gabriel.pelouze@lifewatch.eu",
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/9ecf0475-6a96-48a9-a52c-25e54c59e798/",
+            "owner": "koen.greuell@lifewatch.eu",
             "virtual_lab": "ravl",
+            "shared_with_scopes": [],
+            "shared_with_users": [],
             "base_container_image": {
-              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.16",
-              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.16"
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.37",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.37"
             },
             "dependencies": [
               {
@@ -524,20 +461,8 @@
             ],
             "confs": [
               {
-                "name": "conf_minio_public_root_prefix",
-                "assignation": "conf_minio_public_root_prefix = 'vl-vol2bird'"
-              },
-              {
-                "name": "conf_minio_tutorial_prefix",
-                "assignation": "conf_minio_tutorial_prefix = 'ravl-tutorial'"
-              },
-              {
                 "name": "conf_vp_output_prefix",
                 "assignation": "conf_vp_output_prefix = 'vp'"
-              },
-              {
-                "name": "conf_user_directory",
-                "assignation": "conf_user_directory = 'user'"
               },
               {
                 "name": "conf_local_radar_db",
@@ -550,10 +475,6 @@
               {
                 "name": "conf_minio_endpoint",
                 "assignation": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'"
-              },
-              {
-                "name": "conf_minio_public_bucket_name",
-                "assignation": "conf_minio_public_bucket_name = 'naa-vre-public'"
               },
               {
                 "name": "conf_minio_user_bucket_name",
@@ -572,19 +493,14 @@
                 "default_value": "True"
               },
               {
-                "name": "param_public_minio_data",
-                "type": "int",
-                "default_value": "0"
-              },
-              {
                 "name": "param_upload_results",
                 "type": "str",
                 "default_value": "True"
               },
               {
-                "name": "param_user_number",
+                "name": "param_user_email",
                 "type": "str",
-                "default_value": "001"
+                "default_value": "[the e-mail address you used to log into NaaVRE]"
               }
             ],
             "secrets": [
@@ -597,167 +513,229 @@
                 "type": "str"
               }
             ],
-            "title": "pvol-vp-converter-gabriel-pelouze-lifewatch-eu",
-            "description": "pvol-vp-converter-gabriel-pelouze-lifewatch-eu",
-            "created": "2025-08-07T07:46:09.786656Z",
-            "modified": "2025-08-07T07:46:10.621752Z",
-            "container_image": "ghcr.io/naavre/cells-vl-ravl/pvol-vp-converter-gabriel-pelouze-lifewatch-eu:a2d2380",
+            "title": "pvol-vp-converter-koen-greuell-lifewatch-eu",
+            "description": "pvol-vp-converter-koen-greuell-lifewatch-eu",
+            "created": "2025-11-14T10:05:03.663663Z",
+            "modified": "2025-11-14T10:05:04.564823Z",
+            "version": 3,
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/pvol-vp-converter-koen-greuell-lifewatch-eu:d20ddb4",
             "kernel": "ipython",
-            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/473a208cf16a0aa54615baea04b94760cb34123b/pvol-vp-converter-gabriel-pelouze-lifewatch-eu"
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/41ccb29a82b0f685ed448928751137afd0e54370/pvol-vp-converter-koen-greuell-lifewatch-eu",
+            "next_version": null
           }
         },
         "size": {
           "width": 252,
-          "height": 152
+          "height": 61
         }
       },
-      "b4cc1f54-57c3-4f5a-96fc-8018b4cad55b": {
-        "id": "b4cc1f54-57c3-4f5a-96fc-8018b4cad55b",
+      "f8a6dc83-d5ec-45f2-951d-bab284c772db": {
+        "id": "f8a6dc83-d5ec-45f2-951d-bab284c772db",
         "position": {
-          "x": 953.6499938964844,
-          "y": 326
+          "x": 1267.240695529516,
+          "y": 159.55555555555569
         },
         "orientation": 0,
         "type": "workflow-cell",
         "ports": {
-          "dataset_files": {
-            "id": "dataset_files",
-            "type": "left",
-            "properties": {
-              "color": "#783a4d",
-              "parentNodeType": "workflow-cell"
-            },
-            "position": {
-              "x": 41.5,
-              "y": 75
-            }
-          },
           "knmi_pvol_paths": {
             "id": "knmi_pvol_paths",
-            "type": "right",
+            "type": "left",
             "properties": {
               "color": "#c2d22d",
               "parentNodeType": "workflow-cell"
             },
             "position": {
-              "x": 197,
-              "y": 75
+              "x": -2,
+              "y": 30
+            }
+          },
+          "odim_pvol_paths": {
+            "id": "odim_pvol_paths",
+            "type": "right",
+            "properties": {
+              "color": "#2d3c86",
+              "parentNodeType": "workflow-cell"
+            },
+            "position": {
+              "x": 252,
+              "y": 30
             }
           }
         },
         "properties": {
           "cell": {
-            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/d6898164-ef13-4fcb-890f-0b4c8356acf0/",
-            "owner": "gabriel.pelouze@lifewatch.eu",
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/4bf21c2e-bd5e-44c3-8a69-f5082233282c/",
+            "owner": "koen.greuell@lifewatch.eu",
             "virtual_lab": "ravl",
+            "shared_with_scopes": [],
+            "shared_with_users": [],
             "base_container_image": {
-              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.16",
-              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.16"
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.37",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.37"
             },
             "dependencies": [
               {
-                "name": "Path",
-                "module": "pathlib",
+                "name": "Minio",
+                "module": "minio",
                 "asname": null
               },
               {
-                "name": "requests",
+                "name": "subprocess",
+                "module": "",
+                "asname": null
+              },
+              {
+                "name": "pathlib",
+                "module": "",
+                "asname": null
+              },
+              {
+                "name": "shutil",
+                "module": "",
+                "asname": null
+              },
+              {
+                "name": "json",
+                "module": "",
+                "asname": null
+              },
+              {
+                "name": "h5py",
+                "module": "",
+                "asname": null
+              },
+              {
+                "name": "sys",
+                "module": "",
+                "asname": null
+              },
+              {
+                "name": "os",
                 "module": "",
                 "asname": null
               }
             ],
             "inputs": [
               {
-                "name": "dataset_files",
+                "name": "knmi_pvol_paths",
                 "type": "list"
               }
             ],
             "outputs": [
               {
-                "name": "knmi_pvol_paths",
+                "name": "odim_pvol_paths",
                 "type": "list"
               }
             ],
             "confs": [
               {
-                "name": "conf_radars",
-                "assignation": "conf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}"
+                "name": "conf_pvol_output_prefix",
+                "assignation": "conf_pvol_output_prefix = 'pvol'"
               },
               {
-                "name": "conf_local_knmi",
-                "assignation": "conf_local_knmi = '/tmp/data/knmi'"
+                "name": "conf_local_radar_db",
+                "assignation": "conf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'"
+              },
+              {
+                "name": "conf_minio_endpoint",
+                "assignation": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'"
+              },
+              {
+                "name": "conf_local_odim",
+                "assignation": "conf_local_odim = '/tmp/data/odim'"
+              },
+              {
+                "name": "conf_minio_user_bucket_name",
+                "assignation": "conf_minio_user_bucket_name = 'naa-vre-user-data'"
               }
             ],
             "params": [
               {
-                "name": "param_radar",
+                "name": "param_clean_knmi_input",
                 "type": "str",
-                "default_value": "HRW"
+                "default_value": "True"
+              },
+              {
+                "name": "param_upload_results",
+                "type": "str",
+                "default_value": "True"
+              },
+              {
+                "name": "param_user_email",
+                "type": "str",
+                "default_value": "[the e-mail address you used to log into NaaVRE]"
               }
             ],
             "secrets": [
               {
-                "name": "secret_key_knmi_api",
+                "name": "secret_minio_access_key",
+                "type": "str"
+              },
+              {
+                "name": "secret_minio_secret_key",
                 "type": "str"
               }
             ],
-            "title": "download-knmi-gabriel-pelouze-lifewatch-eu",
-            "description": "download-knmi-gabriel-pelouze-lifewatch-eu",
-            "created": "2025-08-07T07:45:36.216016Z",
-            "modified": "2025-08-07T07:45:36.665122Z",
-            "container_image": "ghcr.io/naavre/cells-vl-ravl/download-knmi-gabriel-pelouze-lifewatch-eu:2e84558",
+            "title": "knmi-to-odim-converter-koen-greuell-lifewatch-eu",
+            "description": "knmi-to-odim-converter-koen-greuell-lifewatch-eu",
+            "created": "2025-11-14T10:04:05.732573Z",
+            "modified": "2025-11-14T10:04:06.158711Z",
+            "version": 3,
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/knmi-to-odim-converter-koen-greuell-lifewatch-eu:9efca9c",
             "kernel": "ipython",
-            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/9724eed5192a366251cd17ce49fa54b879b7b446/download-knmi-gabriel-pelouze-lifewatch-eu"
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/5e3a5fa9db45a76763ce63f90499c4ea7a837a3f/knmi-to-odim-converter-koen-greuell-lifewatch-eu",
+            "next_version": null
           }
         },
         "size": {
           "width": 252,
-          "height": 152
+          "height": 61
         }
       }
     },
     "links": {
-      "ac298f1e-4ce5-45e9-9fff-6eed94e4ad11": {
-        "id": "ac298f1e-4ce5-45e9-9fff-6eed94e4ad11",
+      "7537d823-13e9-46f7-9876-5a4c69a2d568": {
+        "id": "7537d823-13e9-46f7-9876-5a4c69a2d568",
         "from": {
-          "nodeId": "53d0071e-5723-47dc-bd76-4302e182906a",
+          "nodeId": "0c52cc90-776a-4178-8436-a12f7695ed4a",
           "portId": "init_complete"
         },
         "to": {
-          "nodeId": "c28a3517-bf0f-4ad4-bf1b-30450e3564c1",
+          "nodeId": "e523eb0f-81cd-440a-9498-1bf0a51b6dbe",
           "portId": "init_complete"
         }
       },
-      "6059e936-67b3-4a13-926e-d78bdb4109f9": {
-        "id": "6059e936-67b3-4a13-926e-d78bdb4109f9",
+      "5c8b10a9-dbba-4d07-b8a7-a289bb2e1c37": {
+        "id": "5c8b10a9-dbba-4d07-b8a7-a289bb2e1c37",
         "from": {
-          "nodeId": "c28a3517-bf0f-4ad4-bf1b-30450e3564c1",
+          "nodeId": "e523eb0f-81cd-440a-9498-1bf0a51b6dbe",
           "portId": "dataset_files"
         },
         "to": {
-          "nodeId": "b4cc1f54-57c3-4f5a-96fc-8018b4cad55b",
+          "nodeId": "30bfd6df-6141-4a97-b20e-72db05c7bd34",
           "portId": "dataset_files"
         }
       },
-      "216cb9ad-0007-41c1-a51c-ea3a8e54123a": {
-        "id": "216cb9ad-0007-41c1-a51c-ea3a8e54123a",
+      "1ebffc18-e375-4555-9a73-0c17e9da6cd1": {
+        "id": "1ebffc18-e375-4555-9a73-0c17e9da6cd1",
         "from": {
-          "nodeId": "b4cc1f54-57c3-4f5a-96fc-8018b4cad55b",
+          "nodeId": "30bfd6df-6141-4a97-b20e-72db05c7bd34",
           "portId": "knmi_pvol_paths"
         },
         "to": {
-          "nodeId": "3e0b4c3f-b7ec-482e-849f-9b2e2f1708b6",
+          "nodeId": "f8a6dc83-d5ec-45f2-951d-bab284c772db",
           "portId": "knmi_pvol_paths"
         }
       },
-      "e1b3a7fd-72e7-44dd-9aa4-a22fee280637": {
-        "id": "e1b3a7fd-72e7-44dd-9aa4-a22fee280637",
+      "155a6d93-6b23-4eda-9f6d-20d6207304e8": {
+        "id": "155a6d93-6b23-4eda-9f6d-20d6207304e8",
         "from": {
-          "nodeId": "3e0b4c3f-b7ec-482e-849f-9b2e2f1708b6",
+          "nodeId": "f8a6dc83-d5ec-45f2-951d-bab284c772db",
           "portId": "odim_pvol_paths"
         },
         "to": {
-          "nodeId": "0d020856-3752-4ede-98b5-9edad74d99ff",
+          "nodeId": "a7c4b12e-66fc-41f1-a612-271f54056ff3",
           "portId": "odim_pvol_paths"
         }
       }
