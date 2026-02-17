@@ -2,3 +2,6 @@
 .env
 .obsidian
 .idea/
+# Specific 
+virtual_lab/workflows
+virtual_lab/documentation
