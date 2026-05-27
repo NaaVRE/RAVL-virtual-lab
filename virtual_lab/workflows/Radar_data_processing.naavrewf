@@ -123,130 +123,6 @@
           "height": 61
         }
       },
-      "e523eb0f-81cd-440a-9498-1bf0a51b6dbe": {
-        "id": "e523eb0f-81cd-440a-9498-1bf0a51b6dbe",
-        "position": {
-          "x": 655.4074074074074,
-          "y": 161.44444444444446
-        },
-        "orientation": 0,
-        "type": "workflow-cell",
-        "ports": {
-          "init_complete": {
-            "id": "init_complete",
-            "type": "left",
-            "properties": {
-              "color": "#8ec587",
-              "parentNodeType": "workflow-cell"
-            },
-            "position": {
-              "x": -2,
-              "y": 30
-            }
-          },
-          "dataset_files": {
-            "id": "dataset_files",
-            "type": "right",
-            "properties": {
-              "color": "#783a4d",
-              "parentNodeType": "workflow-cell"
-            },
-            "position": {
-              "x": 252,
-              "y": 30
-            }
-          }
-        },
-        "properties": {
-          "cell": {
-            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/f159e4e1-af75-4f62-8a98-e6c412331c7b/",
-            "owner": "koen.greuell@lifewatch.eu",
-            "virtual_lab": "ravl",
-            "shared_with_scopes": [],
-            "shared_with_users": [],
-            "base_container_image": {
-              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.37",
-              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.37"
-            },
-            "dependencies": [
-              {
-                "name": "sys",
-                "module": "",
-                "asname": null
-              },
-              {
-                "name": "requests",
-                "module": "",
-                "asname": null
-              }
-            ],
-            "inputs": [
-              {
-                "name": "init_complete",
-                "type": "str"
-              }
-            ],
-            "outputs": [
-              {
-                "name": "dataset_files",
-                "type": "list"
-              }
-            ],
-            "confs": [
-              {
-                "name": "conf_radars",
-                "assignation": "conf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}"
-              }
-            ],
-            "params": [
-              {
-                "name": "param_end_date",
-                "type": "str",
-                "default_value": "2020-01-01T01:00+00:00"
-              },
-              {
-                "name": "param_interval_in_minutes",
-                "type": "int",
-                "default_value": "60"
-              },
-              {
-                "name": "param_maximum_KNMI_files",
-                "type": "int",
-                "default_value": "4"
-              },
-              {
-                "name": "param_radar",
-                "type": "str",
-                "default_value": "HRW"
-              },
-              {
-                "name": "param_start_date",
-                "type": "str",
-                "default_value": "2019-12-31T23:00+00:00"
-              }
-            ],
-            "secrets": [
-              {
-                "name": "secret_key_knmi_api",
-                "type": "str"
-              }
-            ],
-            "title": "list-knmi-files-koen-greuell-lifewatch-eu",
-            "description": "list-knmi-files-koen-greuell-lifewatch-eu",
-            "created": "2025-11-13T16:51:45.960914Z",
-            "modified": "2025-11-13T16:51:46.314926Z",
-            "version": 2,
-            "container_image": "ghcr.io/naavre/cells-vl-ravl/list-knmi-files-koen-greuell-lifewatch-eu:d450685",
-            "kernel": "ipython",
-            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/20c20646234419813f351cd9e2d51bebbf9324b8/list-knmi-files-koen-greuell-lifewatch-eu",
-            "next_version": null
-          }
-        },
-        "size": {
-          "width": 252,
-          "height": 61
-        }
-      },
       "30bfd6df-6141-4a97-b20e-72db05c7bd34": {
         "id": "30bfd6df-6141-4a97-b20e-72db05c7bd34",
         "position": {
@@ -692,31 +568,142 @@
           "width": 252,
           "height": 61
         }
+      },
+      "aa8f5869-3f4c-4e7a-8a3c-50d9e570b644": {
+        "id": "aa8f5869-3f4c-4e7a-8a3c-50d9e570b644",
+        "position": {
+          "x": 652.8271303530092,
+          "y": 161.40740740740728
+        },
+        "orientation": 0,
+        "type": "workflow-cell",
+        "ports": {
+          "init_complete": {
+            "id": "init_complete",
+            "type": "left",
+            "properties": {
+              "color": "#8ec587",
+              "parentNodeType": "workflow-cell"
+            },
+            "position": {
+              "x": -2,
+              "y": 30
+            }
+          },
+          "dataset_files": {
+            "id": "dataset_files",
+            "type": "right",
+            "properties": {
+              "color": "#783a4d",
+              "parentNodeType": "workflow-cell"
+            },
+            "position": {
+              "x": 252,
+              "y": 30
+            }
+          }
+        },
+        "properties": {
+          "cell": {
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/69a2fa94-2d48-4ca8-b5da-f7b5a804cb3f/",
+            "owner": "koen.greuell@lifewatch.eu",
+            "virtual_lab": "ravl",
+            "shared_with_scopes": [],
+            "shared_with_users": [],
+            "versions": [
+              {
+                "version": 1,
+                "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/5e0bd532-1316-46ef-8069-1ef84b8aed08/"
+              },
+              {
+                "version": 2,
+                "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/f159e4e1-af75-4f62-8a98-e6c412331c7b/"
+              },
+              {
+                "version": 3,
+                "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/69a2fa94-2d48-4ca8-b5da-f7b5a804cb3f/"
+              }
+            ],
+            "base_container_image": {
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.3.4",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.3.4"
+            },
+            "dependencies": [
+              {
+                "name": "sys",
+                "module": "",
+                "asname": null
+              },
+              {
+                "name": "requests",
+                "module": "",
+                "asname": null
+              }
+            ],
+            "inputs": [
+              {
+                "name": "init_complete",
+                "type": "str"
+              }
+            ],
+            "outputs": [
+              {
+                "name": "dataset_files",
+                "type": "list"
+              }
+            ],
+            "confs": [
+              {
+                "name": "conf_radars",
+                "assignation": "conf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}"
+              }
+            ],
+            "params": [
+              {
+                "name": "param_end_date",
+                "type": "str",
+                "default_value": "2020-01-01T01:00+00:00"
+              },
+              {
+                "name": "param_interval_in_minutes",
+                "type": "int",
+                "default_value": "60"
+              },
+              {
+                "name": "param_radar",
+                "type": "str",
+                "default_value": "HRW"
+              },
+              {
+                "name": "param_start_date",
+                "type": "str",
+                "default_value": "2019-12-31T23:00+00:00"
+              }
+            ],
+            "secrets": [
+              {
+                "name": "secret_key_knmi_api",
+                "type": "str"
+              }
+            ],
+            "title": "list-knmi-files-koen-greuell-lifewatch-eu",
+            "description": "list-knmi-files-koen-greuell-lifewatch-eu",
+            "created": "2026-05-27T09:25:25.044593Z",
+            "modified": "2026-05-27T09:25:25.716752Z",
+            "version": 3,
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/list-knmi-files-koen-greuell-lifewatch-eu:be0bee2",
+            "kernel": "ipython",
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/5f0944bf7e45454a73dd1a4423f834ac3debaa5c/list-knmi-files-koen-greuell-lifewatch-eu",
+            "is_draft": false
+          }
+        },
+        "size": {
+          "width": 252,
+          "height": 61
+        }
       }
     },
     "links": {
-      "7537d823-13e9-46f7-9876-5a4c69a2d568": {
-        "id": "7537d823-13e9-46f7-9876-5a4c69a2d568",
-        "from": {
-          "nodeId": "0c52cc90-776a-4178-8436-a12f7695ed4a",
-          "portId": "init_complete"
-        },
-        "to": {
-          "nodeId": "e523eb0f-81cd-440a-9498-1bf0a51b6dbe",
-          "portId": "init_complete"
-        }
-      },
-      "5c8b10a9-dbba-4d07-b8a7-a289bb2e1c37": {
-        "id": "5c8b10a9-dbba-4d07-b8a7-a289bb2e1c37",
-        "from": {
-          "nodeId": "e523eb0f-81cd-440a-9498-1bf0a51b6dbe",
-          "portId": "dataset_files"
-        },
-        "to": {
-          "nodeId": "30bfd6df-6141-4a97-b20e-72db05c7bd34",
-          "portId": "dataset_files"
-        }
-      },
       "1ebffc18-e375-4555-9a73-0c17e9da6cd1": {
         "id": "1ebffc18-e375-4555-9a73-0c17e9da6cd1",
         "from": {
@@ -737,6 +724,28 @@
         "to": {
           "nodeId": "a7c4b12e-66fc-41f1-a612-271f54056ff3",
           "portId": "odim_pvol_paths"
+        }
+      },
+      "dce0a4c2-9861-448c-9b89-e67c3cd9e8df": {
+        "id": "dce0a4c2-9861-448c-9b89-e67c3cd9e8df",
+        "from": {
+          "nodeId": "0c52cc90-776a-4178-8436-a12f7695ed4a",
+          "portId": "init_complete"
+        },
+        "to": {
+          "nodeId": "aa8f5869-3f4c-4e7a-8a3c-50d9e570b644",
+          "portId": "init_complete"
+        }
+      },
+      "a4552138-9e01-42fe-924a-1f9dae9424db": {
+        "id": "a4552138-9e01-42fe-924a-1f9dae9424db",
+        "from": {
+          "nodeId": "aa8f5869-3f4c-4e7a-8a3c-50d9e570b644",
+          "portId": "dataset_files"
+        },
+        "to": {
+          "nodeId": "30bfd6df-6141-4a97-b20e-72db05c7bd34",
+          "portId": "dataset_files"
         }
       }
     },
