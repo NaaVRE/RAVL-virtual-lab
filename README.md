@@ -56,7 +56,17 @@ Preprocessing other weather radar data to the vol2bird input format requires som
 ### Documentation
 See [the documentation page](/docs/Virtual%20lab%20documentation/RAVL/documentation). Additionally, a user guide and tutorial is available in [the virtual lab](https://staging.demo.naavre.net/vreapp/vlabs/RAVL).
 
+### Getting access to the virtual lab 
+Anyone logging into the virtual lab ([documentation](https://naavre.net/docs/tutorials/#signing-in)) will gain access to a set of digital assets. These include source code in Jupyter notebooks, workflow components, workflows, and a tutorial to help you start with radar aeroecology.
+
+### Using the Infrastructure
+LifeWatch provides a limited infrastructure for the development of the virtual lab. This infrastructure can be used to run small processing and analysis jobs, enabling you to develop your own scientific workflows. For handling big data, we recommend getting in touch with the Virtual Laboratory & Innovations Centre of LifeWatch ERIC to discuss scaling the infrastructure.
+
 ### Point of contact
 Berend-Christiaan Wijers  
 IBED - University of Amsterdam   
 Email: B.C.Wijers@uva.nl
+
+### Infrastructure provider
+LifeWatch ERIC Virtual Laboratory & Innovations Centre  
+Email: VLIC@lifewatch.eu
