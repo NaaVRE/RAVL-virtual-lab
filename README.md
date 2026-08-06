@@ -62,6 +62,9 @@ Anyone logging into the virtual lab ([documentation](https://naavre.net/docs/tut
 ### Using the Infrastructure
 LifeWatch provides a limited infrastructure for the development of the virtual lab. This infrastructure can be used to run small processing and analysis jobs, enabling you to develop your own scientific workflows. For handling big data, we recommend getting in touch with the Virtual Laboratory & Innovations Centre of LifeWatch ERIC to discuss scaling the infrastructure.
 
+### Dependencies
+Within the virtual lab a software environment is available providing the dependencies necessary to run the Jupyter Notebooks and workflows. If you want to run the jupyter notebooks outside NaaVRE, you can create an environment based on [the software environment specification](https://github.com/NaaVRE/flavors/tree/main/flavors/ravl).
+
 ### Point of contact
 Berend-Christiaan Wijers  
 IBED - University of Amsterdam   
