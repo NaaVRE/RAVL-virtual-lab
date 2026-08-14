@@ -1,128 +1,11 @@
 {
   "chart": {
     "offset": {
-      "x": 126.54,
-      "y": -21.16
+      "x": 161.35,
+      "y": 110.34
     },
-    "scale": 0.54,
+    "scale": 0.673,
     "nodes": {
-      "0c52cc90-776a-4178-8436-a12f7695ed4a": {
-        "id": "0c52cc90-776a-4178-8436-a12f7695ed4a",
-        "position": {
-          "x": 348,
-          "y": 161
-        },
-        "orientation": 0,
-        "type": "workflow-cell",
-        "ports": {
-          "init_complete": {
-            "id": "init_complete",
-            "type": "right",
-            "properties": {
-              "color": "#8ec587",
-              "parentNodeType": "workflow-cell"
-            },
-            "position": {
-              "x": 252,
-              "y": 30
-            }
-          }
-        },
-        "properties": {
-          "cell": {
-            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/336b6fd9-68d7-411a-bcec-c68948e6ce87/",
-            "owner": "koen.greuell@lifewatch.eu",
-            "virtual_lab": "ravl",
-            "shared_with_scopes": [],
-            "shared_with_users": [],
-            "base_container_image": {
-              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.0.37",
-              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.0.37"
-            },
-            "dependencies": [
-              {
-                "name": "Minio",
-                "module": "minio",
-                "asname": null
-              },
-              {
-                "name": "pathlib",
-                "module": "",
-                "asname": null
-              }
-            ],
-            "inputs": [],
-            "outputs": [
-              {
-                "name": "init_complete",
-                "type": "str"
-              }
-            ],
-            "confs": [
-              {
-                "name": "conf_local_root",
-                "assignation": "conf_local_root = '/tmp/data'"
-              },
-              {
-                "name": "conf_local_knmi",
-                "assignation": "conf_local_knmi = '/tmp/data/knmi'"
-              },
-              {
-                "name": "conf_local_odim",
-                "assignation": "conf_local_odim = '/tmp/data/odim'"
-              },
-              {
-                "name": "conf_local_vp",
-                "assignation": "conf_local_vp = '/tmp/data/vp'"
-              },
-              {
-                "name": "conf_local_conf",
-                "assignation": "conf_local_conf = '/tmp/data/conf'"
-              },
-              {
-                "name": "conf_local_radar_db",
-                "assignation": "conf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'"
-              },
-              {
-                "name": "conf_minio_endpoint",
-                "assignation": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'"
-              },
-              {
-                "name": "conf_minio_public_bucket_name",
-                "assignation": "conf_minio_public_bucket_name = 'naa-vre-public'"
-              },
-              {
-                "name": "conf_minio_public_conf_radar_db_object_name",
-                "assignation": "conf_minio_public_conf_radar_db_object_name = 'vl-vol2bird/conf/OPERA_RADARS_DB.json'"
-              }
-            ],
-            "params": [],
-            "secrets": [
-              {
-                "name": "secret_minio_access_key",
-                "type": "str"
-              },
-              {
-                "name": "secret_minio_secret_key",
-                "type": "str"
-              }
-            ],
-            "title": "initializer-koen-greuell-lifewatch-eu",
-            "description": "initializer-koen-greuell-lifewatch-eu",
-            "created": "2025-11-13T16:50:48.456246Z",
-            "modified": "2025-11-13T16:50:48.820826Z",
-            "version": 2,
-            "container_image": "ghcr.io/naavre/cells-vl-ravl/initializer-koen-greuell-lifewatch-eu:149f5d9",
-            "kernel": "ipython",
-            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/a706a8d5eb17f3ec86c4df2b077a6a2f40260fa2/initializer-koen-greuell-lifewatch-eu",
-            "next_version": null
-          }
-        },
-        "size": {
-          "width": 252,
-          "height": 61
-        }
-      },
       "30bfd6df-6141-4a97-b20e-72db05c7bd34": {
         "id": "30bfd6df-6141-4a97-b20e-72db05c7bd34",
         "position": {
@@ -701,6 +584,183 @@
           "width": 252,
           "height": 61
         }
+      },
+      "1576f24c-d176-43e1-9c25-a4c9d0b35158": {
+        "id": "1576f24c-d176-43e1-9c25-a4c9d0b35158",
+        "position": {
+          "x": 361.0698002762817,
+          "y": 159.97028231797916
+        },
+        "orientation": 0,
+        "type": "workflow-cell",
+        "ports": {
+          "init_complete": {
+            "id": "init_complete",
+            "type": "right",
+            "properties": {
+              "color": "#8ec587",
+              "parentNodeType": "workflow-cell"
+            },
+            "position": {
+              "x": 252,
+              "y": 30
+            }
+          }
+        },
+        "properties": {
+          "cell": {
+            "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/f08501af-a5de-4f22-ad0e-c54e32973722/",
+            "owner": "koen.greuell@lifewatch.eu",
+            "virtual_lab": "ravl",
+            "shared_with_scopes": [],
+            "shared_with_users": [],
+            "versions": [
+              {
+                "version": 1,
+                "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/94eb1466-b6d6-4f59-9b6a-14be3ec8747b/"
+              },
+              {
+                "version": 2,
+                "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/336b6fd9-68d7-411a-bcec-c68948e6ce87/"
+              },
+              {
+                "version": 3,
+                "url": "https://beta.naavre.net/naavre-catalogue-service/workflow-cells/f08501af-a5de-4f22-ad0e-c54e32973722/"
+              }
+            ],
+            "base_container_image": {
+              "build": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-build:v0.3.16",
+              "runtime": "ghcr.io/naavre/flavors/naavre-fl-ravl-cell-runtime:v0.3.16"
+            },
+            "dependencies": [
+              {
+                "name": "Minio",
+                "module": "minio",
+                "asname": null
+              },
+              {
+                "name": "pathlib",
+                "module": "",
+                "asname": null
+              },
+              {
+                "name": "datetime",
+                "module": "datetime",
+                "asname": null
+              }
+            ],
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "init_complete",
+                "type": "str"
+              }
+            ],
+            "confs": [
+              {
+                "name": "conf_local_conf",
+                "assignation": "conf_local_conf = '/tmp/data/conf'"
+              },
+              {
+                "name": "conf_local_radar_db",
+                "assignation": "conf_local_radar_db = '/tmp/data/conf/OPERA_RADARS_DB.json'"
+              },
+              {
+                "name": "conf_minio_endpoint",
+                "assignation": "conf_minio_endpoint = 'scruffy.lab.uvalight.net:9000'"
+              },
+              {
+                "name": "conf_minio_public_bucket_name",
+                "assignation": "conf_minio_public_bucket_name = 'naa-vre-public'"
+              },
+              {
+                "name": "conf_minio_public_conf_radar_db_object_name",
+                "assignation": "conf_minio_public_conf_radar_db_object_name = 'vl-vol2bird/conf/OPERA_RADARS_DB.json'"
+              },
+              {
+                "name": "conf_radars",
+                "assignation": "conf_radars = {'hrw': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'herwijnen': ['radar_volume_full_herwijnen', 1.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_full_herwijnen/versions/1.0/files', 'NL/HRW'], 'dhl': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL'], 'den helder': ['radar_volume_full_denhelder', 2.0, 'https://api.dataplatform.knmi.nl/open-data/v1/datasets/radar_volume_denhelder/versions/2.0/files', 'NL/DHL']}"
+              },
+              {
+                "name": "conf_local_root",
+                "assignation": "conf_local_root = '/tmp/data'"
+              },
+              {
+                "name": "conf_local_knmi",
+                "assignation": "conf_local_knmi = '/tmp/data/knmi'"
+              },
+              {
+                "name": "conf_local_odim",
+                "assignation": "conf_local_odim = '/tmp/data/odim'"
+              },
+              {
+                "name": "conf_local_vp",
+                "assignation": "conf_local_vp = '/tmp/data/vp'"
+              }
+            ],
+            "params": [
+              {
+                "name": "param_clean_knmi_input",
+                "type": "str",
+                "default_value": "True"
+              },
+              {
+                "name": "param_clean_pvol_output",
+                "type": "str",
+                "default_value": "True"
+              },
+              {
+                "name": "param_clean_vp_output",
+                "type": "str",
+                "default_value": "True"
+              },
+              {
+                "name": "param_end_date",
+                "type": "str",
+                "default_value": "2020-01-01T01:00+00:00"
+              },
+              {
+                "name": "param_radar",
+                "type": "str",
+                "default_value": "HRW"
+              },
+              {
+                "name": "param_start_date",
+                "type": "str",
+                "default_value": "2019-12-31T23:00+00:00"
+              },
+              {
+                "name": "param_upload_results",
+                "type": "str",
+                "default_value": "True"
+              }
+            ],
+            "secrets": [
+              {
+                "name": "secret_minio_access_key",
+                "type": "str"
+              },
+              {
+                "name": "secret_minio_secret_key",
+                "type": "str"
+              }
+            ],
+            "title": "initializer-koen-greuell-lifewatch-eu",
+            "description": "initializer-koen-greuell-lifewatch-eu",
+            "created": "2026-08-14T14:07:25.734623Z",
+            "modified": "2026-08-14T14:07:26.760087Z",
+            "version": 3,
+            "template_format": "v1",
+            "container_image": "ghcr.io/naavre/cells-vl-ravl/initializer-koen-greuell-lifewatch-eu:227d820",
+            "kernel": "ipython",
+            "source_url": "https://github.com/NaaVRE/cells-vl-ravl/tree/a94426a416766dab9b96f440adcf0eb7e51ea196/initializer-koen-greuell-lifewatch-eu",
+            "is_draft": false
+          }
+        },
+        "size": {
+          "width": 252,
+          "height": 61
+        }
       }
     },
     "links": {
@@ -726,17 +786,6 @@
           "portId": "odim_pvol_paths"
         }
       },
-      "dce0a4c2-9861-448c-9b89-e67c3cd9e8df": {
-        "id": "dce0a4c2-9861-448c-9b89-e67c3cd9e8df",
-        "from": {
-          "nodeId": "0c52cc90-776a-4178-8436-a12f7695ed4a",
-          "portId": "init_complete"
-        },
-        "to": {
-          "nodeId": "aa8f5869-3f4c-4e7a-8a3c-50d9e570b644",
-          "portId": "init_complete"
-        }
-      },
       "a4552138-9e01-42fe-924a-1f9dae9424db": {
         "id": "a4552138-9e01-42fe-924a-1f9dae9424db",
         "from": {
@@ -747,9 +796,29 @@
           "nodeId": "30bfd6df-6141-4a97-b20e-72db05c7bd34",
           "portId": "dataset_files"
         }
+      },
+      "492ba214-dc52-4d8e-91aa-e1e0818548ca": {
+        "id": "492ba214-dc52-4d8e-91aa-e1e0818548ca",
+        "from": {
+          "nodeId": "1576f24c-d176-43e1-9c25-a4c9d0b35158",
+          "portId": "init_complete"
+        },
+        "to": {
+          "nodeId": "aa8f5869-3f4c-4e7a-8a3c-50d9e570b644",
+          "portId": "init_complete"
+        }
       }
     },
-    "selected": {},
-    "hovered": {}
+    "selected": {
+      "type": "node",
+      "id": "aa8f5869-3f4c-4e7a-8a3c-50d9e570b644"
+    },
+    "hovered": {},
+    "metadata": {
+      "version": "1.1"
+    },
+    "properties": {
+      "params": []
+    }
   }
 }
