@@ -8,11 +8,11 @@ RUN apt-get update && \
     apt autoclean -y && \
     apt autoremove -y
 
-COPY flavors/ravl/KNMI_vol_h5_to_ODIM_h5.c .
+COPY .binder/KNMI_vol_h5_to_ODIM_h5.c .
 RUN gcc -Wall -L/usr/lib/x86_64-linux-gnu/hdf5/serial/ -I/usr/include/hdf5/serial KNMI_vol_h5_to_ODIM_h5.c -lhdf5 -lhdf5_hl -o KNMI_vol_h5_to_ODIM_h5
 RUN mv KNMI_vol_h5_to_ODIM_h5 /opt/radar/vol2bird/bin
 
-COPY flavors/ravl/tests/tests.sh /test_ravl.sh
+COPY .binder/tests/tests.sh /test_ravl.sh
 RUN bash /test_ravl.sh
 RUN rm /test_ravl.sh
 RUN rm version KNMI_vol_h5_to_ODIM_h5_out
