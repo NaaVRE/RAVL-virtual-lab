@@ -18,9 +18,9 @@ RUN rm /test_ravl.sh
 RUN rm version KNMI_vol_h5_to_ODIM_h5_out
 CMD vol2bird
 
-FROM quay.io/jupyter/minimal-notebook:lab-4.3.6
+FROM quay.io/jupyter/minimal-notebook:lab-4.6.6
 
-COPY --chown=jovyan:jovyan .binder/environment.yaml environment.yaml
+COPY --chown=${NB_UID}:${NB_GID} .binder/environment.yaml environment.yaml
 RUN mamba env update --name base --file environment.yaml && \
     mamba clean --all --yes
 
