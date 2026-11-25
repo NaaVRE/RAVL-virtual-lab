@@ -26,9 +26,9 @@ RUN mamba env update --name base --file environment.yaml && \
 
 RUN mkdir -p /tmp/data
 
-RUN /opt/conda/envs/ravl/bin/R -e "install.packages('suntools', repos='https://cran.r-project.org')" && \
-    /opt/conda/envs/ravl/bin/R -e "install.packages('bioRad', repos='https://cran.r-project.org')" && \
-    /opt/conda/envs/ravl/bin/R -e "library('bioRad')"
+RUN /opt/conda/bin/R -e "install.packages('suntools', repos='https://cran.r-project.org')" && \
+    /opt/conda/bin/R -e "install.packages('bioRad', repos='https://cran.r-project.org')" && \
+    /opt/conda/bin/R -e "library('bioRad')"
 
 COPY --from=vol2bird /opt/radar/ /opt/radar/
 COPY --from=vol2bird /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
